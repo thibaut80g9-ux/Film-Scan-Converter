@@ -1,0 +1,943 @@
+2025-01-11 12:33:02,999:::ERROR:::Exception: 'GUI' object has no attribute 'resize'
+Traceback (most recent call last):
+  File "D:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 835, in resize_event
+    self.master.after_cancel(self.resize)
+                             ^^^^^^^^^^^
+AttributeError: 'GUI' object has no attribute 'resize'
+2025-01-11 12:33:03,050:::ERROR:::Exception: [Errno 2] No such file or directory: 'config.npy'
+Traceback (most recent call last):
+  File "D:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 412, in __init__
+    params_dict = np.load('config.npy', allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'config.npy'
+2025-01-11 12:38:55,785:::ERROR:::Exception: 'GUI' object has no attribute 'resize'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 835, in resize_event
+    self.master.after_cancel(self.resize)
+                             ^^^^^^^^^^^
+AttributeError: 'GUI' object has no attribute 'resize'
+2025-01-11 12:38:55,835:::ERROR:::Exception: [Errno 2] No such file or directory: 'config.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 412, in __init__
+    params_dict = np.load('config.npy', allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'config.npy'
+2025-01-11 12:39:05,360:::ERROR:::Exception: 'GUI' object has no attribute 'current_photo'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 790, in update_IMG
+    if self.current_photo.get_IMG() is None:
+       ^^^^^^^^^^^^^^^^^^
+AttributeError: 'GUI' object has no attribute 'current_photo'
+2025-01-11 13:00:10,287:::ERROR:::Exception: 'GUI' object has no attribute 'resize'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 835, in resize_event
+    self.master.after_cancel(self.resize)
+                             ^^^^^^^^^^^
+AttributeError: 'GUI' object has no attribute 'resize'
+2025-01-11 13:00:10,338:::ERROR:::Exception: [Errno 2] No such file or directory: 'config.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 412, in __init__
+    params_dict = np.load('config.npy', allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'config.npy'
+2025-01-11 13:00:20,073:::ERROR:::Exception: 'GUI' object has no attribute 'current_photo'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 790, in update_IMG
+    if self.current_photo.get_IMG() is None:
+       ^^^^^^^^^^^^^^^^^^
+AttributeError: 'GUI' object has no attribute 'current_photo'
+2025-01-11 13:06:07,748:::ERROR:::Exception: 'GUI' object has no attribute 'resize'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 835, in resize_event
+    self.master.after_cancel(self.resize)
+                             ^^^^^^^^^^^
+AttributeError: 'GUI' object has no attribute 'resize'
+2025-01-11 13:06:07,798:::ERROR:::Exception: [Errno 2] No such file or directory: 'config.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 412, in __init__
+    params_dict = np.load('config.npy', allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'config.npy'
+2025-01-11 13:06:37,783:::ERROR:::Exception: 'GUI' object has no attribute 'resize'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 835, in resize_event
+    self.master.after_cancel(self.resize)
+                             ^^^^^^^^^^^
+AttributeError: 'GUI' object has no attribute 'resize'
+2025-01-11 13:06:37,849:::ERROR:::Exception: [Errno 2] No such file or directory: 'config.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 412, in __init__
+    params_dict = np.load('config.npy', allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'config.npy'
+2025-01-11 13:09:15,576:::ERROR:::Exception: 'GUI' object has no attribute 'resize'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 835, in resize_event
+    self.master.after_cancel(self.resize)
+                             ^^^^^^^^^^^
+AttributeError: 'GUI' object has no attribute 'resize'
+2025-01-11 13:09:15,630:::ERROR:::Exception: [Errno 2] No such file or directory: 'config.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 412, in __init__
+    params_dict = np.load('config.npy', allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'config.npy'
+2025-01-11 13:54:35,276:::ERROR:::Exception: 'GUI' object has no attribute 'resize'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 826, in resize_event
+    self.master.after_cancel(self.resize)
+                             ^^^^^^^^^^^
+AttributeError: 'GUI' object has no attribute 'resize'
+2025-01-11 13:54:35,328:::ERROR:::Exception: [Errno 2] No such file or directory: 'config.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 412, in __init__
+    params_dict = np.load('config.npy', allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'config.npy'
+2025-01-11 13:56:12,811:::ERROR:::Exception: 'GUI' object has no attribute 'resize'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 826, in resize_event
+    self.master.after_cancel(self.resize)
+                             ^^^^^^^^^^^
+AttributeError: 'GUI' object has no attribute 'resize'
+2025-01-11 13:56:12,862:::ERROR:::Exception: [Errno 2] No such file or directory: 'config.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 412, in __init__
+    params_dict = np.load('config.npy', allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'config.npy'
+2025-01-11 14:25:10,454:::ERROR:::Exception: 'GUI' object has no attribute 'resize'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 828, in resize_event
+    self.master.after_cancel(self.resize)
+                             ^^^^^^^^^^^
+AttributeError: 'GUI' object has no attribute 'resize'
+2025-01-11 14:25:10,507:::ERROR:::Exception: [Errno 2] No such file or directory: 'config.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 412, in __init__
+    params_dict = np.load('config.npy', allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'config.npy'
+2025-01-11 14:56:35,951:::ERROR:::Exception: 'GUI' object has no attribute 'resize'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 829, in resize_event
+    self.master.after_cancel(self.resize)
+                             ^^^^^^^^^^^
+AttributeError: 'GUI' object has no attribute 'resize'
+2025-01-11 14:56:36,003:::ERROR:::Exception: [Errno 2] No such file or directory: 'config.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 413, in __init__
+    params_dict = np.load('config.npy', allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'config.npy'
+2025-01-11 14:59:39,991:::ERROR:::Exception: 'GUI' object has no attribute 'resize'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 829, in resize_event
+    self.master.after_cancel(self.resize)
+                             ^^^^^^^^^^^
+AttributeError: 'GUI' object has no attribute 'resize'
+2025-01-11 14:59:40,041:::ERROR:::Exception: [Errno 2] No such file or directory: 'config.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 413, in __init__
+    params_dict = np.load('config.npy', allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'config.npy'
+2025-01-11 15:00:43,262:::ERROR:::Exception: 'GUI' object has no attribute 'resize'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 829, in resize_event
+    self.master.after_cancel(self.resize)
+                             ^^^^^^^^^^^
+AttributeError: 'GUI' object has no attribute 'resize'
+2025-01-11 15:00:43,336:::ERROR:::Exception: [Errno 2] No such file or directory: 'config.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 413, in __init__
+    params_dict = np.load('config.npy', allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'config.npy'
+2025-01-11 15:01:17,189:::ERROR:::Exception: 'RawProcessing' object has no attribute 'IMG'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 784, in update_IMG
+    if self.current_photo.get_IMG() is None:
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\RawProcessing.py", line 212, in get_IMG
+    img = self.IMG
+          ^^^^^^^^
+AttributeError: 'RawProcessing' object has no attribute 'IMG'
+2025-01-11 15:01:17,299:::ERROR:::Exception: 'RawProcessing' object has no attribute 'IMG'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 784, in update_IMG
+    if self.current_photo.get_IMG() is None:
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\RawProcessing.py", line 212, in get_IMG
+    img = self.IMG
+          ^^^^^^^^
+AttributeError: 'RawProcessing' object has no attribute 'IMG'
+2025-01-11 15:01:28,196:::ERROR:::Exception: 'RawProcessing' object has no attribute 'IMG'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 784, in update_IMG
+    if self.current_photo.get_IMG() is None:
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\RawProcessing.py", line 212, in get_IMG
+    img = self.IMG
+          ^^^^^^^^
+AttributeError: 'RawProcessing' object has no attribute 'IMG'
+2025-01-11 15:01:54,591:::ERROR:::Exception: 'RawProcessing' object has no attribute 'IMG'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 784, in update_IMG
+    if self.current_photo.get_IMG() is None:
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\RawProcessing.py", line 212, in get_IMG
+    img = self.IMG
+          ^^^^^^^^
+AttributeError: 'RawProcessing' object has no attribute 'IMG'
+2025-01-11 15:07:02,883:::ERROR:::Exception: 'GUI' object has no attribute 'resize'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 829, in resize_event
+    self.master.after_cancel(self.resize)
+                             ^^^^^^^^^^^
+AttributeError: 'GUI' object has no attribute 'resize'
+2025-01-11 15:07:02,937:::ERROR:::Exception: [Errno 2] No such file or directory: 'config.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 413, in __init__
+    params_dict = np.load('config.npy', allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'config.npy'
+2025-01-11 15:07:59,661:::ERROR:::Exception: 'RawProcessing' object has no attribute 'IMG'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 784, in update_IMG
+    if self.current_photo.get_IMG() is None:
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\RawProcessing.py", line 212, in get_IMG
+    img = self.IMG
+          ^^^^^^^^
+AttributeError: 'RawProcessing' object has no attribute 'IMG'
+2025-01-11 15:07:59,771:::ERROR:::Exception: 'RawProcessing' object has no attribute 'IMG'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 784, in update_IMG
+    if self.current_photo.get_IMG() is None:
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\RawProcessing.py", line 212, in get_IMG
+    img = self.IMG
+          ^^^^^^^^
+AttributeError: 'RawProcessing' object has no attribute 'IMG'
+2025-01-11 15:08:03,680:::ERROR:::Exception: 'RawProcessing' object has no attribute 'IMG'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 784, in update_IMG
+    if self.current_photo.get_IMG() is None:
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\RawProcessing.py", line 212, in get_IMG
+    img = self.IMG
+          ^^^^^^^^
+AttributeError: 'RawProcessing' object has no attribute 'IMG'
+2025-01-11 15:12:44,376:::ERROR:::Exception: 'GUI' object has no attribute 'resize'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 829, in resize_event
+    self.master.after_cancel(self.resize)
+                             ^^^^^^^^^^^
+AttributeError: 'GUI' object has no attribute 'resize'
+2025-01-11 15:12:44,426:::ERROR:::Exception: [Errno 2] No such file or directory: 'config.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 413, in __init__
+    params_dict = np.load('config.npy', allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'config.npy'
+2025-01-11 15:18:11,205:::ERROR:::Exception: 'GUI' object has no attribute 'resize'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 829, in resize_event
+    self.master.after_cancel(self.resize)
+                             ^^^^^^^^^^^
+AttributeError: 'GUI' object has no attribute 'resize'
+2025-01-11 15:18:11,254:::ERROR:::Exception: [Errno 2] No such file or directory: 'config.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 413, in __init__
+    params_dict = np.load('config.npy', allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'config.npy'
+2025-01-11 15:25:38,733:::ERROR:::Exception: 'GUI' object has no attribute 'resize'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 828, in resize_event
+    self.master.after_cancel(self.resize)
+                             ^^^^^^^^^^^
+AttributeError: 'GUI' object has no attribute 'resize'
+2025-01-11 15:25:38,786:::ERROR:::Exception: [Errno 2] No such file or directory: 'config.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 412, in __init__
+    params_dict = np.load('config.npy', allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'config.npy'
+2025-01-11 15:29:55,465:::ERROR:::Exception: 'GUI' object has no attribute 'resize'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 828, in resize_event
+    self.master.after_cancel(self.resize)
+                             ^^^^^^^^^^^
+AttributeError: 'GUI' object has no attribute 'resize'
+2025-01-11 15:29:55,526:::ERROR:::Exception: [Errno 2] No such file or directory: 'config.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 412, in __init__
+    params_dict = np.load('config.npy', allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'config.npy'
+2025-01-11 15:35:28,411:::ERROR:::Exception: 'GUI' object has no attribute 'resize'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 828, in resize_event
+    self.master.after_cancel(self.resize)
+                             ^^^^^^^^^^^
+AttributeError: 'GUI' object has no attribute 'resize'
+2025-01-11 15:35:28,462:::ERROR:::Exception: [Errno 2] No such file or directory: 'config.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 412, in __init__
+    params_dict = np.load('config.npy', allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'config.npy'
+2025-01-11 15:46:48,059:::ERROR:::Exception: 'GUI' object has no attribute 'resize'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 828, in resize_event
+    self.master.after_cancel(self.resize)
+                             ^^^^^^^^^^^
+AttributeError: 'GUI' object has no attribute 'resize'
+2025-01-11 15:46:48,110:::ERROR:::Exception: [Errno 2] No such file or directory: 'config.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 412, in __init__
+    params_dict = np.load('config.npy', allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'config.npy'
+2025-01-11 15:48:04,667:::ERROR:::Exception: 'GUI' object has no attribute 'resize'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 828, in resize_event
+    self.master.after_cancel(self.resize)
+                             ^^^^^^^^^^^
+AttributeError: 'GUI' object has no attribute 'resize'
+2025-01-11 15:48:04,718:::ERROR:::Exception: [Errno 2] No such file or directory: 'config.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 412, in __init__
+    params_dict = np.load('config.npy', allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'config.npy'
+2025-01-11 15:54:06,189:::ERROR:::Exception: 'GUI' object has no attribute 'resize'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 828, in resize_event
+    self.master.after_cancel(self.resize)
+                             ^^^^^^^^^^^
+AttributeError: 'GUI' object has no attribute 'resize'
+2025-01-11 15:54:06,246:::ERROR:::Exception: [Errno 2] No such file or directory: 'config.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 412, in __init__
+    params_dict = np.load('config.npy', allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'config.npy'
+2025-01-11 15:57:23,663:::ERROR:::Exception: 'GUI' object has no attribute 'resize'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 833, in resize_event
+    self.master.after_cancel(self.resize)
+                             ^^^^^^^^^^^
+AttributeError: 'GUI' object has no attribute 'resize'
+2025-01-11 15:57:23,717:::ERROR:::Exception: [Errno 2] No such file or directory: 'config.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 417, in __init__
+    params_dict = np.load('config.npy', allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'config.npy'
+2025-01-11 16:00:10,390:::ERROR:::Exception: 'GUI' object has no attribute 'resize'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 828, in resize_event
+    self.master.after_cancel(self.resize)
+                             ^^^^^^^^^^^
+AttributeError: 'GUI' object has no attribute 'resize'
+2025-01-11 16:00:10,443:::ERROR:::Exception: [Errno 2] No such file or directory: 'config.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 412, in __init__
+    params_dict = np.load('config.npy', allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'config.npy'
+2025-01-11 16:03:10,033:::ERROR:::Exception: 'GUI' object has no attribute 'resize'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 828, in resize_event
+    self.master.after_cancel(self.resize)
+                             ^^^^^^^^^^^
+AttributeError: 'GUI' object has no attribute 'resize'
+2025-01-11 16:03:10,086:::ERROR:::Exception: [Errno 2] No such file or directory: 'config.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 412, in __init__
+    params_dict = np.load('config.npy', allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'config.npy'
+2025-01-11 16:10:12,557:::ERROR:::Exception: 'GUI' object has no attribute 'resize'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 828, in resize_event
+    self.master.after_cancel(self.resize)
+                             ^^^^^^^^^^^
+AttributeError: 'GUI' object has no attribute 'resize'
+2025-01-11 16:10:12,616:::ERROR:::Exception: [Errno 2] No such file or directory: 'config.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 412, in __init__
+    params_dict = np.load('config.npy', allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'config.npy'
+2025-01-11 16:16:44,204:::ERROR:::Exception: 'GUI' object has no attribute 'resize'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 828, in resize_event
+    self.master.after_cancel(self.resize)
+                             ^^^^^^^^^^^
+AttributeError: 'GUI' object has no attribute 'resize'
+2025-01-11 16:16:44,260:::ERROR:::Exception: [Errno 2] No such file or directory: 'config.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 412, in __init__
+    params_dict = np.load('config.npy', allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'config.npy'
+2025-01-11 16:17:11,220:::ERROR:::Exception: 'GUI' object has no attribute 'resize'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 828, in resize_event
+    self.master.after_cancel(self.resize)
+                             ^^^^^^^^^^^
+AttributeError: 'GUI' object has no attribute 'resize'
+2025-01-11 16:17:11,270:::ERROR:::Exception: [Errno 2] No such file or directory: 'config.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 412, in __init__
+    params_dict = np.load('config.npy', allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'config.npy'
+2025-01-11 16:18:43,403:::ERROR:::Exception: 'GUI' object has no attribute 'resize'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 828, in resize_event
+    self.master.after_cancel(self.resize)
+                             ^^^^^^^^^^^
+AttributeError: 'GUI' object has no attribute 'resize'
+2025-01-11 16:18:43,460:::ERROR:::Exception: [Errno 2] No such file or directory: 'config.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 412, in __init__
+    params_dict = np.load('config.npy', allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'config.npy'
+2025-01-11 16:20:53,537:::ERROR:::Exception: 'GUI' object has no attribute 'resize'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 828, in resize_event
+    self.master.after_cancel(self.resize)
+                             ^^^^^^^^^^^
+AttributeError: 'GUI' object has no attribute 'resize'
+2025-01-11 16:20:53,588:::ERROR:::Exception: [Errno 2] No such file or directory: 'config.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 412, in __init__
+    params_dict = np.load('config.npy', allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'config.npy'
+2025-01-11 16:22:20,805:::ERROR:::Exception: 'GUI' object has no attribute 'resize'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 828, in resize_event
+    self.master.after_cancel(self.resize)
+                             ^^^^^^^^^^^
+AttributeError: 'GUI' object has no attribute 'resize'
+2025-01-11 16:22:20,856:::ERROR:::Exception: [Errno 2] No such file or directory: 'config.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 412, in __init__
+    params_dict = np.load('config.npy', allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'config.npy'
+2025-01-11 16:23:02,092:::ERROR:::Exception: 'RawProcessing' object has no attribute 'IMG'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 783, in update_IMG
+    if self.current_photo.get_IMG() is None:
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\RawProcessing.py", line 189, in get_IMG
+    img = self.IMG
+          ^^^^^^^^
+AttributeError: 'RawProcessing' object has no attribute 'IMG'
+2025-01-11 16:23:02,322:::ERROR:::Exception: 'RawProcessing' object has no attribute 'IMG'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 783, in update_IMG
+    if self.current_photo.get_IMG() is None:
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\RawProcessing.py", line 189, in get_IMG
+    img = self.IMG
+          ^^^^^^^^
+AttributeError: 'RawProcessing' object has no attribute 'IMG'
+2025-01-11 16:23:02,629:::ERROR:::Exception: 'RawProcessing' object has no attribute 'IMG'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 783, in update_IMG
+    if self.current_photo.get_IMG() is None:
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\RawProcessing.py", line 189, in get_IMG
+    img = self.IMG
+          ^^^^^^^^
+AttributeError: 'RawProcessing' object has no attribute 'IMG'
+2025-01-11 16:23:14,651:::ERROR:::Exception: 'RawProcessing' object has no attribute 'IMG'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 783, in update_IMG
+    if self.current_photo.get_IMG() is None:
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\RawProcessing.py", line 189, in get_IMG
+    img = self.IMG
+          ^^^^^^^^
+AttributeError: 'RawProcessing' object has no attribute 'IMG'
+2025-01-11 16:23:17,645:::ERROR:::Exception: 'RawProcessing' object has no attribute 'IMG'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 783, in update_IMG
+    if self.current_photo.get_IMG() is None:
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\RawProcessing.py", line 189, in get_IMG
+    img = self.IMG
+          ^^^^^^^^
+AttributeError: 'RawProcessing' object has no attribute 'IMG'
+2025-01-11 16:51:58,814:::ERROR:::Exception: 'RawProcessing' object has no attribute 'IMG'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 783, in update_IMG
+    if self.current_photo.get_IMG() is None:
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\RawProcessing.py", line 189, in get_IMG
+    img = self.IMG
+          ^^^^^^^^
+AttributeError: 'RawProcessing' object has no attribute 'IMG'
+2025-01-11 16:57:28,376:::ERROR:::Exception: 'GUI' object has no attribute 'resize'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 828, in resize_event
+    self.master.after_cancel(self.resize)
+                             ^^^^^^^^^^^
+AttributeError: 'GUI' object has no attribute 'resize'
+2025-01-11 16:57:28,432:::ERROR:::Exception: [Errno 2] No such file or directory: 'config.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 412, in __init__
+    params_dict = np.load('config.npy', allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'config.npy'
+2025-01-11 16:57:50,044:::ERROR:::Exception: 'GUI' object has no attribute 'resize'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 828, in resize_event
+    self.master.after_cancel(self.resize)
+                             ^^^^^^^^^^^
+AttributeError: 'GUI' object has no attribute 'resize'
+2025-01-11 16:57:50,098:::ERROR:::Exception: [Errno 2] No such file or directory: 'config.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 412, in __init__
+    params_dict = np.load('config.npy', allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'config.npy'
+2025-01-11 16:58:25,509:::ERROR:::Exception: 'GUI' object has no attribute 'resize'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 828, in resize_event
+    self.master.after_cancel(self.resize)
+                             ^^^^^^^^^^^
+AttributeError: 'GUI' object has no attribute 'resize'
+2025-01-11 16:58:25,566:::ERROR:::Exception: [Errno 2] No such file or directory: 'config.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 412, in __init__
+    params_dict = np.load('config.npy', allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'config.npy'
+2025-01-11 16:59:37,941:::ERROR:::Exception: 'GUI' object has no attribute 'resize'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 828, in resize_event
+    self.master.after_cancel(self.resize)
+                             ^^^^^^^^^^^
+AttributeError: 'GUI' object has no attribute 'resize'
+2025-01-11 16:59:37,992:::ERROR:::Exception: [Errno 2] No such file or directory: 'config.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 412, in __init__
+    params_dict = np.load('config.npy', allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'config.npy'
+2025-01-11 17:00:05,555:::ERROR:::Exception: 'GUI' object has no attribute 'resize'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 828, in resize_event
+    self.master.after_cancel(self.resize)
+                             ^^^^^^^^^^^
+AttributeError: 'GUI' object has no attribute 'resize'
+2025-01-11 17:00:05,608:::ERROR:::Exception: [Errno 2] No such file or directory: 'config.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 412, in __init__
+    params_dict = np.load('config.npy', allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'config.npy'
+2025-01-11 17:00:22,366:::ERROR:::Exception: 'GUI' object has no attribute 'resize'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 828, in resize_event
+    self.master.after_cancel(self.resize)
+                             ^^^^^^^^^^^
+AttributeError: 'GUI' object has no attribute 'resize'
+2025-01-11 17:00:22,425:::ERROR:::Exception: [Errno 2] No such file or directory: 'config.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 412, in __init__
+    params_dict = np.load('config.npy', allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'config.npy'
+2025-01-11 17:04:09,072:::ERROR:::Exception: 'GUI' object has no attribute 'resize'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\Film Scan Converter.pyw", line 840, in resize_event
+    self.master.after_cancel(self.resize)
+                             ^^^^^^^^^^^
+AttributeError: 'GUI' object has no attribute 'resize'
+2025-01-11 17:04:09,122:::ERROR:::Exception: [Errno 2] No such file or directory: 'config.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\Film Scan Converter.pyw", line 424, in __init__
+    params_dict = np.load('config.npy', allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'config.npy'
+2025-01-11 17:06:54,751:::ERROR:::Exception: 'GUI' object has no attribute 'resize'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 828, in resize_event
+    self.master.after_cancel(self.resize)
+                             ^^^^^^^^^^^
+AttributeError: 'GUI' object has no attribute 'resize'
+2025-01-11 17:06:54,808:::ERROR:::Exception: [Errno 2] No such file or directory: 'config.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 412, in __init__
+    params_dict = np.load('config.npy', allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'config.npy'
+2025-01-11 17:08:42,644:::ERROR:::Exception: 'GUI' object has no attribute 'resize'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 828, in resize_event
+    self.master.after_cancel(self.resize)
+                             ^^^^^^^^^^^
+AttributeError: 'GUI' object has no attribute 'resize'
+2025-01-11 17:08:42,697:::ERROR:::Exception: [Errno 2] No such file or directory: 'config.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 412, in __init__
+    params_dict = np.load('config.npy', allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'config.npy'
+2025-01-11 17:11:12,966:::ERROR:::Exception: 'GUI' object has no attribute 'resize'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 1498, in resize_event
+    self.master.after_cancel(self.resize)
+                             ^^^^^^^^^^^
+AttributeError: 'GUI' object has no attribute 'resize'
+2025-01-11 17:11:13,016:::ERROR:::Exception: [Errno 2] No such file or directory: 'config.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 1082, in __init__
+    params_dict = np.load('config.npy', allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'config.npy'
+2025-01-11 17:17:45,225:::ERROR:::Exception: 'GUI' object has no attribute 'resize'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 828, in resize_event
+    self.master.after_cancel(self.resize)
+                             ^^^^^^^^^^^
+AttributeError: 'GUI' object has no attribute 'resize'
+2025-01-11 17:17:45,274:::ERROR:::Exception: [Errno 2] No such file or directory: 'config.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 412, in __init__
+    params_dict = np.load('config.npy', allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'config.npy'
+2025-01-11 17:19:06,936:::ERROR:::Exception: 'GUI' object has no attribute 'resize'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 828, in resize_event
+    self.master.after_cancel(self.resize)
+                             ^^^^^^^^^^^
+AttributeError: 'GUI' object has no attribute 'resize'
+2025-01-11 17:19:06,984:::ERROR:::Exception: [Errno 2] No such file or directory: 'config.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 412, in __init__
+    params_dict = np.load('config.npy', allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'config.npy'
+2025-01-11 17:22:16,055:::DEBUG:::matplotlib data path: c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-11 17:22:16,062:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-11 17:22:16,063:::DEBUG:::interactive is False
+2025-01-11 17:22:16,063:::DEBUG:::platform is win32
+2025-01-11 17:22:20,167:::ERROR:::Exception: 'GUI' object has no attribute 'resize'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 828, in resize_event
+    self.master.after_cancel(self.resize)
+                             ^^^^^^^^^^^
+AttributeError: 'GUI' object has no attribute 'resize'
+2025-01-11 17:22:20,229:::ERROR:::Exception: [Errno 2] No such file or directory: 'config.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 412, in __init__
+    params_dict = np.load('config.npy', allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'config.npy'
+2025-01-11 17:52:12,725:::ERROR:::Exception: 'GUI' object has no attribute 'resize'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 828, in resize_event
+    self.master.after_cancel(self.resize)
+                             ^^^^^^^^^^^
+AttributeError: 'GUI' object has no attribute 'resize'
+2025-01-11 17:52:12,775:::ERROR:::Exception: [Errno 2] No such file or directory: 'config.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 412, in __init__
+    params_dict = np.load('config.npy', allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'config.npy'
+2025-01-11 17:56:35,585:::DEBUG:::matplotlib data path: C:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-11 17:56:35,592:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-11 17:56:35,593:::DEBUG:::interactive is False
+2025-01-11 17:56:35,593:::DEBUG:::platform is win32
+2025-01-11 17:56:35,714:::ERROR:::Exception: 'GUI' object has no attribute 'resize'
+Traceback (most recent call last):
+  File "D:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 828, in resize_event
+    self.master.after_cancel(self.resize)
+                             ^^^^^^^^^^^
+AttributeError: 'GUI' object has no attribute 'resize'
+2025-01-11 17:56:35,765:::ERROR:::Exception: [Errno 2] No such file or directory: 'config.npy'
+Traceback (most recent call last):
+  File "D:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 412, in __init__
+    params_dict = np.load('config.npy', allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'config.npy'
+2025-01-11 18:06:54,158:::DEBUG:::matplotlib data path: C:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-11 18:06:54,166:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-11 18:06:54,167:::DEBUG:::interactive is False
+2025-01-11 18:06:54,167:::DEBUG:::platform is win32
+2025-01-11 18:06:54,289:::ERROR:::Exception: 'GUI' object has no attribute 'resize'
+Traceback (most recent call last):
+  File "D:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 828, in resize_event
+    self.master.after_cancel(self.resize)
+                             ^^^^^^^^^^^
+AttributeError: 'GUI' object has no attribute 'resize'
+2025-01-11 18:06:54,341:::ERROR:::Exception: [Errno 2] No such file or directory: 'config.npy'
+Traceback (most recent call last):
+  File "D:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 412, in __init__
+    params_dict = np.load('config.npy', allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'config.npy'
+2025-01-11 18:07:08,472:::DEBUG:::matplotlib data path: C:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-11 18:07:08,479:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-11 18:07:08,480:::DEBUG:::interactive is False
+2025-01-11 18:07:08,480:::DEBUG:::platform is win32
+2025-01-11 18:07:08,845:::DEBUG:::matplotlib data path: C:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-11 18:07:08,846:::DEBUG:::matplotlib data path: C:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-11 18:07:08,847:::DEBUG:::matplotlib data path: C:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-11 18:07:08,848:::DEBUG:::matplotlib data path: C:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-11 18:07:08,854:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-11 18:07:08,855:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-11 18:07:08,855:::DEBUG:::interactive is False
+2025-01-11 18:07:08,855:::DEBUG:::platform is win32
+2025-01-11 18:07:08,856:::DEBUG:::matplotlib data path: C:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-11 18:07:08,856:::DEBUG:::interactive is False
+2025-01-11 18:07:08,857:::DEBUG:::platform is win32
+2025-01-11 18:07:08,858:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-11 18:07:08,859:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-11 18:07:08,859:::DEBUG:::interactive is False
+2025-01-11 18:07:08,859:::DEBUG:::platform is win32
+2025-01-11 18:07:08,860:::DEBUG:::interactive is False
+2025-01-11 18:07:08,860:::DEBUG:::platform is win32
+2025-01-11 18:07:08,861:::DEBUG:::matplotlib data path: C:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-11 18:07:08,862:::DEBUG:::matplotlib data path: C:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-11 18:07:08,863:::DEBUG:::matplotlib data path: C:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-11 18:07:08,867:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-11 18:07:08,868:::DEBUG:::interactive is False
+C:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-11 18:07:08,868:::DEBUG:::platform is win32
+2025-01-11 18:07:08,871:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-11 18:07:08,871:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-11 18:07:08,872:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-11 18:07:08,872:::DEBUG:::interactive is False
+2025-01-11 18:07:08,872:::DEBUG:::platform is win32
+2025-01-11 18:07:08,872:::DEBUG:::interactive is False
+2025-01-11 18:07:08,872:::DEBUG:::platform is win32
+2025-01-11 18:07:08,873:::DEBUG:::interactive is False
+2025-01-11 18:07:08,873:::DEBUG:::platform is win32
+2025-01-11 18:07:08,874:::DEBUG:::matplotlib data path: C:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-11 18:07:08,875:::DEBUG:::matplotlib data path: C:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-11 18:07:08,878:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-11 18:07:08,879:::DEBUG:::interactive is False
+2025-01-11 18:07:08,879:::DEBUG:::platform is win32
+2025-01-11 18:07:08,883:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-11 18:07:08,884:::DEBUG:::interactive is False
+2025-01-11 18:07:08,884:::DEBUG:::platform is win32
+2025-01-11 18:07:08,885:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-11 18:07:08,886:::DEBUG:::interactive is False
+2025-01-11 18:07:08,886:::DEBUG:::platform is win32
+2025-01-11 18:09:58,320:::DEBUG:::matplotlib data path: C:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-11 18:09:58,327:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-11 18:09:58,328:::DEBUG:::interactive is False
+2025-01-11 18:09:58,328:::DEBUG:::platform is win32
+2025-01-11 18:09:58,449:::ERROR:::Exception: 'GUI' object has no attribute 'resize'
+Traceback (most recent call last):
+  File "D:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 828, in resize_event
+    self.master.after_cancel(self.resize)
+                             ^^^^^^^^^^^
+AttributeError: 'GUI' object has no attribute 'resize'
+2025-01-11 18:09:58,500:::ERROR:::Exception: [Errno 2] No such file or directory: 'config.npy'
+Traceback (most recent call last):
+  File "D:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 412, in __init__
+    params_dict = np.load('config.npy', allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'config.npy'
+2025-01-11 18:10:17,563:::DEBUG:::matplotlib data path: C:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-11 18:10:17,570:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-11 18:10:17,571:::DEBUG:::interactive is False
+2025-01-11 18:10:17,571:::DEBUG:::platform is win32
+2025-01-11 18:10:17,941:::DEBUG:::matplotlib data path: C:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-11 18:10:17,941:::DEBUG:::matplotlib data path: C:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-11 18:10:17,943:::DEBUG:::matplotlib data path: C:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-11 18:10:17,944:::DEBUG:::matplotlib data path: C:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-11 18:10:17,945:::DEBUG:::matplotlib data path: C:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-11 18:10:17,945:::DEBUG:::matplotlib data path: C:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-11 18:10:17,950:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-11 18:10:17,951:::DEBUG:::interactive is False
+2025-01-11 18:10:17,951:::DEBUG:::platform is win32
+2025-01-11 18:10:17,951:::DEBUG:::platform is win32
+2025-01-11 18:10:17,954:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-11 18:10:17,954:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-11 18:10:17,955:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-11 18:10:17,955:::DEBUG:::interactive is False
+2025-01-11 18:10:17,955:::DEBUG:::platform is win32
+2025-01-11 18:10:17,955:::DEBUG:::interactive is False
+2025-01-11 18:10:17,955:::DEBUG:::interactive is False
+2025-01-11 18:10:17,955:::DEBUG:::platform is win32
+2025-01-11 18:10:17,955:::DEBUG:::platform is win32
+2025-01-11 18:10:17,956:::DEBUG:::interactive is False
+2025-01-11 18:10:17,956:::DEBUG:::platform is win32
+2025-01-11 18:10:17,957:::DEBUG:::matplotlib data path: C:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-11 18:10:17,962:::DEBUG:::matplotlib data path: C:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-11 18:10:17,964:::DEBUG:::matplotlib data path: C:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-11 18:10:17,965:::DEBUG:::matplotlib data path: C:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-11 18:10:17,966:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-11 18:10:17,967:::DEBUG:::interactive is False
+2025-01-11 18:10:17,967:::DEBUG:::platform is win32
+2025-01-11 18:10:17,968:::DEBUG:::matplotlib data path: C:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-11 18:10:17,972:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-11 18:10:17,973:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-11 18:10:17,973:::DEBUG:::interactive is False
+2025-01-11 18:10:17,973:::DEBUG:::platform is win32
+2025-01-11 18:10:17,974:::DEBUG:::interactive is False
+2025-01-11 18:10:17,974:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-11 18:10:17,974:::DEBUG:::platform is win32
+2025-01-11 18:10:17,975:::DEBUG:::interactive is False
+2025-01-11 18:10:17,975:::DEBUG:::platform is win32
+2025-01-11 18:10:17,980:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-11 18:10:17,981:::DEBUG:::interactive is False
+2025-01-11 18:10:17,981:::DEBUG:::platform is win32

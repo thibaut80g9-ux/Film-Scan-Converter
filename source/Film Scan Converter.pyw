@@ -761,8 +761,8 @@ class GUI:
         self.set_disable_buttons()
     
     def update_IMG(self, full_res=True):
-        # Loads new image into GUI
-        # Queues full res picture to be loaded when ignore_full_res is set to False and the Full Preview is selected (default behaviour)
+        # Loads latest processed image into GUI
+        # Queues full res picture to be loaded when full_res is set to True and the Full Preview is selected (default behaviour)
         def update_full_res():
             # Checks periodically if the thread is finished, then updates the image
             def check_if_done(t):

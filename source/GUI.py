@@ -24,6 +24,7 @@ logging.basicConfig(filename='logfile.log', level=logging.DEBUG, format=FORMAT)
 class GUI:
     def __init__(self, master):
         # Initialize Variables
+        self.config_path = self._check_and_create_conf_folder()
         self.photos = []
         self.in_progress = set() # keeps track photos that are in processing when first loading
         self.photo_process_values = ['RAW', 'Threshold', 'Contours', 'Histogram', 'Full Preview']
@@ -63,7 +64,6 @@ class GUI:
 
         self.global_settings = self.default_settings.copy()
         self.master = master
-        
         # Building the GUI
         self.master.title('Film Scan Converter')
         try:
@@ -409,7 +409,7 @@ class GUI:
 
         self.set_disable_buttons()
         try:
-            params_dict = np.load('config.npy', allow_pickle=True).item()
+            params_dict = np.load(f'{os.path.join(self.config_path,"/config.npy")}', allow_pickle=True).item()
         except Exception as e:
             logger.exception(f"Exception: {e}")
         else:
@@ -417,6 +417,21 @@ class GUI:
                 for attr in object.advanced_attrs:
                     if attr in params_dict:
                         setattr(object, attr, params_dict[attr]) # Initializes every parameter with imported parameters
+    
+    def _check_and_create_conf_folder(self) -> str:
+        '''
+        Check if conf folder exists and, if not, it creates it
+
+        Returns: 
+            The folder's path
+        '''
+      
+        folder_path = os.path.join(os.path.expanduser('~'), '.film_scan_converter')
+        if not os.path.exists(folder_path):
+            os.makedirs(folder_path)
+            print(f'Creating {folder_path}')
+        return folder_path
+
 
     def advanced_dialog(self):
         # Pop-up window to contain all the advanced settings that don't fit in the main controls
@@ -557,7 +572,7 @@ class GUI:
                 params_dict[attr] = getattr(RawProcessing, attr)
             for attr in self.advanced_attrs:
                 params_dict[attr] = getattr(self, attr)
-            np.save('config.npy', params_dict)
+            np.save(f'{os.path.join(self.config_path,"config.npy")}', params_dict)
         
         def quit():
             self.master.attributes('-topmost', 0)
@@ -712,7 +727,7 @@ class GUI:
         
         self.update_progress(20, f'Initializing {str(total)} photos...')
         for i, filename in enumerate(filenames):
-            photo = RawProcessing(file_directory=filename, default_settings=self.default_settings, global_settings=self.global_settings)
+            photo = RawProcessing(file_directory=filename, default_settings=self.default_settings, global_settings=self.global_settings, config_path=self.config_path)
             self.photos.append(photo)
             photo_names.append(f'{str(i + 1)}. {str(photo)}')
         

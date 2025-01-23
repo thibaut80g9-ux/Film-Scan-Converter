@@ -14,7 +14,6 @@ logging.basicConfig(filename='logfile.log', level=logging.DEBUG, format=FORMAT)
    
 if __name__ == '__main__':
     # Main function
-    
     multiprocessing.freeze_support()
     try:
         ctypes.windll.shcore.SetProcessDpiAwareness(1)

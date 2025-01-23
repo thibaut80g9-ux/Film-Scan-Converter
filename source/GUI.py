@@ -9,9 +9,10 @@ import threading
 import numpy as np 
 import cv2
 import multiprocessing
+from typing import Literal
 
 #custom classes
-from ScrollFrame import ScrollFrame
+from CustomWidgets import ScrollFrame, ScaleEntry, CheckLabel, ComboLabel, MultiEntryLabel
 from RawProcessing import RawProcessing
 
 #logging
@@ -73,7 +74,6 @@ class GUI:
             self.master.geometry('{}x{}+0+0'.format(*m))
             logger.exception(f"Exception: {e}")
         self.master.geometry('800x500')
-        validation = self.master.register(self.validate)
 
         menubar = tk.Menu(self.master, relief=tk.FLAT)
         self.filemenu = tk.Menu(menubar, tearoff=0)
@@ -99,6 +99,8 @@ class GUI:
         self.controlsFrame.grid_rowconfigure(0, weight=1)
         self.controlsFrame.grid_columnconfigure(0, weight=1)
         dynamic_scroll_frame = ScrollFrame(self.controlsFrame)
+
+        self.widgets = {} # stores dictionary of all widgets
 
         # Importing RAW scans
         import_title = ttk.Label(text='Select Photo', font=self.header_style, padding=2)
@@ -126,33 +128,20 @@ class GUI:
         # Reject Checkbutton to exclude from export
         rejectFrame = ttk.Frame(processingFrame)
         rejectFrame.grid(row=0, column=0, sticky='EW')
-        ttk.Label(rejectFrame, text='Reject Photo:').pack(side=tk.LEFT)
-        self.reject_check = tk.BooleanVar()
-        self.reject_check.set(False)
-        self.reject_CheckButton = ttk.Checkbutton(rejectFrame, variable=self.reject_check, state='deselected', command=self.set_reject)
-        self.reject_CheckButton.pack(side=tk.LEFT)
+        self.reject_check = CheckLabel(rejectFrame, 'Reject Photo:', 0, 'reject', self.widgets, False, command=lambda widget: self.widget_changed(widget, 'update'))
         # Selection of global settings
         self.globFrame = ttk.Frame(processingFrame)
         self.globFrame.grid(row=1, column=0, sticky='EW')
-        ttk.Label(self.globFrame, text='Sync with Global Settings:').pack(side=tk.LEFT)
-        self.glob_check = tk.BooleanVar()
-        self.glob_check.set(True)
-        ttk.Checkbutton(self.globFrame, variable=self.glob_check, state='selected', command=self.set_global).pack(side=tk.LEFT)
+        self.glob_check = CheckLabel(self.globFrame, 'Sync with Global Settings:', 0, default_value=True, global_sync=False, command=self.set_global)
         # Selection of film type
         self.filmFrame = ttk.Frame(processingFrame)
         self.filmFrame.grid(row=3, column=0, sticky='EW')
-        ttk.Label(self.filmFrame, text='Film Type:').pack(side=tk.LEFT)
-        self.filmCombo = ttk.Combobox(self.filmFrame, state='readonly', values=['Black & White Negative', 'Colour Negative', 'Slide (Colour Positive)','Crop Only (RAW)'], width=25)
-        self.filmCombo.current(self.global_settings['film_type'])
-        self.filmCombo.pack(side=tk.LEFT, padx=2)
-        self.filmCombo.bind('<<ComboboxSelected>>', self.set_film_type)
+        film_types = ['Black & White Negative', 'Colour Negative', 'Slide (Colour Positive)','Crop Only (RAW)']
+        self.film_type = ComboLabel(self.filmFrame, 'Film Type:', 0, film_types, 'film_type', self.widgets, width=25, command=self.widget_changed)
         # Dust removal
         self.dustFrame = ttk.Frame(processingFrame)
         self.dustFrame.grid(row=4, column=0, sticky='EW')
-        ttk.Label(self.dustFrame, text='Remove Dust:').pack(side=tk.LEFT)
-        self.dust_check = tk.BooleanVar()
-        self.dust_check.set(self.global_settings['remove_dust'])
-        ttk.Checkbutton(self.dustFrame, variable=self.dust_check, state='deselected', command=self.set_remove_dust).pack(side=tk.LEFT)
+        CheckLabel(self.dustFrame, 'Remove Dust:', 0, 'remove_dust', self.widgets, command=lambda widget: self.widget_changed(widget, 'update'))
 
         # Automatic Cropping Settings
         controls_title = ttk.Label(text='Automatic Crop & Rotate', font=self.header_style, padding=2)
@@ -162,40 +151,10 @@ class GUI:
         crop_adjustments.pack(fill='x')
         crop_adjustments.grid_rowconfigure(1, weight=1)
         crop_adjustments.grid_columnconfigure(3, weight=1)
-        ttk.Label(crop_adjustments, text='Dark Threshold:').grid(row=0, column=0, sticky=tk.E)
-        self.dark_threshold = tk.IntVar()
-        self.dark_threshold.set(self.global_settings['dark_threshold'])
-        self.dark_threshold_scale = ttk.Scale(crop_adjustments, from_=0, to=100, orient=tk.HORIZONTAL, command=lambda x:self.dark_threshold.set(round(float(x))), length=100, value=self.dark_threshold.get())
-        self.dark_threshold_scale.grid(row=0, column=1, padx=2)
-        self.dark_threshold_scale.bind('<ButtonRelease-1>', self.set_dark_threshold)
-        self.dark_threshold_spin = ttk.Spinbox(crop_adjustments, from_=0, to=100, increment=1, textvariable=self.dark_threshold, command=self.set_dark_threshold, width=5, validate='key', validatecommand=(validation, '%P', '%W'))
-        self.dark_threshold_spin.grid(row=0, column=2)
-        self.dark_threshold_spin.bind('<Return>', self.set_dark_threshold)
-        self.dark_threshold_spin.bind('<FocusOut>', self.set_dark_threshold)
-        ttk.Label(crop_adjustments, text='Light Threshold:').grid(row=1, column=0, sticky=tk.E)
-        self.light_threshold = tk.IntVar()
-        self.light_threshold.set(self.global_settings['light_threshold'])
-        self.light_threshold_scale = ttk.Scale(crop_adjustments, from_=0, to=100, orient=tk.HORIZONTAL, command=lambda x:self.light_threshold.set(round(float(x))), length=100, value=self.light_threshold.get())
-        self.light_threshold_scale.grid(row=1, column=1, padx=2)
-        self.light_threshold_scale.bind('<ButtonRelease-1>', self.set_light_threshold)
-        self.light_threshold_spin = ttk.Spinbox(crop_adjustments, from_=0, to=100, increment=1, textvariable=self.light_threshold, command=self.set_light_threshold, width=5, validate='key', validatecommand=(validation, '%P', '%W'))
-        self.light_threshold_spin.grid(row=1, column=2)
-        self.light_threshold_spin.bind('<Return>', self.set_light_threshold)
-        self.light_threshold_spin.bind('<FocusOut>', self.set_light_threshold)
-        ttk.Label(crop_adjustments, text='Border Crop (%):').grid(row=2, column=0, sticky=tk.E)
-        self.border_crop = tk.IntVar()
-        self.border_crop.set(self.global_settings['border_crop'])
-        self.bc_scale = ttk.Scale(crop_adjustments, from_=0, to=20, orient=tk.HORIZONTAL, command=lambda x:self.border_crop.set(round(float(x))), length=100, value=self.border_crop.get())
-        self.bc_scale.grid(row=2, column=1, padx=2)
-        self.bc_scale.bind('<ButtonRelease-1>', self.set_border_crop)
-        self.bc_spin = ttk.Spinbox(crop_adjustments, from_=0, to=20, textvariable=self.border_crop, width=5, command=self.set_border_crop, validate='key', validatecommand=(validation, '%P', '%W'))
-        self.bc_spin.grid(row=2, column=2)
-        self.bc_spin.bind('<Return>', self.set_border_crop)
-        self.bc_spin.bind('<FocusOut>', self.set_border_crop)
-        ttk.Label(crop_adjustments, text='Flip Horizontally:').grid(column=0, row=3, sticky=tk.E)
-        self.flip_check = tk.BooleanVar()
-        self.flip_check.set(self.global_settings['flip'])
-        ttk.Checkbutton(crop_adjustments, variable=self.flip_check, state='selected', command=self.set_flip).grid(column=1, row=3, sticky=tk.W)
+        ScaleEntry(crop_adjustments, 'Dark Threshold:', 0, 0, 100, 'dark_threshold', self.widgets, command=self.widget_changed)
+        ScaleEntry(crop_adjustments, 'Light Threshold:', 1, 0, 100, 'light_threshold', self.widgets, command=self.widget_changed)
+        ScaleEntry(crop_adjustments, 'Border Crop (%):', 2, 0, 20, 'border_crop', self.widgets, command=self.widget_changed)
+        CheckLabel(crop_adjustments, 'Flip Horizontally:', 3, 'flip', self.widgets, command=self.set_flip)
         rotButtons = ttk.Frame(self.cropFrame)
         rotButtons.pack(fill='x')
         ttk.Button(rotButtons, text='Rotate Counterclockwise', width=22, command=self.rot_counterclockwise).pack(side=tk.LEFT, padx=2, pady=5)
@@ -210,11 +169,8 @@ class GUI:
         self.colourFrame = ttk.LabelFrame(dynamic_scroll_frame.frame, borderwidth=2, labelwidget=colour_title, padding=5)
         colour_controls = ttk.Frame(self.colourFrame)
         colour_controls.pack(fill='x', side=tk.LEFT)
-        ttk.Label(colour_controls, text='Film Base Colour:').grid(row=0, column=0, sticky=tk.E)
-        self.base = ttk.Combobox(colour_controls, values=['Auto Detect','Set Manually'], state='readonly', width=12)
-        self.base.grid(row=0, column=1, columnspan=2, sticky=tk.W, padx=2)
-        self.base.current(self.global_settings['base_detect'])
-        self.base.bind('<<ComboboxSelected>>', self.set_base_detect)
+        base_setting_modes = ['Auto Detect','Set Manually']
+        self.base_mode = ComboLabel(colour_controls, 'Film Base Colour', 0, base_setting_modes, 'base_detect', self.widgets, command=self.set_base_detect)
         self.base_clr_lbl = ttk.Label(colour_controls, text='RGB:')
         self.base_rgb = tk.StringVar()
         self.base_rgb.set(str(self.global_settings['base_rgb']))
@@ -229,39 +185,9 @@ class GUI:
         self.wb_picker_button = ttk.Button(colour_controls, image=picker, command=self.pick_wb)
         self.wb_picker_button.grid(row=3, column=1, sticky=tk.W)
         self.wb_picker_button.image = picker
-        ttk.Label(colour_controls, text='Temperature:').grid(row=4, column=0, sticky=tk.E, padx=2, pady=2)
-        self.temp = tk.IntVar()
-        self.temp.set(self.global_settings['temp'])
-        self.temp_scale = ttk.Scale(colour_controls, from_=-100, to=100, orient=tk.HORIZONTAL, command=lambda x:self.temp.set(round(float(x)/5)*5), length=100, value=self.temp.get())
-        self.temp_scale.grid(row=4, column=1, padx=2)
-        self.temp_scale.set(self.global_settings['temp'])
-        self.temp_scale.bind('<ButtonRelease-1>', self.set_temp)
-        self.temp_spin = ttk.Spinbox(colour_controls, from_=-100, to=100, increment=5, textvariable=self.temp, width=5, command=self.set_temp, validate='key', validatecommand=(validation, '%P', '%W'))
-        self.temp_spin.grid(row=4, column=2, sticky=tk.W, columnspan=2)
-        self.temp_spin.bind('<Return>', self.set_temp)
-        self.temp_spin.bind('<FocusOut>', self.set_temp)
-        ttk.Label(colour_controls, text='Tint:').grid(row=5, column=0, sticky=tk.E)
-        self.tint = tk.IntVar()
-        self.tint.set(self.global_settings['tint'])
-        self.tint_scale = ttk.Scale(colour_controls, from_=-100, to=100, orient=tk.HORIZONTAL, command=lambda x:self.tint.set(round(float(x)/5)*5), length=100, value=self.tint.get())
-        self.tint_scale.grid(row=5, column=1, padx=2)
-        self.tint_scale.set(self.global_settings['tint'])
-        self.tint_scale.bind('<ButtonRelease-1>', self.set_tint)
-        self.tint_spin = ttk.Spinbox(colour_controls, from_=-100, to=100, increment=5, textvariable=self.tint, width=5, command=self.set_tint, validate='key', validatecommand=(validation, '%P', '%W'))
-        self.tint_spin.grid(row=5, column=2, sticky=tk.W, columnspan=2)
-        self.tint_spin.bind('<Return>', self.set_tint)
-        self.tint_spin.bind('<FocusOut>', self.set_tint)
-        ttk.Label(colour_controls, text='Saturation (%):').grid(row=6, column=0, sticky=tk.E)
-        self.sat = tk.IntVar()
-        self.sat.set(self.global_settings['sat'])
-        self.sat_scale = ttk.Scale(colour_controls, from_=0, to=200, orient=tk.HORIZONTAL, command=lambda x:self.sat.set(round(float(x)/10)*10), length=100, value=self.sat.get())
-        self.sat_scale.grid(row=6, column=1, padx=2)
-        self.sat_scale.set(self.global_settings['sat'])
-        self.sat_scale.bind('<ButtonRelease-1>', self.set_sat)
-        self.sat_spin = ttk.Spinbox(colour_controls, from_=0, to=200, increment=10, textvariable=self.sat, width=5, command=self.set_sat, validate='key', validatecommand=(validation, '%P', '%W'))
-        self.sat_spin.grid(row=6, column=2, sticky=tk.W, columnspan=2)
-        self.sat_spin.bind('<Return>', self.set_sat)
-        self.sat_spin.bind('<FocusOut>', self.set_sat)
+        self.temp = ScaleEntry(colour_controls, 'Temperature:', 4, -100, 100, 'temp', self.widgets, increment=5, command=lambda widget:self.widget_changed(widget, 'skip crop'))
+        self.tint = ScaleEntry(colour_controls, 'Tint:', 5, -100, 100, 'tint', self.widgets, increment=5, command=lambda widget:self.widget_changed(widget, 'skip crop'))
+        ScaleEntry(colour_controls, 'Saturation (%):', 6, 0, 200, 'sat', self.widgets, increment=10, command=lambda widget:self.widget_changed(widget, 'skip crop'))
         
         # Brightness Settings
         brightness_title = ttk.Label(text='Brightness Adjustment', font=self.header_style, padding=2)
@@ -271,61 +197,11 @@ class GUI:
         exposureControls.pack(fill='x', side=tk.LEFT)
         exposureControls.grid_rowconfigure(6, weight=1)
         exposureControls.grid_columnconfigure(3, weight=1)
-        ttk.Label(exposureControls, text='White Point:').grid(row=2, column=0, sticky=tk.E)
-        self.white_point = tk.IntVar()
-        self.white_point.set(self.global_settings['white_point'])
-        self.wpp_scale = ttk.Scale(exposureControls, from_=-100, to=100, orient=tk.HORIZONTAL, command=lambda x:self.white_point.set(round(float(x)/5)*5), length=100, value=self.white_point.get())
-        self.wpp_scale.grid(row=2, column=1, padx=2)
-        self.wpp_scale.set(self.global_settings['white_point'])
-        self.wpp_scale.bind('<ButtonRelease-1>', self.set_white_point)
-        self.wpp_spin = ttk.Spinbox(exposureControls, from_=-100, to=100, increment=5, textvariable=self.white_point, width=5, command=self.set_white_point, validate='key', validatecommand=(validation, '%P', '%W'))
-        self.wpp_spin.grid(row=2, column=2, sticky=tk.W)
-        self.wpp_spin.bind('<Return>', self.set_white_point)
-        self.wpp_spin.bind('<FocusOut>', self.set_white_point)
-        ttk.Label(exposureControls, text='Black Point:').grid(row=3, column=0, sticky=tk.E)
-        self.black_point = tk.IntVar()
-        self.black_point.set(self.global_settings['black_point'])
-        self.bpp_scale = ttk.Scale(exposureControls, from_=-100, to=100, orient=tk.HORIZONTAL, command=lambda x:self.black_point.set(round(float(x)/5)*5), length=100, value=self.black_point.get())
-        self.bpp_scale.grid(row=3, column=1, padx=2)
-        self.bpp_scale.set(self.global_settings['black_point'])
-        self.bpp_scale.bind('<ButtonRelease-1>', self.set_black_point)
-        self.bpp_spin = ttk.Spinbox(exposureControls, from_=-100, to=100, increment=5, textvariable=self.black_point, width=5, command=self.set_black_point, validate='key', validatecommand=(validation, '%P', '%W'))
-        self.bpp_spin.grid(row=3, column=2, sticky=tk.W)
-        self.bpp_spin.bind('<Return>', self.set_black_point)
-        self.bpp_spin.bind('<FocusOut>', self.set_black_point)
-        ttk.Label(exposureControls, text='Gamma:').grid(row=4, column=0, sticky=tk.E)
-        self.gamma = tk.IntVar()
-        self.gamma.set(self.global_settings['gamma'])
-        self.gamma_scale = ttk.Scale(exposureControls, from_=-100, to=100, orient=tk.HORIZONTAL, command=lambda x:self.gamma.set(round(float(x)/5)*5), length=100, value=self.gamma.get())
-        self.gamma_scale.grid(row=4, column=1, padx=2)
-        self.gamma_scale.set(self.global_settings['gamma'])
-        self.gamma_scale.bind('<ButtonRelease-1>', self.set_gamma)
-        self.gamma_spin = ttk.Spinbox(exposureControls, from_=-100, to=100, increment=5, textvariable=self.gamma, width=5, command=self.set_gamma, validate='key', validatecommand=(validation, '%P', '%W'))
-        self.gamma_spin.grid(row=4, column=2, sticky=tk.W)
-        self.gamma_spin.bind('<Return>', self.set_gamma)
-        self.gamma_spin.bind('<FocusOut>', self.set_gamma)
-        ttk.Label(exposureControls, text='Shadows:').grid(row=5, column=0, sticky=tk.E)
-        self.shadows = tk.IntVar()
-        self.shadows.set(self.global_settings['shadows'])
-        self.shad_scale = ttk.Scale(exposureControls, from_=-100, to=100, orient=tk.HORIZONTAL, command=lambda x:self.shadows.set(round(float(x)/5)*5), length=100, value=self.shadows.get())
-        self.shad_scale.grid(row=5, column=1, padx=2)
-        self.shad_scale.set(self.global_settings['shadows'])
-        self.shad_scale.bind('<ButtonRelease-1>', self.set_shadows)
-        self.shad_spin = ttk.Spinbox(exposureControls, from_=-100, to=100, increment=5, textvariable=self.shadows, width=5, command=self.set_shadows, validate='key', validatecommand=(validation, '%P', '%W'))
-        self.shad_spin.grid(row=5, column=2, sticky=tk.W)
-        self.shad_spin.bind('<Return>', self.set_shadows)
-        self.shad_spin.bind('<FocusOut>', self.set_shadows)
-        ttk.Label(exposureControls, text='Highlights:').grid(row=6, column=0, sticky=tk.E)
-        self.highlights = tk.IntVar()
-        self.highlights.set(self.global_settings['highlights'])
-        self.high_scale = ttk.Scale(exposureControls, from_=-100, to=100, orient=tk.HORIZONTAL, command=lambda x:self.highlights.set(round(float(x)/5)*5), length=100, value=self.highlights.get())
-        self.high_scale.grid(row=6, column=1, padx=2)
-        self.high_scale.set(self.global_settings['highlights'])
-        self.high_scale.bind('<ButtonRelease-1>', self.set_highlights)
-        self.high_spin = ttk.Spinbox(exposureControls, from_=-100, to=100, increment=5, textvariable=self.highlights, width=5, command=self.set_highlights, validate='key', validatecommand=(validation, '%P', '%W'))
-        self.high_spin.grid(row=6, column=2, sticky=tk.W)
-        self.high_spin.bind('<Return>', self.set_highlights)
-        self.high_spin.bind('<FocusOut>', self.set_highlights)
+        ScaleEntry(exposureControls, 'White Point:', 0, -100, 100, 'white_point', self.widgets, increment=5, command=lambda widget:self.widget_changed(widget, 'skip crop'))
+        ScaleEntry(exposureControls, 'Black Point:', 1, -100, 100, 'black_point', self.widgets, increment=5, command=lambda widget:self.widget_changed(widget, 'skip crop'))
+        ScaleEntry(exposureControls, 'Gamma:', 2, -100, 100, 'gamma', self.widgets, increment=5, command=lambda widget:self.widget_changed(widget, 'skip crop'))
+        ScaleEntry(exposureControls, 'Shadows:', 3, -100, 100, 'shadows', self.widgets, increment=5, command=lambda widget:self.widget_changed(widget, 'skip crop'))
+        ScaleEntry(exposureControls, 'Highlights:', 4, -100, 100, 'highlights', self.widgets, increment=5, command=lambda widget:self.widget_changed(widget, 'skip crop'))
 
         # Export photo settings
         export_title = ttk.Label(text='Export Settings', font=self.header_style, padding=2)
@@ -333,21 +209,8 @@ class GUI:
         export_frame.grid(row=9, column=0, sticky='EW')
         export_settings_frame = ttk.Frame(export_frame)
         export_settings_frame.pack(fill='x')
-        ttk.Label(export_settings_frame, text='Export File Type:', anchor='w').grid(row=0, column=0, sticky=tk.E)
-        self.filetype_Combo = ttk.Combobox(export_settings_frame, state='readonly', values=self.filetypes, width=15)
-        self.filetype_Combo.current(2)
-        self.filetype_Combo.grid(row=0, column=1, sticky=tk.W, padx=2, columnspan=2)
-        ttk.Label(export_settings_frame, text='White Frame (%):', anchor='w').grid(row=1, column=0, sticky=tk.E)
-        self.frame = tk.IntVar()
-        self.frame.set(RawProcessing.frame)
-        self.frame_scale = ttk.Scale(export_settings_frame, from_=0, to=10, orient=tk.HORIZONTAL, command=lambda x:self.frame.set(round(float(x))), length=100, value=self.frame.get())
-        self.frame_scale.grid(row=1, column=1, sticky=tk.W, pady=5, padx=2)
-        self.frame_scale.set(self.frame.get())
-        self.frame_scale.bind('<ButtonRelease-1>', self.set_frame)
-        frame_spin = ttk.Spinbox(export_settings_frame, from_=0, to=10, increment=1, textvariable=self.frame, validate='key', validatecommand=(validation, '%P', '%W'), command=self.set_frame, width=5)
-        frame_spin.grid(row=1, column=2, sticky=tk.W, pady=5)
-        frame_spin.bind('<Return>', self.set_frame)
-        frame_spin.bind('<FocusOut>', self.set_frame)
+        ComboLabel(export_settings_frame, 'Export File Type:', 0, self.filetypes, 'filetype', global_sync=False, output_list=self.filetypes, command=lambda widget:self.widget_changed(widget, 'skip', False), default_value=self.filetypes.index(RawProcessing.default_parameters['filetype']))
+        self.frame = ScaleEntry(export_settings_frame, 'White Frame (%):', 1, 0, 10, 'frame', global_sync=False, command=lambda widget:self.widget_changed(widget, 'update', False), default_value=RawProcessing.default_parameters['frame'])
         ttk.Label(export_frame, text='Output Destination Folder:', anchor='w').pack(fill = 'x')
         self.destination_folder_text = tk.StringVar()
         self.destination_folder_text.set('No Destination Folder Specified')
@@ -362,7 +225,7 @@ class GUI:
         self.abort_button = ttk.Button(export_frame, text='Abort Export', command=self.abort)
 
         # Progress Bar
-        self.progressFrame = ttk.Frame(dynamic_scroll_frame.frame, padding=2)
+        self.progressFrame = ttk.Frame(self.controlsFrame, padding=2)
         self.progress_percentage = ttk.Label(self.progressFrame)
         self.progress_percentage.pack(side=tk.RIGHT, anchor='n')
         self.progress = tk.DoubleVar()
@@ -408,15 +271,23 @@ class GUI:
         dynamic_scroll_frame.update()
 
         self.set_disable_buttons()
+
+        # Loading advanced parameters from the config file
         try:
             params_dict = np.load(f'{os.path.join(self.config_path,"/config.npy")}', allow_pickle=True).item()
         except Exception as e:
             logger.exception(f"Exception: {e}")
         else:
-            for object in [self, RawProcessing]:
-                for attr in object.advanced_attrs:
-                    if attr in params_dict:
-                        setattr(object, attr, params_dict[attr]) # Initializes every parameter with imported parameters
+            for attr in self.advanced_attrs:
+                if attr in params_dict:
+                    setattr(self, attr, params_dict[attr]) # Initializes every parameter with imported parameters
+            for attr in RawProcessing.advanced_attrs:
+                if attr in params_dict:
+                    RawProcessing.class_parameters[attr] = params_dict[attr]
+                    
+        for widget in self.widgets.values():
+            if widget.key in self.default_settings:
+                widget.set(self.default_settings[widget.key]) # initializes widgets with default settings
     
     def _check_and_create_conf_folder(self) -> str:
         '''
@@ -432,107 +303,9 @@ class GUI:
             print(f'Creating {folder_path}')
         return folder_path
 
-
     def advanced_dialog(self):
         # Pop-up window to contain all the advanced settings that don't fit in the main controls
-        class EntryLabel:
-            # Defines custom widget with label with a spinbox next to it
-            def __init__(widget, master, text, min, max, default_values, tkVar, increment=1, format='', width=10):
-                nonlocal row
-                def focus_in(variable):
-                    widget.prev_value = variable.get() # when selected, store the current value for later
-
-                def fix_num(variable):
-                    # Keeps the input numeric and in-bounds
-                    try:
-                        variable.get()
-                    except tk.TclError:
-                        variable.set(widget.prev_value)
-                    else:
-                        if not is_float:
-                            variable.set(round(variable.get()))
-                        if variable.get() < min:
-                            variable.set(min)
-                        elif variable.get() > max:
-                            variable.set(max)
-                        widget.prev_value = variable.get()
-                    top.focus()
-
-                def numeric(input):
-                    # validates the input as numeric and in bounds
-                    try:
-                        x = float(input)
-                    except ValueError:
-                        return False
-                    else:
-                        if not input.isnumeric() and not is_float:
-                            return False
-                        elif x < min:
-                            return False
-                        elif x > max:
-                            return False
-                        else:
-                            return True
-                
-                validation = top.register(numeric)
-                widget.variables_list = []
-                is_float = tkVar == tk.DoubleVar
-                try:
-                    iter(default_values)
-                except TypeError:
-                    default_values = [default_values]
-                
-                widget.label = ttk.Label(master, text=text)
-                widget.label.grid(row=row, column=0, sticky=tk.E)
-                widget.entryFrame = ttk.Frame(master, width=20)
-                widget.entryFrame.grid(row=row, column=1, sticky='new', padx=5, pady=2)
-                widget.entryFrame.columnconfigure(0, weight=1)
-                for i, value in enumerate(default_values):
-                    variable = tkVar()
-                    variable.set(value)
-                    widget.variables_list.append(variable)
-                    invalid = top.register(lambda: fix_num(variable))
-                    spinbox = ttk.Spinbox(widget.entryFrame, textvariable=variable, from_=min, to=max, increment=increment, validate='focusout', validatecommand=(validation, '%P'), invalidcommand=invalid, format=format, width=width)
-                    spinbox.grid(row=0, column=i, sticky='new')
-                    spinbox.bind('<Return>', lambda x: fix_num(variable))
-                    spinbox.bind('<FocusIn>', lambda x:focus_in(variable))
-                row += 1
-            def get(widget):
-                # Returns the value of the entry
-                output = tuple([var.get() for var in widget.variables_list])
-                if len(output) == 1:
-                    return output[0]
-                else:
-                    return output
-            
-            def show(widget):
-                widget.label.grid(row=row, column=0, sticky=tk.E)
-                widget.entryFrame.grid(row=row, column=1, sticky='new', padx=5, pady=2)
-            
-            def hide(widget):
-                widget.label.grid_forget()
-                widget.entryFrame.grid_forget()
-        
-        class ComboLabel:
-            # Defines custom widget with a label and a dropdown menu next to it
-            def __init__(widget, master, text, values, variable):
-                nonlocal row
-                ttk.Label(master, text=text).grid(row=row, column=0, sticky=tk.E)
-                ttk.Combobox(master, textvariable=variable, values=values, state='readonly').grid(row=row, column=1, sticky='new', padx=5, pady=2)
-                row += 1
-        
-        class CheckLabel:
-            # Defines custom widget with a label and checkbox
-            def __init__(widget, master, text, value, command):
-                widget.variable = tk.BooleanVar()
-                widget.variable.set(value)
-                ttk.Label(master, text=text).grid(row=row, column=0, sticky=tk.E)
-                ttk.Checkbutton(master, variable=widget.variable, command=command).grid(row=row, column=1, sticky='new', padx=5, pady=2)
-
-            def get(widget):
-                return widget.variable.get()
-        
-        def set_wb():
+        def set_wb(event=None):
             # Hides or shows wb multipliers if using wb from camera
             if use_camera_wb.get():
                 wb_mult.hide()
@@ -540,22 +313,8 @@ class GUI:
                 wb_mult.show()
 
         def apply_settings():
-            RawProcessing.max_proxy_size = max_proxy_size.get()
-            RawProcessing.jpg_quality = jpg_quality.get()
-            RawProcessing.dm_alg = allowable_dm_algs[dm_algs_list.index(dm_alg.get())]
-            RawProcessing.colour_space = cs_list.index(colour_space.get())
-            RawProcessing.tiff_compression = t_comp_dict[tiff_compression.get()]
-            RawProcessing.exp_shift = exp_shift.get()
-            RawProcessing.fbdd_nr = fbdd_nr_list.index(fbdd_nr.get())
-            RawProcessing.raw_gamma = raw_gamma.get()
-            RawProcessing.use_camera_wb = use_camera_wb.get()
-            RawProcessing.wb_mult = list(wb_mult.get())
-            RawProcessing.white_point_percentile = white_point_percentile.get()
-            RawProcessing.black_point_percentile = black_point_percentile.get()
-            RawProcessing.ignore_border = ignore_border.get()
-            RawProcessing.dust_threshold = dust_threshold.get()
-            RawProcessing.dust_iter = dust_iter.get()
-            RawProcessing.max_dust_area = max_dust_area.get()
+            for widget in raw_processing_widgets.values():
+                RawProcessing.class_parameters[widget.key] = widget.get()
             self.max_processors_override = max_processors.get()
             self.preload = preload.get()
             
@@ -569,7 +328,7 @@ class GUI:
             apply_settings()
             params_dict = dict()
             for attr in RawProcessing.advanced_attrs:
-                params_dict[attr] = getattr(RawProcessing, attr)
+                params_dict[attr] = RawProcessing.class_parameters[attr]
             for attr in self.advanced_attrs:
                 params_dict[attr] = getattr(self, attr)
             np.save(f'{os.path.join(self.config_path,"config.npy")}', params_dict)
@@ -608,68 +367,45 @@ class GUI:
         dust_settings = ttk.LabelFrame(secondColumn, borderwidth=2, labelwidget=dust_lbl, padding=5)
         dust_settings.pack(fill='x', expand=True)
 
-        row = 0 # starting row
+        raw_processing_widgets = {}
+        initialized_values = {}
+        for key in RawProcessing.advanced_attrs:
+            initialized_values[key] = RawProcessing.class_parameters[key]
 
         # Building pop-up GUI
-        dm_alg = tk.StringVar()
         allowable_dm_algs = (0, 1, 2, 3, 4, 11, 12)
         dm_algs_list = ('LINEAR','VNG','PPG','AHD','DCB','DHT','AAHD')
-        dm_alg.set(dm_algs_list[allowable_dm_algs.index(RawProcessing.dm_alg)])
-        ComboLabel(import_settings, 'Demosaicing Algorithm:', dm_algs_list, dm_alg)
-
-        colour_space = tk.StringVar()
+        ComboLabel(import_settings, 'Demosaicing Algorithm:', 0, dm_algs_list, 'dm_alg', raw_processing_widgets, False, default_value=initialized_values['dm_alg'], output_list=allowable_dm_algs, width=25)
         cs_list = ('raw','sRGB','Adobe','Wide','ProPhoto','XYZ','ACES','P3D65','Rec2020')
-        colour_space.set(cs_list[RawProcessing.colour_space])
-        ComboLabel(import_settings, 'RAW Output Colour Space:', cs_list, colour_space)
-
-        raw_gamma = EntryLabel(import_settings, 'RAW Gamma (Power, Slope):', 0, 8, RawProcessing.raw_gamma, tk.DoubleVar, 0.1, width=10)
-
-        exp_shift = EntryLabel(import_settings, 'RAW Exposure Shift:', -2, 3, RawProcessing.exp_shift, tk.IntVar)
-
-        fbdd_nr = tk.StringVar()
+        ComboLabel(import_settings, 'RAW Output Colour Space:', 1, cs_list, 'colour_space', raw_processing_widgets, False, default_value=initialized_values['colour_space'], width=25)
+        MultiEntryLabel(import_settings, 'RAW Gamma (Power, Slope):', 3, 0, 8, initialized_values['raw_gamma'], 'raw_gamma', raw_processing_widgets, False, True, 0.1, width=25)
+        MultiEntryLabel(import_settings, 'RAW Exposure Shift:', 4, -2, 3, initialized_values['exp_shift'], 'exp_shift', raw_processing_widgets, False, True, 0.25, width=25)
         fbdd_nr_list = ('Off','Light','Full')
-        fbdd_nr.set(fbdd_nr_list[RawProcessing.fbdd_nr])
-        ComboLabel(import_settings, 'FBDD Noise Reduction:', fbdd_nr_list, fbdd_nr)
-
-        use_camera_wb = CheckLabel(import_settings, 'Use Camera White Balance:', RawProcessing.use_camera_wb, set_wb)
-
+        ComboLabel(import_settings, 'FBDD Noise Reduction:', 5, fbdd_nr_list, 'fbdd_nr', raw_processing_widgets, False, default_value=initialized_values['fbdd_nr'], width=25)
+        use_camera_wb = CheckLabel(import_settings, 'Use Camera White Balance:', 6, 'use_camera_wb', raw_processing_widgets, False, initialized_values['use_camera_wb'], set_wb)
         try:
-            wb_lbl = 'White Balance Multipliers (' + self.current_photo.colour_desc + '):'
+            wb_lbl = f'White Balance Multipliers ({self.current_photo.colour_desc}):'
         except Exception as e:
-            logger.exception(f"Exception: {e}")
             wb_lbl = 'White Balance Multipliers:'
-        wb_mult = EntryLabel(import_settings, wb_lbl, 0, 4, RawProcessing.wb_mult, tk.DoubleVar, 0.1, width=4)
+        wb_mult = MultiEntryLabel(import_settings, wb_lbl, 7, 0, 4, initialized_values['wb_mult'], 'wb_mult', raw_processing_widgets, False, True, 0.1, width=25)
         set_wb()
 
-        max_proxy_size = EntryLabel(process_settings, 'Max Proxy Size (W + H):', 500, 20000, RawProcessing.max_proxy_size, tk.IntVar, 500)
+        MultiEntryLabel(process_settings, 'Max Proxy Size (W + H):', 0, 500, 20000, initialized_values['max_proxy_size'], 'max_proxy_size', raw_processing_widgets, False, increment=500)
+        preload = MultiEntryLabel(process_settings, 'Photo Preload Buffer Size:', 1, 0, 20, self.preload)
+        MultiEntryLabel(process_settings, 'EQ Ignore Borders % (W, H)', 2, 0, 40, initialized_values['ignore_border'], 'ignore_border', raw_processing_widgets, False)
+        MultiEntryLabel(process_settings, 'White Point Percentile:', 3, 70, 100, initialized_values['white_point_percentile'], 'white_point_percentile', raw_processing_widgets, False, True)
+        MultiEntryLabel(process_settings, 'Black Point Percentile:', 4, 0, 30, initialized_values['black_point_percentile'], 'black_point_percentile', raw_processing_widgets, False, True)
 
-        preload = EntryLabel(process_settings, 'Photo Preload Buffer Size:', 0, 20, self.preload, tk.IntVar)
+        MultiEntryLabel(dust_settings, 'Threshold:', 0, 0, 50, initialized_values['dust_threshold'], 'dust_threshold', raw_processing_widgets, False)
+        MultiEntryLabel(dust_settings, 'Noise Closing Iterations:', 1, 1, 10, initialized_values['dust_iter'], 'dust_iter', raw_processing_widgets, False)
+        MultiEntryLabel(dust_settings, 'Max Particle Area:', 2, 0, 100, initialized_values['max_dust_area'], 'max_dust_area', raw_processing_widgets, False)
 
-        ignore_border = EntryLabel(process_settings, 'EQ Ignore Borders % (W, H):', 0, 40, RawProcessing.ignore_border, tk.IntVar)
+        MultiEntryLabel(export_settings, 'JPEG Quality:', 0, 0, 100, initialized_values['jpg_quality'], 'jpg_quality', raw_processing_widgets, False, increment=10)
+        tiff_comp_list = ['No Compression','Lempel-Ziv & Welch','Adobe Deflate (ZIP)','PackBits']
+        tiff_comp_out = [1, 5, 8, 32773]
+        ComboLabel(export_settings, 'TIFF Compression:', 1, tiff_comp_list, 'tiff_compression', raw_processing_widgets, False, tiff_comp_out.index(initialized_values['tiff_compression']), output_list=tiff_comp_out, width=20)
 
-        white_point_percentile = EntryLabel(process_settings, 'White Point Percentile:', 70, 100, RawProcessing.white_point_percentile, tk.DoubleVar)
-
-        black_point_percentile = EntryLabel(process_settings, 'Black Point Percentile:', 0, 30, RawProcessing.black_point_percentile, tk.DoubleVar)
-
-        dust_threshold = EntryLabel(dust_settings, 'Threshold:', 0, 50, RawProcessing.dust_threshold, tk.IntVar)
-
-        dust_iter = EntryLabel(dust_settings, 'Noise Closing Iterations:', 1, 10, RawProcessing.dust_iter, tk.IntVar)
-
-        max_dust_area = EntryLabel(dust_settings, 'Max Particle Area:', 0, 100, RawProcessing.max_dust_area, tk.IntVar)
-
-        jpg_quality = EntryLabel(export_settings, 'JPEG Quality:', 0, 100, RawProcessing.jpg_quality, tk.IntVar, 10)
-
-        tiff_compression = tk.StringVar()
-        t_comp_dict = {
-            'No Compression': 1,
-            'Lempel-Ziv & Welch': 5,
-            'Adobe Deflate (ZIP)': 8,
-            'PackBits': 32773
-            }
-        tiff_compression.set(list(t_comp_dict.keys())[list(t_comp_dict.values()).index(RawProcessing.tiff_compression)])
-        ComboLabel(export_settings, 'TIFF Compression:', list(t_comp_dict), tiff_compression)
-
-        max_processors = EntryLabel(export_settings, 'Max Processors Override:', 0, multiprocessing.cpu_count(), self.max_processors_override, tk.IntVar)
+        max_processors = MultiEntryLabel(export_settings, 'Max Processors Override:', 2, 0, multiprocessing.cpu_count(), self.max_processors_override)
 
         buttonFrame = ttk.Frame(mainFrame)
         buttonFrame.grid(row=1, column=0, columnspan=2, sticky='e')
@@ -682,27 +418,37 @@ class GUI:
         y = self.master.winfo_y() + int((self.master.winfo_height()/2) - (top.winfo_height()/2))
         top.geometry('+%d+%d' % (x, y))
 
-    def validate(self, input, widget):
-        # Validates if the input is numeric
-        def set_value(value):
-            # Function to replace value in current widget
-            self.master.nametowidget(widget).delete(0,'end')
-            self.master.nametowidget(widget).insert(0, value)
-        if input == '' or input == '-':
-            set_value(0)
-        elif input == '0-':
-            set_value('-0') # allows negative numbers to be more easily entered
-        try: 
-            int(input)
-        except ValueError:
-            return False # input is non-numeric
+    def widget_changed(self, widget, mode: Literal['normal','skip crop','update','skip']='normal', instance=True):
+        # called whenever widget is changed
+        # applies value stored in widget to photo
+        # mode: some setting changes don't need to fully reprocess the photo, this speeds up processing
+        # instance: whether the variable is changing an instance variable or class variable
+        value = widget.get()
+        key = widget.key
+        if self.glob_check.get() and widget.global_sync:
+            self.global_settings[key] = value
+            self.changed_global_settings()
+        self.update_UI()
+        if len(self.photos) == 0:
+            return
+        if instance:
+            setattr(self.current_photo, key, value) # change instance
         else:
-            # Get rid of leading zeros
-            if input[0] == '0':
-                set_value(input[1:])
-            elif (input[:2] == '-0') and (len(input) > 2):
-                set_value('-' + input[2:])
-            return True
+            RawProcessing.class_parameters[key] = value
+        match mode:
+            case 'normal':
+                self.current_photo.process()
+                self.update_IMG()
+                self.unsaved = True
+            case 'skip crop':
+                self.current_photo.process(skip_crop=True)
+                self.update_IMG()
+                self.unsaved = True
+            case 'update':
+                self.update_IMG()
+                self.unsaved = True
+            case 'skip':
+                pass
     
     def import_photos(self):
         # Import photos: opens dialog to load files, and intializes GUI
@@ -825,7 +571,7 @@ class GUI:
             if self.photo_process_Combo.current() == 4: # Only display when full preview is selected
                 try: 
                     self.master.after_cancel(self.start_full_res)
-                except Exception as _: 
+                except: 
                     pass
                 finally: 
                     self.start_full_res = self.master.after(500, update_full_res) # waits for 0.5 s of inactivity before processing
@@ -841,8 +587,8 @@ class GUI:
         # Attempts to resize the images if the resize event has not been called for 100 ms
         try:
             self.master.after_cancel(self.resize)
-        except Exception as e: 
-                     logger.exception(f"Exception: {e}")
+        except: 
+            pass
         finally:
             self.resize = self.master.after(100, self.resize_UI)
     
@@ -887,15 +633,8 @@ class GUI:
         else:
             self.nextButton.configure(state=tk.NORMAL)
 
-    def set_reject(self, event=None):
-        # Defines behaviour of the 'Discard' checkbox
-        if len(self.photos) > 0:
-            self.current_photo.reject = self.reject_check.get()
-        self.update_UI()
-        self.unsaved = True
-
     def set_global(self, event=None):
-        # Defines behaviour of the 'Use Global Settings' checkbox
+        # Defines behaviour of the 'Sync with Global Settings' checkbox
         if len(self.photos) == 0:
             return
         self.current_photo.use_global_settings = self.glob_check.get()
@@ -908,53 +647,14 @@ class GUI:
 
     def change_settings(self, reset=False):
         # Configures GUI to reflect current applied settings for the photo
-        self.reject_check.set(self.current_photo.reject)
+        for widget in self.widgets.values():
+            widget.set(getattr(self.current_photo, widget.key))
 
         if self.current_photo.FileReadError:
-            self.reject_CheckButton.configure(state=tk.DISABLED)
+            self.reject_check.disable()
         else:
-            self.reject_CheckButton.configure(state=tk.NORMAL)
-        
-        self.filmCombo.current(self.current_photo.film_type)
+            self.reject_check.enable()
 
-        self.dust_check.set(self.current_photo.remove_dust)
-
-        self.dark_threshold.set(self.current_photo.dark_threshold)
-        self.dark_threshold_scale.set(self.current_photo.dark_threshold)
-
-        self.light_threshold.set(self.current_photo.light_threshold)
-        self.light_threshold_scale.set(self.current_photo.light_threshold)
-
-        self.border_crop.set(self.current_photo.border_crop)
-        self.bc_scale.set(self.current_photo.border_crop)
-
-        self.flip_check.set(self.current_photo.flip)
-
-        self.white_point.set(self.current_photo.white_point)
-        self.wpp_scale.set(self.current_photo.white_point)
-
-        self.black_point.set(self.current_photo.black_point)
-        self.bpp_scale.set(self.current_photo.black_point)
-
-        self.gamma.set(self.current_photo.gamma)
-        self.gamma_scale.set(self.current_photo.gamma)
-
-        self.shadows.set(self.current_photo.shadows)
-        self.shad_scale.set(self.current_photo.shadows)
-
-        self.highlights.set(self.current_photo.highlights)
-        self.high_scale.set(self.current_photo.highlights)
-
-        self.temp.set(self.current_photo.temp)
-        self.temp_scale.set(self.current_photo.temp)
-
-        self.tint.set(self.current_photo.tint)
-        self.tint_scale.set(self.current_photo.tint)
-        
-        self.sat.set(self.current_photo.sat)
-        self.sat_scale.set(self.current_photo.sat)
-
-        self.base.current(self.current_photo.base_detect)
         self.base_rgb.set(str(self.current_photo.base_rgb)) 
         self.rgb_display.configure(bg=self._from_rgb(self.current_photo.base_rgb))
 
@@ -991,27 +691,15 @@ class GUI:
         self.unsaved = True
     
     # The following functions all define the behaviour of the interactable GUI, such as buttons, entries, and scales
-
-    def set_film_type(self, event=None):
-        if self.glob_check.get():
-            self.global_settings['film_type'] = self.filmCombo.current()
-            self.changed_global_settings()
-        self.update_UI()
-        if len(self.photos) == 0:
-            return
-        self.current_photo.film_type = self.filmCombo.current()
-        self.current_photo.process()
-        self.update_IMG()
-        self.unsaved = True
     
     def update_UI(self):
         # Changes which settings are visible
-        if (self.filmCombo.current() == 3) or self.reject_check.get():
+        if (self.film_type.get() == 3) or self.reject_check.get():
             self.exposureFrame.grid_forget() # Hide the exposure frame when set to output RAW
         else:
             self.exposureFrame.grid(row=7, column=0, sticky='EW')
 
-        if ((self.filmCombo.current() == 1) or (self.filmCombo.current() == 2)) and not self.reject_check.get():
+        if ((self.film_type.get()  == 1) or (self.film_type.get()  == 2)) and not self.reject_check.get():
             self.colourFrame.grid(row=6, column=0, sticky='EW') # Show the colour frame only for colour and slides
         else:
             self.colourFrame.grid_forget()
@@ -1039,7 +727,7 @@ class GUI:
         else:
             self.all_photo_button.configure(state=tk.NORMAL)
         
-        if self.base.current():
+        if self.base_mode.get():
             self.base_clr_lbl.grid(row=1, column=0, sticky=tk.E)
             self.base_rgb_lbl.grid(row=1, column=1, sticky=tk.W)
             self.rgb_display.grid(row=1, column=2, sticky=tk.W)
@@ -1052,52 +740,6 @@ class GUI:
             self.base_pick_button.grid_forget()
             self.base_buttons_frame.grid_forget()
     
-    def set_remove_dust(self, event=None):
-        if self.glob_check.get():
-            self.global_settings['remove_dust'] = self.dust_check.get()
-            self.changed_global_settings()
-        if len(self.photos) == 0:
-            return
-        self.current_photo.remove_dust = self.dust_check.get()
-        self.update_IMG()
-        self.unsaved = True
-            
-    def set_dark_threshold(self, event=None):
-        if self.glob_check.get():
-            self.global_settings['dark_threshold'] = self.dark_threshold.get()
-            self.changed_global_settings()
-        self.dark_threshold_scale.set(self.dark_threshold.get())
-        if len(self.photos) == 0:
-            return
-        self.current_photo.dark_threshold = self.dark_threshold.get()
-        self.current_photo.process()
-        self.update_IMG()
-        self.unsaved = True
-
-    def set_light_threshold(self, event=None):
-        if self.glob_check.get():
-            self.global_settings['light_threshold'] = self.light_threshold.get()
-            self.changed_global_settings()
-        self.light_threshold_scale.set(self.light_threshold.get())
-        if len(self.photos) == 0:
-            return
-        self.current_photo.light_threshold = self.light_threshold.get()
-        self.current_photo.process()
-        self.update_IMG()
-        self.unsaved = True
-    
-    def set_border_crop(self, event=None):
-        if self.glob_check.get():
-            self.global_settings['border_crop'] = self.border_crop.get()
-            self.changed_global_settings()
-        self.bc_scale.set(self.border_crop.get())
-        if len(self.photos) == 0:
-            return
-        self.current_photo.border_crop = self.border_crop.get()
-        self.current_photo.process()
-        self.update_IMG()
-        self.unsaved = True
-    
     def set_flip(self, event=None):
         if self.glob_check.get():
             affected = sum([photo.use_global_settings for photo in self.photos])
@@ -1109,11 +751,11 @@ class GUI:
                     self.glob_check.set(False)
                     self.current_photo.use_global_settings = False
             else:
-                self.global_settings['flip'] = self.flip_check.get()
+                self.global_settings['flip'] = self.widgets['flip'].get()
                 self.changed_global_settings()
         if len(self.photos) == 0:
             return
-        self.current_photo.flip = self.flip_check.get()
+        self.current_photo.flip = self.widgets['flip'].get()
         self.update_IMG()
         self.unsaved = True
     
@@ -1136,66 +778,6 @@ class GUI:
             self.current_photo.rotation -= 1
         self.update_IMG()
         self.unsaved = True
-    
-    def set_white_point(self, event=None):
-        if self.glob_check.get():
-            self.global_settings['white_point'] = self.white_point.get()
-            self.changed_global_settings()
-        self.wpp_scale.set(self.white_point.get())
-        if len(self.photos) == 0:
-            return
-        self.current_photo.white_point = self.white_point.get()
-        self.current_photo.process(skip_crop=True)
-        self.update_IMG()
-        self.unsaved = True
-    
-    def set_black_point(self, event=None):
-        if self.glob_check.get():
-            self.global_settings['black_point'] = self.black_point.get()
-            self.changed_global_settings()
-        self.bpp_scale.set(self.black_point.get())
-        if len(self.photos) == 0:
-            return
-        self.current_photo.black_point = self.black_point.get()
-        self.current_photo.process(skip_crop=True)
-        self.update_IMG()
-        self.unsaved = True
-
-    def set_gamma(self, event=None):
-        if self.glob_check.get():
-            self.global_settings['gamma'] = self.gamma.get()
-            self.changed_global_settings()
-        self.gamma_scale.set(self.gamma.get())
-        if len(self.photos) == 0:
-            return
-        self.current_photo.gamma = self.gamma.get()
-        self.current_photo.process(skip_crop=True)
-        self.update_IMG()
-        self.unsaved = True
-    
-    def set_shadows(self, event=None):
-        if self.glob_check.get():
-            self.global_settings['shadows'] = self.shadows.get()
-            self.changed_global_settings()
-        self.shad_scale.set(self.shadows.get())
-        if len(self.photos) == 0:
-            return
-        self.current_photo.shadows = self.shadows.get()
-        self.current_photo.process(skip_crop=True)
-        self.update_IMG()
-        self.unsaved = True
-    
-    def set_highlights(self, event=None):
-        if self.glob_check.get():
-            self.global_settings['highlights'] = self.highlights.get()
-            self.changed_global_settings()
-        self.high_scale.set(self.highlights.get())
-        if len(self.photos) == 0:
-            return
-        self.current_photo.highlights = self.highlights.get()
-        self.current_photo.process(skip_crop=True)
-        self.update_IMG()
-        self.unsaved = True
 
     def pick_wb(self):
         # Enables the white balance picker and cursor
@@ -1205,6 +787,7 @@ class GUI:
         self.result_photo.configure(cursor='tcross') # changes the cursor over the preview to a cross
         self.result_photo_frame.configure(background='red') # highlights the preview image
         self.wb_picker = True # flag to indicate that the wb picker is enabled
+        self.frame.set(0, True)
 
     def click(self, event):
         # Event handler for all clicks on GUI
@@ -1218,13 +801,10 @@ class GUI:
             if event.widget == self.result_photo:
                 x = event.x / event.widget.winfo_width()
                 y = event.y / event.widget.winfo_height()
-                self.current_photo.set_wb_from_picker(x, y) # set the white balance to neutral at the x, y cooredinates of the mouse click
+                self.current_photo.set_wb_from_picker(x, y) # set the white balance to neutral at the x, y coordinates of the mouse click
 
                 self.temp.set(self.current_photo.temp)
-                self.temp_scale.set(self.current_photo.temp)
-
                 self.tint.set(self.current_photo.tint)
-                self.tint_scale.set(self.current_photo.tint)
 
                 if self.glob_check.get():
                     affected = sum([photo.use_global_settings for photo in self.photos])
@@ -1240,7 +820,6 @@ class GUI:
                         self.global_settings['temp'] = self.temp.get()
                         self.global_settings['tint'] = self.tint.get()
                         self.changed_global_settings()
-
                 self.update_IMG()
                 self.unsaved = True
         elif self.base_picker and (event.widget != self.base_pick_button):
@@ -1267,12 +846,12 @@ class GUI:
                     self.glob_check.set(False)
                     self.current_photo.use_global_settings = False
             else:
-                self.global_settings['base_detect'] = self.base.current()
+                self.global_settings['base_detect'] = self.base_mode.get()
                 self.changed_global_settings()
         self.update_UI()
         if len(self.photos) == 0:
             return
-        self.current_photo.base_detect = self.base.current()
+        self.current_photo.base_detect = self.base_mode.get()
         self.current_photo.process(skip_crop=True)
         self.update_IMG()
         self.unsaved = True
@@ -1298,31 +877,11 @@ class GUI:
                 except Exception as e: 
                     logger.exception(f"Exception: {e}")
                     return
-                try:
-                    with rawpy.imread(filename) as raw: # tries to read as raw file
-                        raw_img = raw.postprocess(
-                            output_bps = 8, # output 8-bit image
-                            use_camera_wb = RawProcessing.use_camera_wb, # Screws up the colours if not used
-                            user_wb = RawProcessing.wb_mult, # wb multipliers
-                            demosaic_algorithm = rawpy.DemosaicAlgorithm(RawProcessing.dm_alg),
-                            output_color = rawpy.ColorSpace(RawProcessing.colour_space),
-                            gamma = RawProcessing.raw_gamma, # Guessed random numbers, these seemed to work the best
-                            auto_bright_thr = 0, # no clipping of highlights
-                            exp_preserve_highlights = 1,
-                            exp_shift = 2 ** RawProcessing.exp_shift,
-                            half_size = True # take the average of 4 pixels to reduce resolution
-                            )
-                except Exception as _:
-                    try:
-                        raw_img = cv2.imread(filename) # if fails, reads as normal image
-                        if type(raw_img) is not np.ndarray:
-                            raise Exception(f'{filename} failed to load!')
-                        raw_img = raw_img[:,:,::-1] # converts BGR to RGB
-                    except Exception as e: # If fails again, generate error message
-                        logger.error("The selected image could not be read.")
-                        logger.exception(f"Exception: {e}") 
-                        messagebox.showerror('Error: File Read Error','The selected image could not be read.')
-                        return
+                blank = RawProcessing(filename, self.default_settings, self.global_settings)
+                blank.load()
+                if blank.FileReadError:
+                    messagebox.showerror('Read Blank', 'RAW image could not be read. Verify the integrity of the RAW image.')
+                raw_img = cv2.convertScaleAbs(blank.RAW_IMG, alpha=(255.0/65535.0))[:,:,::-1]
                 brightness = np.sum(raw_img.astype(np.uint16), 2)
                 sample = np.percentile(brightness, 90) # take sample at 90th percentile brightest pixel
                 index = np.where(brightness==sample)
@@ -1350,52 +909,6 @@ class GUI:
         self.photo_process_Combo.current(0) # display the RAW photo
         self.process_photo_frame.configure(background='red') # highlights the raw photo
         self.base_picker = True # flag to indicate that the wb picker is enabled
-        self.update_IMG()
-
-    def set_temp(self, event=None):
-        if self.glob_check.get():
-            self.global_settings['temp'] = self.temp.get()
-            self.changed_global_settings()
-        self.temp_scale.set(self.temp.get())
-        if len(self.photos) == 0:
-            return
-        self.current_photo.temp = self.temp.get()
-        self.current_photo.process(skip_crop=True)
-        self.update_IMG()
-        self.unsaved = True
-    
-    def set_tint(self, event=None):
-        if self.glob_check.get():
-            self.global_settings['tint'] = self.tint.get()
-            self.changed_global_settings()
-        self.tint_scale.set(self.tint.get())
-        if len(self.photos) == 0:
-            return
-        self.current_photo.tint = self.tint.get()
-        self.current_photo.process(skip_crop=True)
-        self.update_IMG()
-        self.unsaved = True
-
-    def set_sat(self, event=None):
-        if self.glob_check.get():
-            self.global_settings['sat'] = self.sat.get()
-            self.changed_global_settings()
-        self.sat_scale.set(self.sat.get())
-        if len(self.photos) == 0:
-            return
-        self.current_photo.sat = self.sat.get()
-        self.current_photo.process(skip_crop=True)
-        self.update_IMG()
-        self.unsaved = True
-
-    def set_frame(self, event=None):
-        # Adds a decorative white border to final output
-        if self.frame.get() > 10:
-            self.frame.set(10)
-        elif self.frame.get() < 0:
-            self.frame.set(0)
-        self.frame_scale.set(self.frame.get())
-        RawProcessing.frame = self.frame.get()
         self.update_IMG()
     
     def select_folder(self):
@@ -1434,7 +947,6 @@ class GUI:
         self.current_photo.process(True)
         self.update_progress(99, 'Exporting photo...')
         filename = self.destination_folder + str(self.current_photo).split('.')[0] # removes the file extension
-        filename = filename + '.' + self.filetypes[self.filetype_Combo.current()]  # sets the file extension
         self.current_photo.export(filename) # saves the photo
         self.current_photo_button.configure(state=tk.NORMAL)
         self.all_photo_button.configure(state=tk.NORMAL)
@@ -1453,8 +965,6 @@ class GUI:
         self.import_button.configure(state=tk.DISABLED)
         self.filemenu.entryconfigure('Import...', state=tk.DISABLED)
 
-        filetype = self.filetypes[self.filetype_Combo.current()] # sets the file type for export
-
         inputs = []
         allocated = 0 # sum of total allocated memory
         has_alloc = 0 # number of photos in which the memory allocation has been calculated
@@ -1467,8 +977,7 @@ class GUI:
                 if photo.use_global_settings:
                     self.apply_settings(photo, self.global_settings) # Ensures the proper settings have been applied
                 filename = self.destination_folder + str(photo).split('.')[0] # removes the file extension
-                filename = f'{filename}.{filetype}' # creates file path with file name and extension
-                inputs.append((photo, filename, self.terminate))
+                inputs.append((photo, filename, self.terminate, RawProcessing.class_parameters))
                 if hasattr(photo, 'memory_alloc'):
                     allocated += photo.memory_alloc # tally of estimated memory requirements of each photo
                     has_alloc += 1
@@ -1522,7 +1031,7 @@ class GUI:
     
     # Defines how to show and hide the progress bar
     def show_progress(self, message=''):
-        self.progressFrame.grid(row=10, column=0, sticky='EW')
+        self.progressFrame.grid(row=10, column=0, sticky='NEW')
         self.update_progress(0, message)
     
     def hide_progress(self):
@@ -1584,10 +1093,12 @@ class GUI:
     @staticmethod
     def export_async(inputs):
         # used by multiprocessing
-        photo, filename, terminate = inputs
+        photo, filename, terminate, class_parameters = inputs
         # photo: RawProcessing object
         # filename: the directory and filename to be saved as
         # terminate: multiprocessing.Event flag to tell the process to stop
+        # class_parameters: class variables
+        RawProcessing.class_parameters = class_parameters
         for _ in range(5):
             try:
                 if terminate.is_set():

@@ -13,32 +13,35 @@ logging.basicConfig(filename='logfile.log', level=logging.DEBUG, format=FORMAT)
 
 class RawProcessing:
     # This class defines a photo object that contains the image processing pipeline from raw to final export, including all processing functions and parameters
-    # Class variables (affects all photos)
-    max_proxy_size = 2000 # Max dimension of height + width to increase processing speed (only for previews)
-    histogram_plt_size = (1600, 2400, 3) # Dimensions of the histogram
-    hist_bg_colour = (25, 25, 25) # sets the backgroud colour of the histogram
-    frame = 0 # adds white frame to final photo
-    jpg_quality = 90 # from 0-100
-    tiff_compression = 8 # defines the tiff compression algorithm
-    dm_alg = 2 # demosaicing algorithm
-    colour_space = 7 # output colour space after demosaicing
-    exp_shift = 3
-    fbdd_nr = 0 # noise reduction on demosaic
-    raw_gamma = (2.222,4.5) # (power, slope) for RAW image
-    use_camera_wb = True
-    wb_mult = [1, 1, 1, 1]
-    black_point_percentile = 0 # sets the black point
-    white_point_percentile = 99 # sets the default white balance as a percentile of the brightest pixels
-    ignore_border = (1, 1) # ignores the border for calculation of histogram EQ
-    dust_threshold = 10
-    max_dust_area = 15
-    dust_iter = 5
+    default_parameters = dict(
+        max_proxy_size = 2000, # Max dimension of height + width to increase processing speed (only for previews)
+        histogram_plt_size = (1600, 2400, 3), # Dimensions of the histogram
+        hist_bg_colour = (25, 25, 25), # sets the backgroud colour of the histogram
+        frame = 0, # adds white frame to final photo
+        jpg_quality = 90, # from 0-100
+        tiff_compression = 8, # defines the tiff compression algorithm
+        dm_alg = 2, # demosaicing algorithm
+        colour_space = 7, # output colour space after demosaicing
+        exp_shift = 3, # number of stops to adjust the raw
+        fbdd_nr = 0, # noise reduction on demosaic
+        raw_gamma = (2.222, 4.5), # (power, slope) for RAW image
+        use_camera_wb = True, # use built-in wb parameters from camera
+        wb_mult = [1, 1, 1, 1],
+        black_point_percentile = 0.5, # sets the black point
+        white_point_percentile = 99, # sets the default white balance as a percentile of the brightest pixels
+        ignore_border = (1, 1), # ignores the border for calculation of histogram EQ
+        dust_threshold = 10,
+        max_dust_area = 15,
+        dust_iter = 5,
+        filetype = 'JPG'
+    )
+    class_parameters = default_parameters.copy()
     advanced_attrs = ('max_proxy_size','jpg_quality','tiff_compression','dm_alg','colour_space','exp_shift','fbdd_nr','raw_gamma','use_camera_wb','wb_mult', 'black_point_percentile', 'white_point_percentile','ignore_border','dust_threshold','max_dust_area','dust_iter')
-    processing_parameters = ('dark_threshold','light_threshold','border_crop','flip','rotation','film_type','white_point','black_point','gamma','shadows','highlights','temp','tint','sat','reject','base_detect','base_rgb', 'remove_dust')
+    processing_parameters = ('dark_threshold','light_threshold','border_crop','flip','rotation','film_type','white_point','black_point','gamma','shadows','highlights','temp','tint','sat','reject','base_detect','base_rgb','remove_dust')
 
     def __init__(self, file_directory, default_settings, global_settings):
         # file_directory: the name of the RAW file to be processed
-        # Instance Variables (Only for specific photo)
+        # Instance Variables
         self.processed = False # flag for whether the image has been processed yet
         self.proxy = False # Flag to keep track of whether or not proxies are being used
         self.FileReadError = False # flag for if the class could not read the RAW file
@@ -54,14 +57,14 @@ class RawProcessing:
             logger.exception(f"Exception: {e}")
             for attr in self.processing_parameters:
                 if attr in global_settings:
-                    setattr(self, attr, global_settings[attr]) # Initializes every parameter based on default value
+                    setattr(self, attr, global_settings[attr]) # Initializes every instance parameter based on default value
                 else:
                     setattr(self, attr, 0) # otherwise set to 0
             self.use_global_settings = True # tells GUI class whether to overwrite current photo settings with global setting
         else: # import successful
             for attr in self.processing_parameters:
                 if attr in params_dict:
-                    setattr(self, attr, params_dict[attr]) # Initializes every parameter with imported parameters
+                    setattr(self, attr, params_dict[attr]) # Initializes every instance parameter with imported parameters
                 elif attr in default_settings:
                     setattr(self, attr, default_settings[attr]) # if parameter doesn't exist, use default
                 else:
@@ -75,14 +78,14 @@ class RawProcessing:
             with rawpy.imread(self.file_directory) as raw: # tries to read as raw file
                 self.RAW_IMG = raw.postprocess(
                     output_bps = 16, # output 16-bit image
-                    use_camera_wb = self.use_camera_wb, # Screws up the colours if not used
-                    user_wb = self.wb_mult, # wb multipliers
-                    demosaic_algorithm = rawpy.DemosaicAlgorithm(self.dm_alg),
-                    output_color = rawpy.ColorSpace(self.colour_space),
-                    gamma = self.raw_gamma,
+                    use_camera_wb = self.class_parameters['use_camera_wb'], # Screws up the colours if not used
+                    user_wb = self.class_parameters['wb_mult'], # wb multipliers
+                    demosaic_algorithm = rawpy.DemosaicAlgorithm(self.class_parameters['dm_alg']),
+                    output_color = rawpy.ColorSpace(self.class_parameters['colour_space']),
+                    gamma = self.class_parameters['raw_gamma'],
                     auto_bright_thr = 0, # no clipping of highlights
                     exp_preserve_highlights = 1,
-                    exp_shift = 2 ** self.exp_shift,
+                    exp_shift = 2 ** self.class_parameters['exp_shift'],
                     half_size = not full_res # take the average of 4 pixels to reduce resolution and computational requirements
                     )
                 self.colour_desc = raw.color_desc.decode('utf-8') # get the bayer pattern
@@ -160,7 +163,7 @@ class RawProcessing:
                     box = cv2.boxPoints(rect)
                     box = np.int64(box)
                     extra_crop_box = shrink_box(box, x_crop, y_crop)
-                    EQ_ignore_box = shrink_box(extra_crop_box, self.ignore_border[0], self.ignore_border[1])
+                    EQ_ignore_box = shrink_box(extra_crop_box, self.class_parameters['ignore_border'][0], self.class_parameters['ignore_border'][1])
                     EQ_ignore_poly = np.zeros_like(img)
                     cv2.fillPoly(EQ_ignore_poly, [extra_crop_box], (0,0,255))
                     cv2.fillPoly(EQ_ignore_poly, [EQ_ignore_box], (0,0,0))
@@ -173,7 +176,7 @@ class RawProcessing:
                 img = self.draw_histogram(self.IMG)
                 img = np.flip(img, 0)
                 mask = np.sum(img, 2) == 0
-                img[mask] = np.array(self.hist_bg_colour)
+                img[mask] = np.array(self.class_parameters['hist_bg_colour'])
             case _: # default case, return preview image
                 img = self.IMG
                 if self.remove_dust:
@@ -194,17 +197,17 @@ class RawProcessing:
         # filename is a string containing the directory and file name with the file extension
         if not hasattr(self, 'IMG'):
             return
-        filetype = filename.split('.')[-1]
         img = self.IMG
         if self.remove_dust:
             img = self.fill_dust(img, self.dust_mask)
         img = self.add_frame(self.rotate(img)) # add decorative white frame
-        match filetype:
+        filename = f'{filename}.{self.class_parameters['filetype']}'
+        match self.class_parameters['filetype']:
             case 'JPG':
-                quality = [cv2.IMWRITE_JPEG_QUALITY, self.jpg_quality]
+                quality = [cv2.IMWRITE_JPEG_QUALITY, self.class_parameters['jpg_quality']]
                 cv2.imwrite(filename, cv2.convertScaleAbs(img, alpha=(255.0/65535.0)), quality) # Must convert to 8-bit image before exporting as JPG
             case 'TIFF':
-                quality = [cv2.IMWRITE_TIFF_COMPRESSION, self.tiff_compression]
+                quality = [cv2.IMWRITE_TIFF_COMPRESSION, self.class_parameters['tiff_compression']]
                 cv2.imwrite(filename, img, quality)
             case _:
                 cv2.imwrite(filename, img)
@@ -232,9 +235,9 @@ class RawProcessing:
             self.thresh, self.rect, self.largest_contour = self.find_optimal_crop()
             
             img_size = self.RAW_IMG.shape[0] + self.RAW_IMG.shape[1]
-            if (img_size > self.max_proxy_size): # Checks if image is larger than the allowable size, if yes, then generate proxy images to speed up preview generation
+            if (img_size > self.class_parameters['max_proxy_size']): # Checks if image is larger than the allowable size, if yes, then generate proxy images to speed up preview generation
                 # Downscales the image to a smaller size
-                scale_factor = self.max_proxy_size / img_size
+                scale_factor = self.class_parameters['max_proxy_size'] / img_size
                 x = int(self.RAW_IMG.shape[1] * scale_factor)
                 y = int(self.RAW_IMG.shape[0] * scale_factor)
                 self.proxy_RAW_IMG = cv2.resize(self.RAW_IMG, (x, y))
@@ -301,10 +304,10 @@ class RawProcessing:
         y, x, _ = img.shape
         img_size = (x + y) / 2
         multiplier = img_size / 800
-        max_dust_size = multiplier ** 2 * self.max_dust_area
+        max_dust_size = multiplier ** 2 * self.class_parameters['max_dust_area']
         kernel_size = max(round(multiplier) * 2 + 1,1)
         kernel = np.ones((kernel_size,kernel_size),np.uint8)
-        x, y = (np.array(self.ignore_border) / 100 * img.shape[:2][::-1]).astype(np.int32) # calculates the width of the border to ignore in pixels
+        x, y = (np.array(self.class_parameters['ignore_border']) / 100 * img.shape[:2][::-1]).astype(np.int32) # calculates the width of the border to ignore in pixels
         if x * y == 0:
             sample = np.s_[:]
         else:
@@ -314,10 +317,10 @@ class RawProcessing:
         imgray = cv2.cvtColor(img8, cv2.COLOR_BGR2GRAY) # converts to b&w
         minimum = np.percentile(imgray[sample], 0.5)
         maximum = np.percentile(imgray[sample], 99.5)
-        threshold = (maximum - minimum) * self.dust_threshold / 100 + minimum
+        threshold = (maximum - minimum) * self.class_parameters['dust_threshold'] / 100 + minimum
         _, thresh = cv2.threshold(imgray, threshold, 255, cv2.THRESH_BINARY_INV)
-        thresh_img = cv2.dilate(thresh,kernel,iterations = self.dust_iter)
-        thresh_img = cv2.erode(thresh_img,kernel,iterations = self.dust_iter)
+        thresh_img = cv2.dilate(thresh,kernel,iterations = self.class_parameters['dust_iter'])
+        thresh_img = cv2.erode(thresh_img,kernel,iterations = self.class_parameters['dust_iter'])
         contours, _ = cv2.findContours(thresh_img, 1, 2)
         contours = sorted(contours, key=lambda x: cv2.contourArea(x))
         smallest = [contour for contour in contours if cv2.contourArea(contour) < max_dust_size]
@@ -413,7 +416,7 @@ class RawProcessing:
     def hist_EQ(self, img):
         # Equalizes histogram for each color channel
         sensitivity = 0.2 # multiplier to adjust degree at which the sliders affect the output image
-        x, y = (np.array(self.ignore_border) / 100 * img.shape[:2][::-1]).astype(np.int32) # calculates the width of the border to ignore in pixels
+        x, y = (np.array(self.class_parameters['ignore_border']) / 100 * img.shape[:2][::-1]).astype(np.int32) # calculates the width of the border to ignore in pixels
         if x * y == 0:
             sample = np.s_[:]
         else:
@@ -425,13 +428,13 @@ class RawProcessing:
             else:
                 black_point = np.array(self.base_rgb, np.uint16)[::-1] * 256
         else:
-            black_point = np.percentile(img[sample], self.black_point_percentile, (0,1))
+            black_point = np.percentile(img[sample], self.class_parameters['black_point_percentile'], (0,1))
         black_offsets = self.black_point / 100 * sensitivity * 65535 - black_point
         img = img.astype(np.float32, copy=False)
         img[:,:] = img[:,:] + black_offsets # Sets the black point
 
         max_array = np.ones_like(black_offsets)
-        white_point = np.percentile(img[sample], self.white_point_percentile, (0,1))
+        white_point = np.percentile(img[sample], self.class_parameters['white_point_percentile'], (0,1))
         white_multipliers = np.divide(65535 + self.white_point / 100 * sensitivity * 65535, white_point, out=max_array, where=white_point>0) # division, but ignore divide by zero or negative
         img = np.multiply(img, white_multipliers) # Scales the white percentile to 65535
         return img
@@ -575,9 +578,9 @@ class RawProcessing:
     
     def draw_histogram(self, img):
         # Generates histogram plot of image
-        hist_plot = np.zeros(self.histogram_plt_size, np.uint8) # Base image for the histogram
-        width = self.histogram_plt_size[1]
-        height = self.histogram_plt_size[0] - 10 # Leave a little border from the top
+        hist_plot = np.zeros(self.class_parameters['histogram_plt_size'], np.uint8) # Base image for the histogram
+        width = self.class_parameters['histogram_plt_size'][1]
+        height = self.class_parameters['histogram_plt_size'][0] - 10 # Leave a little border from the top
         histograms = []
         maxes = []
         if len(img.shape) == 2: # Determines if the image is grayscale
@@ -601,22 +604,22 @@ class RawProcessing:
             pts = np.stack((np.linspace(0, width, len(hist)), hist), -1).reshape(-1,1,2).squeeze().tolist() # Reformats hist into a list of 2d points
             pts.insert(0, [0, 0])
             pts.append([width, 0])
-            new_plot = np.zeros(self.histogram_plt_size, np.uint8)
+            new_plot = np.zeros(self.class_parameters['histogram_plt_size'], np.uint8)
             new_plot = cv2.fillPoly(new_plot, np.array([pts]).astype(np.int32), color=colour) # Generates histogram as a polygon
             hist_plot = hist_plot + new_plot # Add current histogram channel to the overall histogram plot
         return hist_plot
     
     def add_frame(self, img):
         # adds decorative white border to the outside of picture
-        if self.frame == 0:
+        if self.class_parameters['frame'] == 0:
             return img
-        scale_factor = self.frame / 50 + 1
+        scale_factor = self.class_parameters['frame'] / 50 + 1
         new_shape = np.array(img.shape)
         new_shape[0] *= scale_factor
         new_shape[1] *= scale_factor
         new_shape.astype(np.int_)
         frame_img = np.ones(new_shape, np.uint16) * 65535
-        x_offset, y_offset = int(img.shape[1] * self.frame / 100), int(img.shape[0] * self.frame / 100)
+        x_offset, y_offset = int(img.shape[1] * self.class_parameters['frame'] / 100), int(img.shape[0] * self.class_parameters['frame'] / 100)
         frame_img[y_offset:y_offset+img.shape[0], x_offset:x_offset+img.shape[1]] = img
         return frame_img
 

@@ -53,7 +53,7 @@ class RawProcessing:
         self.config_path = config_path
         # initializing raw processing parameters
         try: # to read in the parameters from a saved file
-            directory = os.path.join(self.config_path, f"{self.filename.split('.')[0]}.npy")
+            directory = os.path.join(self.config_path, f'{self.filename.split('.')[0]}.npy')
             params_dict = np.load(directory, allow_pickle=True).item()
         except Exception as e:# file does not exist
             logger.exception(f"Exception: {e}")

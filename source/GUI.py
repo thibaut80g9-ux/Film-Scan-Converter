@@ -274,7 +274,7 @@ class GUI:
 
         # Loading advanced parameters from the config file
         try:
-            params_dict = np.load(f'{os.path.join(self.config_path,"/config.npy")}', allow_pickle=True).item()
+            params_dict = np.load(os.path.join(self.config_path,'config.npy'), allow_pickle=True).item()
         except Exception as e:
             logger.exception(f"Exception: {e}")
         else:

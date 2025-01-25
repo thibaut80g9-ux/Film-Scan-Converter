@@ -203,7 +203,7 @@ class RawProcessing:
         if self.remove_dust:
             img = self.fill_dust(img, self.dust_mask)
         img = self.add_frame(self.rotate(img)) # add decorative white frame
-        filename = f'{filename}.{self.class_parameters['filetype']}'
+        filename = f"{filename}.{self.class_parameters['filetype']}"
         match self.class_parameters['filetype']:
             case 'JPG':
                 quality = [cv2.IMWRITE_JPEG_QUALITY, self.class_parameters['jpg_quality']]

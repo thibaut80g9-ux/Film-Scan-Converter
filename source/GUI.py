@@ -154,7 +154,7 @@ class GUI:
         ScaleEntry(crop_adjustments, 'Dark Threshold:', 0, 0, 100, 'dark_threshold', self.widgets, command=self.widget_changed)
         ScaleEntry(crop_adjustments, 'Light Threshold:', 1, 0, 100, 'light_threshold', self.widgets, command=self.widget_changed)
         ScaleEntry(crop_adjustments, 'Border Crop (%):', 2, 0, 20, 'border_crop', self.widgets, command=self.widget_changed)
-        CheckLabel(crop_adjustments, 'Flip Horizontally:', 3, 'flip', self.widgets, command=self.set_flip)
+        self.flip_check = CheckLabel(crop_adjustments, 'Flip Horizontally:', 3, 'flip', self.widgets, command=self.set_flip)
         rotButtons = ttk.Frame(self.cropFrame)
         rotButtons.pack(fill='x')
         ttk.Button(rotButtons, text='Rotate Counterclockwise', width=22, command=self.rot_counterclockwise).pack(side=tk.LEFT, padx=2, pady=5)

@@ -25,6 +25,7 @@ logging.basicConfig(filename='logfile.log', level=logging.DEBUG, format=FORMAT)
 class GUI:
     def __init__(self, master):
         # Initialize Variables
+        self.config_path = self._check_and_create_conf_folder()
         self.photos = []
         self.in_progress = set() # keeps track photos that are in processing when first loading
         self.photo_process_values = ['RAW', 'Threshold', 'Contours', 'Histogram', 'Full Preview']
@@ -64,7 +65,6 @@ class GUI:
 
         self.global_settings = self.default_settings.copy()
         self.master = master
-        
         # Building the GUI
         self.master.title('Film Scan Converter')
         try:
@@ -77,15 +77,15 @@ class GUI:
 
         menubar = tk.Menu(self.master, relief=tk.FLAT)
         self.filemenu = tk.Menu(menubar, tearoff=0)
-        self.filemenu.add_cascade(label='Import...', command=self.import_photos)
-        self.filemenu.add_cascade(label='Save Settings', command=self.save_settings)
+        self.filemenu.add_command(label='Import...', command=self.import_photos)
+        self.filemenu.add_command(label='Save Settings', command=self.save_settings)
         self.filemenu.add_separator()
         self.filemenu.add_command(label='Exit', command=self.on_closing)
         menubar.add_cascade(label='File', menu=self.filemenu)
         self.editmenu = tk.Menu(menubar, tearoff=0)
-        self.editmenu.add_cascade(label='Reset to Default Settings', command=self.reset_settings)
+        self.editmenu.add_command(label='Reset to Default Settings', command=self.reset_settings)
         self.editmenu.add_separator()
-        self.editmenu.add_cascade(label='Advanced Settings...', command=self.advanced_dialog)
+        self.editmenu.add_command(label='Advanced Settings...', command=self.advanced_dialog)
         menubar.add_cascade(label='Edit', menu=self.editmenu)
         self.master.config(menu=menubar)
 
@@ -274,7 +274,7 @@ class GUI:
 
         # Loading advanced parameters from the config file
         try:
-            params_dict = np.load('config.npy', allow_pickle=True).item()
+            params_dict = np.load(os.path.join(self.config_path,'config.npy'), allow_pickle=True).item()
         except Exception as e:
             logger.exception(f"Exception: {e}")
         else:
@@ -284,10 +284,24 @@ class GUI:
             for attr in RawProcessing.advanced_attrs:
                 if attr in params_dict:
                     RawProcessing.class_parameters[attr] = params_dict[attr]
-        
+                    
         for widget in self.widgets.values():
             if widget.key in self.default_settings:
                 widget.set(self.default_settings[widget.key]) # initializes widgets with default settings
+    
+    def _check_and_create_conf_folder(self) -> str:
+        '''
+        Check if conf folder exists and, if not, it creates it
+
+        Returns: 
+            The folder's path
+        '''
+      
+        folder_path = os.path.join(os.path.expanduser('~'), '.film_scan_converter')
+        if not os.path.exists(folder_path):
+            os.makedirs(folder_path)
+            print(f'Creating {folder_path}')
+        return folder_path
 
     def advanced_dialog(self):
         # Pop-up window to contain all the advanced settings that don't fit in the main controls
@@ -317,10 +331,10 @@ class GUI:
                 params_dict[attr] = RawProcessing.class_parameters[attr]
             for attr in self.advanced_attrs:
                 params_dict[attr] = getattr(self, attr)
-            np.save('config.npy', params_dict)
+            np.save(f'{os.path.join(self.config_path,"config.npy")}', params_dict)
         
         def quit():
-            self.master.attributes('-disabled', 0)
+            self.master.attributes('-topmost', 0)
             top.destroy()
 
         top = tk.Toplevel(self.master)
@@ -332,7 +346,7 @@ class GUI:
         top.focus_set()
         top.transient(self.master)
         top.protocol('WM_DELETE_WINDOW', quit)
-        self.master.attributes('-disabled', 1)
+        self.master.attributes('-topmost', 1)
 
         mainFrame = ttk.Frame(top, padding=10)
         mainFrame.pack(fill='x')
@@ -457,11 +471,11 @@ class GUI:
         self.photos = []
         photo_names = []
         
-        self.update_progress(20, 'Initializing ' + str(total) + ' photos...')
+        self.update_progress(20, f'Initializing {str(total)} photos...')
         for i, filename in enumerate(filenames):
-            photo = RawProcessing(file_directory=filename, default_settings=self.default_settings, global_settings=self.global_settings)
+            photo = RawProcessing(file_directory=filename, default_settings=self.default_settings, global_settings=self.global_settings, config_path=self.config_path)
             self.photos.append(photo)
-            photo_names.append(str(i + 1) + '. ' + str(photo))
+            photo_names.append(f'{str(i + 1)}. {str(photo)}')
         
         self.update_progress(80, 'Configuring GUI...')
         self.photoCombo.configure(values=photo_names) # configures dropdown to include list of photos
@@ -666,7 +680,7 @@ class GUI:
         if self.glob_check.get():
             affected = sum([photo.use_global_settings for photo in self.photos]) # calculate the total number of photos using global settings
             if affected > 1:
-                if not messagebox.askyesno('Reset to Default Settings','You are about to globally reset ' + str(affected) + ' photos\'s settings.\nDo you wish to continue?', icon='warning'):
+                if not messagebox.askyesno('Reset to Default Settings',f'You are about to globally reset {str(affected)} photos\'s settings.\nDo you wish to continue?', icon='warning'):
                     return
             self.global_settings = self.default_settings.copy() # reset global settings
             self.changed_global_settings()
@@ -730,8 +744,8 @@ class GUI:
         if self.glob_check.get():
             affected = sum([photo.use_global_settings for photo in self.photos])
             if affected > 1:
-                if messagebox.askyesno('Flip Photo', 'Do you want to globally flip ' + str(affected) + ' photos?', default='no'):
-                    self.global_settings['flip'] = self.widgets['flip'].get()
+                if messagebox.askyesno('Flip Photo', f'Do you want to globally flip {str(affected)} photos?', default='no'):
+                    self.global_settings['flip'] = self.flip_check.get()
                     self.changed_global_settings()
                 else:
                     self.glob_check.set(False)
@@ -795,7 +809,7 @@ class GUI:
                 if self.glob_check.get():
                     affected = sum([photo.use_global_settings for photo in self.photos])
                     if affected > 1:
-                        if messagebox.askyesno('White Balance Picker', 'Do you want to apply this white balance adjustment globally to ' + str(affected) + ' photos?', default='no'):
+                        if messagebox.askyesno('White Balance Picker', f'Do you want to apply this white balance adjustment globally to {str(affected)} photos?', default='no'):
                             self.global_settings['temp'] = self.temp.get()
                             self.global_settings['tint'] = self.tint.get()
                             self.changed_global_settings()
@@ -825,8 +839,8 @@ class GUI:
         if self.glob_check.get():
             affected = sum([photo.use_global_settings for photo in self.photos])
             if affected > 1:
-                if messagebox.askyesno('Base Colour Changed', 'Do you want change the base colour globally to ' + str(affected) + ' photos?', default='no'):
-                    self.global_settings['base_detect'] = self.base_mode.get()
+                if messagebox.askyesno('Base Colour Changed', f'Do you want change the base colour globally to {str(affected)} photos?', default='no'):
+                    self.global_settings['base_detect'] = self.base.current()
                     self.changed_global_settings()
                 else:
                     self.glob_check.set(False)
@@ -991,15 +1005,15 @@ class GUI:
                     if result:
                         errors.append(result) # keeps track of any errors raised
                         logger.exception(f"Exception: {result}") 
-                    update_message = 'Exported ' + str(i) + ' of ' + str(len(inputs)) + ' photos.'
+                    update_message = f'Exported {i} of {str(len(inputs))} photos.'
                     self.update_progress(i / len(inputs) * 80 + 19.99, update_message) # update progress display
                     i += 1
         if errors and not self.terminate.is_set():
             # if errors are raised, display dialog with errors
             errors_display = 'Details:'
             for i, error in enumerate(errors, 1):
-                errors_display += '\n' + str(i) + '. ' + str(error)
-            messagebox.showerror('Export Error',str(len(errors)) + ' export(s) failed.\n' + errors_display)
+                errors_display += f'\n {str(i)}. {str(error)}'
+            messagebox.showerror(f'Export Error {len(errors)}) export(s) failed.\n' + errors_display)
 
         self.current_photo_button.configure(state=tk.NORMAL)
         self.abort_button.pack_forget()
@@ -1026,7 +1040,7 @@ class GUI:
     def update_progress(self, percentage, message=''):
         # takes number between 0 and 100 to display progress, with optional parameter to display message
         self.progress.set(percentage)
-        self.progress_percentage.configure(text=str(round(percentage))+'%')
+        self.progress_percentage.configure(text=f'{str(round(percentage))}%')
         self.progress_msg.configure(text=message)
         self.master.update()
 

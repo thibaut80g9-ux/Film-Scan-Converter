@@ -38,8 +38,8 @@ class RawProcessing:
     class_parameters = default_parameters.copy()
     advanced_attrs = ('max_proxy_size','jpg_quality','tiff_compression','dm_alg','colour_space','exp_shift','fbdd_nr','raw_gamma','use_camera_wb','wb_mult', 'black_point_percentile', 'white_point_percentile','ignore_border','dust_threshold','max_dust_area','dust_iter')
     processing_parameters = ('dark_threshold','light_threshold','border_crop','flip','rotation','film_type','white_point','black_point','gamma','shadows','highlights','temp','tint','sat','reject','base_detect','base_rgb','remove_dust')
-
-    def __init__(self, file_directory, default_settings, global_settings):
+    
+    def __init__(self, file_directory, default_settings, global_settings, config_path):
         # file_directory: the name of the RAW file to be processed
         # Instance Variables
         self.processed = False # flag for whether the image has been processed yet
@@ -48,10 +48,12 @@ class RawProcessing:
         self.active_processes = 0 # lets object know how many processes are currently processing the photo
         self.pick_wb = False # flag to pick white balance from a set of pixel coordinates
         self.file_directory = file_directory
+        self.filename = os.path.basename(self.file_directory)
         self.colour_desc = None # RAW bayer colour description
+        self.config_path = config_path
         # initializing raw processing parameters
         try: # to read in the parameters from a saved file
-            directory = self.file_directory.split('.')[0] + '.npy'
+            directory = os.path.join(self.config_path, f'{self.filename.split('.')[0]}.npy')
             params_dict = np.load(directory, allow_pickle=True).item()
         except Exception as e:# file does not exist
             logger.exception(f"Exception: {e}")
@@ -214,7 +216,7 @@ class RawProcessing:
 
     def save_settings(self):
         # saves the processing parameters to a file
-        directory = self.file_directory.split('.')[0] + '.npy' # uses the same name as the input file
+        directory = os.path.join(self.config_path, f"{self.filename.split('.')[0]}.npy") # uses the same name as the input file
         params_dict = dict()
         for attr in self.processing_parameters:
             params_dict[attr] = getattr(self, attr)

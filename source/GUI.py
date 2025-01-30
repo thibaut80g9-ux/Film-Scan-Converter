@@ -285,14 +285,14 @@ class GUI:
         try:
             params_dict = np.load(os.path.join(self.config_path,'config.npy'), allow_pickle=True).item()
         except Exception as e:
-            logger.exception(f"Exception: {e}")
+            logger.exception(f'Exception: {e}')
         else:
             for settings in [self.advanced_settings, RawProcessing.class_parameters]:
                 for attr in settings:
                     if attr in params_dict:
                         settings[attr] = params_dict[attr] # Initializes every parameter with imported parameters
                     else:
-                        Exception(f'Attribute {attr} not found in imported config.npy file.')
+                        logger.exception(f'Attribute {attr} not found in imported config.npy file.')
                     
         for widget in self.widgets.values():
             if widget.key in self.default_settings:
@@ -1119,15 +1119,24 @@ class GUI:
         self.copied_settings = {}
         for key in self.default_settings:
             self.copied_settings[key] = getattr(self.current_photo, key)
-        self.copied_settings['use_global_settings'] = self.glob_check.get()
         self.editmenu.entryconfig('Paste Settings', state=tk.NORMAL)
         
     def paste_settings(self, event=None):
         # pastes the copied settings if self.copy_settings() has been called
         if hasattr(self, 'copied_settings') and hasattr(self, 'current_photo'):
             self.apply_settings(self.current_photo, self.copied_settings)
+            if self.current_photo.use_global_settings:
+                affected = sum([photo.use_global_settings for photo in self.photos])
+                if affected > 1:
+                    if messagebox.askyesno('Paste Settings', f'Do you want to paste the settings globally to {str(affected)} photos?'):
+                        self.global_settings = self.copied_settings
+                        self.changed_global_settings()
+                    else:
+                        self.glob_check.set(False)
+                        self.current_photo.use_global_settings = False
+                else:
+                    self.global_settings = self.copied_settings
             self.change_settings()
-            self.glob_check.set(self.current_photo.use_global_settings)
             self.current_photo.process()
             self.update_IMG()
             self.unsaved = True

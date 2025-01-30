@@ -1101,3 +1101,1144 @@ FileNotFoundError: [Errno 2] No such file or directory: 'C:/config.npy'
 2025-01-25 01:39:21,299:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
 2025-01-25 01:39:21,300:::DEBUG:::interactive is False
 2025-01-25 01:39:21,300:::DEBUG:::platform is win32
+2025-01-26 17:52:49,194:::DEBUG:::matplotlib data path: c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-26 17:52:49,210:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-26 17:52:49,211:::DEBUG:::interactive is False
+2025-01-26 17:52:49,211:::DEBUG:::platform is win32
+2025-01-26 17:52:49,602:::ERROR:::Exception: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\config.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 277, in __init__
+    params_dict = np.load(os.path.join(self.config_path,'config.npy'), allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\config.npy'
+2025-01-26 17:53:24,091:::ERROR:::Exception: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06892.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\RawProcessing.py", line 57, in __init__
+    params_dict = np.load(directory, allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06892.npy'
+2025-01-26 17:55:20,667:::DEBUG:::matplotlib data path: c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-26 17:55:20,676:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-26 17:55:20,677:::DEBUG:::interactive is False
+2025-01-26 17:55:20,677:::DEBUG:::platform is win32
+2025-01-26 17:55:20,844:::ERROR:::Exception: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\config.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 277, in __init__
+    params_dict = np.load(os.path.join(self.config_path,'config.npy'), allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\config.npy'
+2025-01-26 17:56:34,601:::DEBUG:::matplotlib data path: c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-26 17:56:34,609:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-26 17:56:34,610:::DEBUG:::interactive is False
+2025-01-26 17:56:34,610:::DEBUG:::platform is win32
+2025-01-26 17:56:34,803:::ERROR:::Exception: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\config.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 277, in __init__
+    params_dict = np.load(os.path.join(self.config_path,'config.npy'), allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\config.npy'
+2025-01-26 17:57:25,322:::DEBUG:::matplotlib data path: c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-26 17:57:25,330:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-26 17:57:25,331:::DEBUG:::interactive is False
+2025-01-26 17:57:25,332:::DEBUG:::platform is win32
+2025-01-26 17:57:25,507:::ERROR:::Exception: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\config.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 277, in __init__
+    params_dict = np.load(os.path.join(self.config_path,'config.npy'), allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\config.npy'
+2025-01-26 17:58:27,116:::DEBUG:::matplotlib data path: c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-26 17:58:27,124:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-26 17:58:27,125:::DEBUG:::interactive is False
+2025-01-26 17:58:27,125:::DEBUG:::platform is win32
+2025-01-26 17:58:27,299:::ERROR:::Exception: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\config.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 277, in __init__
+    params_dict = np.load(os.path.join(self.config_path,'config.npy'), allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\config.npy'
+2025-01-26 18:00:42,929:::DEBUG:::matplotlib data path: c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-26 18:00:42,937:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-26 18:00:42,938:::DEBUG:::interactive is False
+2025-01-26 18:00:42,938:::DEBUG:::platform is win32
+2025-01-26 18:00:43,124:::ERROR:::Exception: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\config.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 277, in __init__
+    params_dict = np.load(os.path.join(self.config_path,'config.npy'), allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\config.npy'
+2025-01-26 18:01:39,217:::DEBUG:::matplotlib data path: c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-26 18:01:39,226:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-26 18:01:39,227:::DEBUG:::interactive is False
+2025-01-26 18:01:39,227:::DEBUG:::platform is win32
+2025-01-26 18:01:39,442:::ERROR:::Exception: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\config.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 277, in __init__
+    params_dict = np.load(os.path.join(self.config_path,'config.npy'), allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\config.npy'
+2025-01-26 18:03:32,516:::ERROR:::Exception: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06864.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\RawProcessing.py", line 57, in __init__
+    params_dict = np.load(directory, allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06864.npy'
+2025-01-26 18:03:32,517:::ERROR:::Exception: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06865.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\RawProcessing.py", line 57, in __init__
+    params_dict = np.load(directory, allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06865.npy'
+2025-01-26 18:03:32,517:::ERROR:::Exception: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06866.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\RawProcessing.py", line 57, in __init__
+    params_dict = np.load(directory, allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06866.npy'
+2025-01-26 18:03:32,518:::ERROR:::Exception: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06867.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\RawProcessing.py", line 57, in __init__
+    params_dict = np.load(directory, allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06867.npy'
+2025-01-26 18:03:32,518:::ERROR:::Exception: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06868.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\RawProcessing.py", line 57, in __init__
+    params_dict = np.load(directory, allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06868.npy'
+2025-01-26 18:03:32,518:::ERROR:::Exception: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06869.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\RawProcessing.py", line 57, in __init__
+    params_dict = np.load(directory, allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06869.npy'
+2025-01-26 18:03:32,519:::ERROR:::Exception: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06870.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\RawProcessing.py", line 57, in __init__
+    params_dict = np.load(directory, allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06870.npy'
+2025-01-26 18:03:32,519:::ERROR:::Exception: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06876.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\RawProcessing.py", line 57, in __init__
+    params_dict = np.load(directory, allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06876.npy'
+2025-01-26 18:03:32,519:::ERROR:::Exception: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06877.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\RawProcessing.py", line 57, in __init__
+    params_dict = np.load(directory, allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06877.npy'
+2025-01-26 18:03:32,520:::ERROR:::Exception: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06878.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\RawProcessing.py", line 57, in __init__
+    params_dict = np.load(directory, allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06878.npy'
+2025-01-26 18:03:32,520:::ERROR:::Exception: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06879.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\RawProcessing.py", line 57, in __init__
+    params_dict = np.load(directory, allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06879.npy'
+2025-01-26 18:03:32,520:::ERROR:::Exception: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06880.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\RawProcessing.py", line 57, in __init__
+    params_dict = np.load(directory, allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06880.npy'
+2025-01-26 18:03:32,520:::ERROR:::Exception: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06881.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\RawProcessing.py", line 57, in __init__
+    params_dict = np.load(directory, allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06881.npy'
+2025-01-26 18:03:32,521:::ERROR:::Exception: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06885.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\RawProcessing.py", line 57, in __init__
+    params_dict = np.load(directory, allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06885.npy'
+2025-01-26 18:03:32,521:::ERROR:::Exception: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06886.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\RawProcessing.py", line 57, in __init__
+    params_dict = np.load(directory, allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06886.npy'
+2025-01-26 18:03:32,522:::ERROR:::Exception: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06887.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\RawProcessing.py", line 57, in __init__
+    params_dict = np.load(directory, allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06887.npy'
+2025-01-26 18:03:32,522:::ERROR:::Exception: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06888.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\RawProcessing.py", line 57, in __init__
+    params_dict = np.load(directory, allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06888.npy'
+2025-01-26 18:03:32,522:::ERROR:::Exception: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06889.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\RawProcessing.py", line 57, in __init__
+    params_dict = np.load(directory, allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06889.npy'
+2025-01-26 18:03:32,523:::ERROR:::Exception: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06890.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\RawProcessing.py", line 57, in __init__
+    params_dict = np.load(directory, allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06890.npy'
+2025-01-26 18:03:32,523:::ERROR:::Exception: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06891.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\RawProcessing.py", line 57, in __init__
+    params_dict = np.load(directory, allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06891.npy'
+2025-01-26 18:03:32,523:::ERROR:::Exception: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06893.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\RawProcessing.py", line 57, in __init__
+    params_dict = np.load(directory, allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06893.npy'
+2025-01-26 18:03:32,524:::ERROR:::Exception: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06894.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\RawProcessing.py", line 57, in __init__
+    params_dict = np.load(directory, allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06894.npy'
+2025-01-26 18:03:32,524:::ERROR:::Exception: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06895.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\RawProcessing.py", line 57, in __init__
+    params_dict = np.load(directory, allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06895.npy'
+2025-01-26 18:03:32,524:::ERROR:::Exception: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06896.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\RawProcessing.py", line 57, in __init__
+    params_dict = np.load(directory, allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06896.npy'
+2025-01-26 18:03:32,525:::ERROR:::Exception: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06897.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\RawProcessing.py", line 57, in __init__
+    params_dict = np.load(directory, allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06897.npy'
+2025-01-26 18:03:32,525:::ERROR:::Exception: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06898.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\RawProcessing.py", line 57, in __init__
+    params_dict = np.load(directory, allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06898.npy'
+2025-01-26 18:03:32,525:::ERROR:::Exception: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06899.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\RawProcessing.py", line 57, in __init__
+    params_dict = np.load(directory, allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06899.npy'
+2025-01-26 18:03:32,525:::ERROR:::Exception: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06900.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\RawProcessing.py", line 57, in __init__
+    params_dict = np.load(directory, allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06900.npy'
+2025-01-26 18:03:32,526:::ERROR:::Exception: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06901.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\RawProcessing.py", line 57, in __init__
+    params_dict = np.load(directory, allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06901.npy'
+2025-01-26 18:03:32,526:::ERROR:::Exception: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06902.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\RawProcessing.py", line 57, in __init__
+    params_dict = np.load(directory, allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06902.npy'
+2025-01-26 18:03:32,526:::ERROR:::Exception: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06903.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\RawProcessing.py", line 57, in __init__
+    params_dict = np.load(directory, allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06903.npy'
+2025-01-26 18:03:32,527:::ERROR:::Exception: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06904.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\RawProcessing.py", line 57, in __init__
+    params_dict = np.load(directory, allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06904.npy'
+2025-01-26 18:03:32,527:::ERROR:::Exception: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06905.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\RawProcessing.py", line 57, in __init__
+    params_dict = np.load(directory, allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06905.npy'
+2025-01-26 18:03:32,527:::ERROR:::Exception: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06906.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\RawProcessing.py", line 57, in __init__
+    params_dict = np.load(directory, allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06906.npy'
+2025-01-26 18:03:32,528:::ERROR:::Exception: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06907.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\RawProcessing.py", line 57, in __init__
+    params_dict = np.load(directory, allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06907.npy'
+2025-01-26 18:03:32,528:::ERROR:::Exception: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06908.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\RawProcessing.py", line 57, in __init__
+    params_dict = np.load(directory, allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06908.npy'
+2025-01-26 22:53:30,418:::DEBUG:::matplotlib data path: c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-26 22:53:30,434:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-26 22:53:30,435:::DEBUG:::interactive is False
+2025-01-26 22:53:30,435:::DEBUG:::platform is win32
+2025-01-26 22:53:30,796:::ERROR:::Exception: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\config.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 277, in __init__
+    params_dict = np.load(os.path.join(self.config_path,'config.npy'), allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\config.npy'
+2025-01-26 22:54:28,400:::ERROR:::Exception: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06866.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\RawProcessing.py", line 57, in __init__
+    params_dict = np.load(directory, allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06866.npy'
+2025-01-26 22:56:36,448:::ERROR:::Exception: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06866.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\RawProcessing.py", line 57, in __init__
+    params_dict = np.load(directory, allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06866.npy'
+2025-01-26 22:57:34,190:::DEBUG:::matplotlib data path: c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-26 22:57:34,199:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-26 22:57:34,200:::DEBUG:::interactive is False
+2025-01-26 22:57:34,200:::DEBUG:::platform is win32
+2025-01-26 22:57:34,378:::ERROR:::Exception: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\config.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 277, in __init__
+    params_dict = np.load(os.path.join(self.config_path,'config.npy'), allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\config.npy'
+2025-01-26 22:57:45,415:::ERROR:::Exception: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06866.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\RawProcessing.py", line 57, in __init__
+    params_dict = np.load(directory, allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06866.npy'
+2025-01-26 22:58:03,340:::DEBUG:::matplotlib data path: c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-26 22:58:03,348:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-26 22:58:03,349:::DEBUG:::interactive is False
+2025-01-26 22:58:03,349:::DEBUG:::platform is win32
+2025-01-26 22:58:03,539:::ERROR:::Exception: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\config.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 277, in __init__
+    params_dict = np.load(os.path.join(self.config_path,'config.npy'), allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\config.npy'
+2025-01-26 22:58:08,604:::ERROR:::Exception: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06866.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\RawProcessing.py", line 57, in __init__
+    params_dict = np.load(directory, allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06866.npy'
+2025-01-26 22:58:39,635:::DEBUG:::matplotlib data path: c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-26 22:58:39,644:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-26 22:58:39,644:::DEBUG:::interactive is False
+2025-01-26 22:58:39,645:::DEBUG:::platform is win32
+2025-01-26 22:58:39,822:::ERROR:::Exception: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\config.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 277, in __init__
+    params_dict = np.load(os.path.join(self.config_path,'config.npy'), allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\config.npy'
+2025-01-26 22:58:45,572:::ERROR:::Exception: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06866.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\RawProcessing.py", line 57, in __init__
+    params_dict = np.load(directory, allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06866.npy'
+2025-01-26 22:59:13,873:::DEBUG:::matplotlib data path: c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-26 22:59:13,882:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-26 22:59:13,883:::DEBUG:::interactive is False
+2025-01-26 22:59:13,883:::DEBUG:::platform is win32
+2025-01-26 22:59:14,064:::ERROR:::Exception: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\config.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 277, in __init__
+    params_dict = np.load(os.path.join(self.config_path,'config.npy'), allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\config.npy'
+2025-01-26 22:59:20,325:::ERROR:::Exception: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06866.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\RawProcessing.py", line 57, in __init__
+    params_dict = np.load(directory, allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06866.npy'
+2025-01-26 23:00:09,436:::DEBUG:::matplotlib data path: c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-26 23:00:09,444:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-26 23:00:09,445:::DEBUG:::interactive is False
+2025-01-26 23:00:09,445:::DEBUG:::platform is win32
+2025-01-26 23:00:09,611:::ERROR:::Exception: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\config.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 277, in __init__
+    params_dict = np.load(os.path.join(self.config_path,'config.npy'), allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\config.npy'
+2025-01-26 23:00:16,980:::ERROR:::Exception: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06866.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\RawProcessing.py", line 57, in __init__
+    params_dict = np.load(directory, allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06866.npy'
+2025-01-26 23:00:41,917:::DEBUG:::matplotlib data path: c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-26 23:00:41,924:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-26 23:00:41,925:::DEBUG:::interactive is False
+2025-01-26 23:00:41,925:::DEBUG:::platform is win32
+2025-01-26 23:00:42,099:::ERROR:::Exception: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\config.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 277, in __init__
+    params_dict = np.load(os.path.join(self.config_path,'config.npy'), allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\config.npy'
+2025-01-26 23:00:47,713:::ERROR:::Exception: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06866.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\RawProcessing.py", line 57, in __init__
+    params_dict = np.load(directory, allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06866.npy'
+2025-01-26 23:02:00,183:::DEBUG:::matplotlib data path: c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-26 23:02:00,191:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-26 23:02:00,192:::DEBUG:::interactive is False
+2025-01-26 23:02:00,192:::DEBUG:::platform is win32
+2025-01-26 23:02:00,365:::ERROR:::Exception: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\config.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 277, in __init__
+    params_dict = np.load(os.path.join(self.config_path,'config.npy'), allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\config.npy'
+2025-01-26 23:02:05,305:::ERROR:::Exception: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06866.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\RawProcessing.py", line 57, in __init__
+    params_dict = np.load(directory, allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06866.npy'
+2025-01-26 23:02:55,614:::DEBUG:::matplotlib data path: c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-26 23:02:55,623:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-26 23:02:55,624:::DEBUG:::interactive is False
+2025-01-26 23:02:55,624:::DEBUG:::platform is win32
+2025-01-26 23:02:55,814:::ERROR:::Exception: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\config.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 277, in __init__
+    params_dict = np.load(os.path.join(self.config_path,'config.npy'), allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\config.npy'
+2025-01-26 23:03:00,963:::ERROR:::Exception: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06866.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\RawProcessing.py", line 57, in __init__
+    params_dict = np.load(directory, allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06866.npy'
+2025-01-26 23:09:36,846:::DEBUG:::matplotlib data path: c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-26 23:09:36,855:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-26 23:09:36,856:::DEBUG:::interactive is False
+2025-01-26 23:09:36,856:::DEBUG:::platform is win32
+2025-01-26 23:09:37,026:::ERROR:::Exception: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\config.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 277, in __init__
+    params_dict = np.load(os.path.join(self.config_path,'config.npy'), allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\config.npy'
+2025-01-26 23:09:41,288:::ERROR:::Exception: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06866.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\RawProcessing.py", line 57, in __init__
+    params_dict = np.load(directory, allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06866.npy'
+2025-01-26 23:23:10,735:::DEBUG:::matplotlib data path: c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-26 23:23:10,744:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-26 23:23:10,745:::DEBUG:::interactive is False
+2025-01-26 23:23:10,745:::DEBUG:::platform is win32
+2025-01-26 23:23:10,921:::ERROR:::Exception: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\config.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 277, in __init__
+    params_dict = np.load(os.path.join(self.config_path,'config.npy'), allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\config.npy'
+2025-01-26 23:24:08,629:::DEBUG:::matplotlib data path: c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-26 23:24:08,636:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-26 23:24:08,637:::DEBUG:::interactive is False
+2025-01-26 23:24:08,637:::DEBUG:::platform is win32
+2025-01-26 23:24:08,841:::ERROR:::Exception: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\config.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 277, in __init__
+    params_dict = np.load(os.path.join(self.config_path,'config.npy'), allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\config.npy'
+2025-01-26 23:25:29,651:::DEBUG:::matplotlib data path: c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-26 23:25:29,660:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-26 23:25:29,661:::DEBUG:::interactive is False
+2025-01-26 23:25:29,661:::DEBUG:::platform is win32
+2025-01-26 23:25:29,831:::ERROR:::Exception: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\config.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 277, in __init__
+    params_dict = np.load(os.path.join(self.config_path,'config.npy'), allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\config.npy'
+2025-01-26 23:25:56,394:::DEBUG:::matplotlib data path: c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-26 23:25:56,402:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-26 23:25:56,403:::DEBUG:::interactive is False
+2025-01-26 23:25:56,403:::DEBUG:::platform is win32
+2025-01-26 23:25:56,572:::ERROR:::Exception: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\config.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 277, in __init__
+    params_dict = np.load(os.path.join(self.config_path,'config.npy'), allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\config.npy'
+2025-01-26 23:27:53,523:::DEBUG:::matplotlib data path: c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-26 23:27:53,531:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-26 23:27:53,532:::DEBUG:::interactive is False
+2025-01-26 23:27:53,532:::DEBUG:::platform is win32
+2025-01-26 23:27:53,710:::ERROR:::Exception: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\config.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 277, in __init__
+    params_dict = np.load(os.path.join(self.config_path,'config.npy'), allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\config.npy'
+2025-01-27 00:27:24,066:::DEBUG:::matplotlib data path: c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-27 00:27:24,074:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-27 00:27:24,075:::DEBUG:::interactive is False
+2025-01-27 00:27:24,075:::DEBUG:::platform is win32
+2025-01-27 00:27:24,253:::ERROR:::Exception: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\config.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 279, in __init__
+    params_dict = np.load(os.path.join(self.config_path,'config.npy'), allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\config.npy'
+2025-01-27 00:28:16,857:::DEBUG:::matplotlib data path: c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-27 00:28:16,865:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-27 00:28:16,866:::DEBUG:::interactive is False
+2025-01-27 00:28:16,866:::DEBUG:::platform is win32
+2025-01-27 00:28:17,036:::ERROR:::Exception: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\config.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\GUI.py", line 279, in __init__
+    params_dict = np.load(os.path.join(self.config_path,'config.npy'), allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\config.npy'
+2025-01-27 00:31:11,699:::DEBUG:::matplotlib data path: c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-27 00:31:11,707:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-27 00:31:11,707:::DEBUG:::interactive is False
+2025-01-27 00:31:11,708:::DEBUG:::platform is win32
+2025-01-27 00:34:26,270:::DEBUG:::matplotlib data path: c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-27 00:34:26,278:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-27 00:34:26,279:::DEBUG:::interactive is False
+2025-01-27 00:34:26,279:::DEBUG:::platform is win32
+2025-01-27 00:34:47,105:::DEBUG:::matplotlib data path: c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-27 00:34:47,113:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-27 00:34:47,114:::DEBUG:::interactive is False
+2025-01-27 00:34:47,114:::DEBUG:::platform is win32
+2025-01-27 00:36:12,960:::DEBUG:::matplotlib data path: c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-27 00:36:12,967:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-27 00:36:12,968:::DEBUG:::interactive is False
+2025-01-27 00:36:12,968:::DEBUG:::platform is win32
+2025-01-27 00:36:47,828:::DEBUG:::matplotlib data path: c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-27 00:36:47,836:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-27 00:36:47,837:::DEBUG:::interactive is False
+2025-01-27 00:36:47,837:::DEBUG:::platform is win32
+2025-01-27 00:37:51,901:::DEBUG:::matplotlib data path: c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-27 00:37:51,909:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-27 00:37:51,910:::DEBUG:::interactive is False
+2025-01-27 00:37:51,910:::DEBUG:::platform is win32
+2025-01-27 00:39:02,038:::DEBUG:::matplotlib data path: c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-27 00:39:02,046:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-27 00:39:02,047:::DEBUG:::interactive is False
+2025-01-27 00:39:02,047:::DEBUG:::platform is win32
+2025-01-27 00:46:41,741:::DEBUG:::matplotlib data path: c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-27 00:46:41,749:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-27 00:46:41,750:::DEBUG:::interactive is False
+2025-01-27 00:46:41,750:::DEBUG:::platform is win32
+2025-01-27 00:52:06,126:::DEBUG:::matplotlib data path: c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-27 00:52:06,133:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-27 00:52:06,134:::DEBUG:::interactive is False
+2025-01-27 00:52:06,134:::DEBUG:::platform is win32
+2025-01-27 00:52:32,096:::DEBUG:::matplotlib data path: c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-27 00:52:32,104:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-27 00:52:32,105:::DEBUG:::interactive is False
+2025-01-27 00:52:32,105:::DEBUG:::platform is win32
+2025-01-27 00:54:14,360:::DEBUG:::matplotlib data path: c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-27 00:54:14,369:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-27 00:54:14,370:::DEBUG:::interactive is False
+2025-01-27 00:54:14,370:::DEBUG:::platform is win32
+2025-01-27 00:58:30,680:::DEBUG:::matplotlib data path: c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-27 00:58:30,688:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-27 00:58:30,689:::DEBUG:::interactive is False
+2025-01-27 00:58:30,689:::DEBUG:::platform is win32
+2025-01-27 01:05:37,921:::DEBUG:::matplotlib data path: c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-27 01:05:37,931:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-27 01:05:37,932:::DEBUG:::interactive is False
+2025-01-27 01:05:37,932:::DEBUG:::platform is win32
+2025-01-27 01:08:15,733:::DEBUG:::matplotlib data path: c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-27 01:08:15,741:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-27 01:08:15,742:::DEBUG:::interactive is False
+2025-01-27 01:08:15,742:::DEBUG:::platform is win32
+2025-01-27 01:09:12,215:::DEBUG:::matplotlib data path: c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-27 01:09:12,223:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-27 01:09:12,223:::DEBUG:::interactive is False
+2025-01-27 01:09:12,224:::DEBUG:::platform is win32
+2025-01-27 01:09:33,246:::DEBUG:::matplotlib data path: c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-27 01:09:33,254:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-27 01:09:33,255:::DEBUG:::interactive is False
+2025-01-27 01:09:33,255:::DEBUG:::platform is win32
+2025-01-27 01:09:36,841:::DEBUG:::matplotlib data path: c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-27 01:09:36,850:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-27 01:09:36,851:::DEBUG:::interactive is False
+2025-01-27 01:09:36,851:::DEBUG:::platform is win32
+2025-01-27 01:11:08,489:::DEBUG:::matplotlib data path: c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-27 01:11:08,497:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-27 01:11:08,498:::DEBUG:::interactive is False
+2025-01-27 01:11:08,498:::DEBUG:::platform is win32
+2025-01-27 12:35:40,884:::DEBUG:::matplotlib data path: c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-27 12:35:40,899:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-27 12:35:40,900:::DEBUG:::interactive is False
+2025-01-27 12:35:40,900:::DEBUG:::platform is win32
+2025-01-27 12:35:47,005:::ERROR:::Exception: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06866.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\RawProcessing.py", line 59, in __init__
+    params_dict = np.load(directory, allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06866.npy'
+2025-01-27 12:44:59,294:::DEBUG:::matplotlib data path: c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-27 12:44:59,303:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-27 12:44:59,303:::DEBUG:::interactive is False
+2025-01-27 12:44:59,304:::DEBUG:::platform is win32
+2025-01-27 12:45:59,730:::DEBUG:::matplotlib data path: c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-27 12:45:59,738:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-27 12:45:59,739:::DEBUG:::interactive is False
+2025-01-27 12:45:59,739:::DEBUG:::platform is win32
+2025-01-27 12:47:13,343:::DEBUG:::matplotlib data path: c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-27 12:47:13,351:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-27 12:47:13,352:::DEBUG:::interactive is False
+2025-01-27 12:47:13,352:::DEBUG:::platform is win32
+2025-01-27 12:48:08,950:::DEBUG:::matplotlib data path: c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-27 12:48:08,958:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-27 12:48:08,959:::DEBUG:::interactive is False
+2025-01-27 12:48:08,959:::DEBUG:::platform is win32
+2025-01-27 12:50:01,067:::DEBUG:::matplotlib data path: c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-27 12:50:01,074:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-27 12:50:01,075:::DEBUG:::interactive is False
+2025-01-27 12:50:01,075:::DEBUG:::platform is win32
+2025-01-27 12:52:24,681:::DEBUG:::matplotlib data path: c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-27 12:52:24,689:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-27 12:52:24,690:::DEBUG:::interactive is False
+2025-01-27 12:52:24,690:::DEBUG:::platform is win32
+2025-01-27 12:53:57,000:::DEBUG:::matplotlib data path: c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-27 12:53:57,007:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-27 12:53:57,008:::DEBUG:::interactive is False
+2025-01-27 12:53:57,008:::DEBUG:::platform is win32
+2025-01-27 12:54:06,212:::DEBUG:::matplotlib data path: c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-27 12:54:06,220:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-27 12:54:06,220:::DEBUG:::interactive is False
+2025-01-27 12:54:06,221:::DEBUG:::platform is win32
+2025-01-27 12:54:25,743:::DEBUG:::matplotlib data path: c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-27 12:54:25,751:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-27 12:54:25,752:::DEBUG:::interactive is False
+2025-01-27 12:54:25,752:::DEBUG:::platform is win32
+2025-01-27 12:56:07,668:::DEBUG:::matplotlib data path: c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-27 12:56:07,676:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-27 12:56:07,677:::DEBUG:::interactive is False
+2025-01-27 12:56:07,677:::DEBUG:::platform is win32
+2025-01-27 12:56:31,936:::DEBUG:::matplotlib data path: c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-27 12:56:31,945:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-27 12:56:31,946:::DEBUG:::interactive is False
+2025-01-27 12:56:31,946:::DEBUG:::platform is win32
+2025-01-27 12:57:02,764:::DEBUG:::matplotlib data path: c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-27 12:57:02,772:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-27 12:57:02,773:::DEBUG:::interactive is False
+2025-01-27 12:57:02,773:::DEBUG:::platform is win32
+2025-01-27 12:57:39,875:::DEBUG:::matplotlib data path: c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-27 12:57:39,883:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-27 12:57:39,884:::DEBUG:::interactive is False
+2025-01-27 12:57:39,884:::DEBUG:::platform is win32
+2025-01-27 12:58:35,730:::DEBUG:::matplotlib data path: c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-27 12:58:35,737:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-27 12:58:35,738:::DEBUG:::interactive is False
+2025-01-27 12:58:35,738:::DEBUG:::platform is win32
+2025-01-27 12:59:22,380:::DEBUG:::matplotlib data path: c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-27 12:59:22,389:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-27 12:59:22,390:::DEBUG:::interactive is False
+2025-01-27 12:59:22,390:::DEBUG:::platform is win32
+2025-01-27 13:00:05,631:::DEBUG:::matplotlib data path: c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-27 13:00:05,639:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-27 13:00:05,640:::DEBUG:::interactive is False
+2025-01-27 13:00:05,640:::DEBUG:::platform is win32
+2025-01-27 13:36:57,814:::DEBUG:::matplotlib data path: c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-27 13:36:57,823:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-27 13:36:57,824:::DEBUG:::interactive is False
+2025-01-27 13:36:57,824:::DEBUG:::platform is win32
+2025-01-27 13:38:55,306:::DEBUG:::matplotlib data path: c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-27 13:38:55,314:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-27 13:38:55,315:::DEBUG:::interactive is False
+2025-01-27 13:38:55,315:::DEBUG:::platform is win32
+2025-01-27 13:40:23,732:::DEBUG:::matplotlib data path: c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-27 13:40:23,739:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-27 13:40:23,740:::DEBUG:::interactive is False
+2025-01-27 13:40:23,740:::DEBUG:::platform is win32
+2025-01-27 13:40:54,801:::DEBUG:::matplotlib data path: c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-27 13:40:54,809:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-27 13:40:54,809:::DEBUG:::interactive is False
+2025-01-27 13:40:54,810:::DEBUG:::platform is win32
+2025-01-27 13:42:19,056:::DEBUG:::matplotlib data path: c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-27 13:42:19,064:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-27 13:42:19,065:::DEBUG:::interactive is False
+2025-01-27 13:42:19,065:::DEBUG:::platform is win32
+2025-01-27 13:42:38,381:::DEBUG:::matplotlib data path: c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-27 13:42:38,389:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-27 13:42:38,390:::DEBUG:::interactive is False
+2025-01-27 13:42:38,390:::DEBUG:::platform is win32
+2025-01-27 13:43:02,605:::DEBUG:::matplotlib data path: c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-27 13:43:02,613:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-27 13:43:02,614:::DEBUG:::interactive is False
+2025-01-27 13:43:02,614:::DEBUG:::platform is win32
+2025-01-27 13:43:51,024:::DEBUG:::matplotlib data path: c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-27 13:43:51,032:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-27 13:43:51,033:::DEBUG:::interactive is False
+2025-01-27 13:43:51,033:::DEBUG:::platform is win32
+2025-01-27 13:49:24,637:::DEBUG:::matplotlib data path: c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-27 13:49:24,646:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-27 13:49:24,647:::DEBUG:::interactive is False
+2025-01-27 13:49:24,647:::DEBUG:::platform is win32
+2025-01-27 13:49:26,522:::DEBUG:::matplotlib data path: c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-27 13:49:26,529:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-27 13:49:26,530:::DEBUG:::interactive is False
+2025-01-27 13:49:26,530:::DEBUG:::platform is win32
+2025-01-27 13:50:02,286:::DEBUG:::matplotlib data path: c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-27 13:50:02,293:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-27 13:50:02,294:::DEBUG:::interactive is False
+2025-01-27 13:50:02,294:::DEBUG:::platform is win32
+2025-01-27 14:25:40,475:::DEBUG:::matplotlib data path: c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-27 14:25:40,483:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-27 14:25:40,483:::DEBUG:::interactive is False
+2025-01-27 14:25:40,484:::DEBUG:::platform is win32
+2025-01-27 14:26:36,772:::DEBUG:::matplotlib data path: c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-27 14:26:36,780:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-27 14:26:36,781:::DEBUG:::interactive is False
+2025-01-27 14:26:36,781:::DEBUG:::platform is win32
+2025-01-27 14:32:44,847:::DEBUG:::matplotlib data path: c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-27 14:32:44,856:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-27 14:32:44,857:::DEBUG:::interactive is False
+2025-01-27 14:32:44,857:::DEBUG:::platform is win32
+2025-01-27 14:33:20,539:::DEBUG:::matplotlib data path: c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-27 14:33:20,547:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-27 14:33:20,547:::DEBUG:::interactive is False
+2025-01-27 14:33:20,548:::DEBUG:::platform is win32
+2025-01-27 14:33:51,997:::DEBUG:::matplotlib data path: c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-27 14:33:52,005:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-27 14:33:52,006:::DEBUG:::interactive is False
+2025-01-27 14:33:52,006:::DEBUG:::platform is win32
+2025-01-27 14:34:17,429:::DEBUG:::matplotlib data path: c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-27 14:34:17,436:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-27 14:34:17,437:::DEBUG:::interactive is False
+2025-01-27 14:34:17,437:::DEBUG:::platform is win32
+2025-01-27 14:34:40,301:::DEBUG:::matplotlib data path: c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-27 14:34:40,308:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-27 14:34:40,309:::DEBUG:::interactive is False
+2025-01-27 14:34:40,309:::DEBUG:::platform is win32
+2025-01-27 14:35:06,973:::DEBUG:::matplotlib data path: c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-27 14:35:06,981:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-27 14:35:06,982:::DEBUG:::interactive is False
+2025-01-27 14:35:06,982:::DEBUG:::platform is win32
+2025-01-27 14:35:43,422:::DEBUG:::matplotlib data path: c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-27 14:35:43,430:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-27 14:35:43,431:::DEBUG:::interactive is False
+2025-01-27 14:35:43,431:::DEBUG:::platform is win32
+2025-01-27 14:36:56,155:::DEBUG:::matplotlib data path: c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-27 14:36:56,163:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-27 14:36:56,164:::DEBUG:::interactive is False
+2025-01-27 14:36:56,164:::DEBUG:::platform is win32
+2025-01-27 14:42:34,710:::DEBUG:::matplotlib data path: c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-27 14:42:34,718:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-27 14:42:34,719:::DEBUG:::interactive is False
+2025-01-27 14:42:34,719:::DEBUG:::platform is win32
+2025-01-29 20:25:37,248:::DEBUG:::matplotlib data path: c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-29 20:25:37,266:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-29 20:25:37,267:::DEBUG:::interactive is False
+2025-01-29 20:25:37,267:::DEBUG:::platform is win32
+2025-01-29 20:26:16,781:::ERROR:::Exception: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06865.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\RawProcessing.py", line 59, in __init__
+    params_dict = np.load(directory, allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06865.npy'
+2025-01-29 20:34:41,189:::DEBUG:::matplotlib data path: c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-29 20:34:41,198:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-29 20:34:41,199:::DEBUG:::interactive is False
+2025-01-29 20:34:41,199:::DEBUG:::platform is win32
+2025-01-29 20:34:45,093:::ERROR:::Exception: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06864.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\RawProcessing.py", line 59, in __init__
+    params_dict = np.load(directory, allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06864.npy'
+2025-01-29 20:34:45,094:::ERROR:::Exception: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06865.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\RawProcessing.py", line 59, in __init__
+    params_dict = np.load(directory, allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06865.npy'
+2025-01-29 20:35:52,751:::DEBUG:::matplotlib data path: c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-29 20:35:52,759:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-29 20:35:52,760:::DEBUG:::interactive is False
+2025-01-29 20:35:52,760:::DEBUG:::platform is win32
+2025-01-29 20:35:58,767:::ERROR:::Exception: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06864.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\RawProcessing.py", line 59, in __init__
+    params_dict = np.load(directory, allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06864.npy'
+2025-01-29 20:35:58,768:::ERROR:::Exception: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06865.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\RawProcessing.py", line 59, in __init__
+    params_dict = np.load(directory, allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06865.npy'
+2025-01-29 20:38:32,020:::DEBUG:::matplotlib data path: c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-29 20:38:32,028:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-29 20:38:32,029:::DEBUG:::interactive is False
+2025-01-29 20:38:32,029:::DEBUG:::platform is win32
+2025-01-29 20:38:35,936:::ERROR:::Exception: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06864.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\RawProcessing.py", line 59, in __init__
+    params_dict = np.load(directory, allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06864.npy'
+2025-01-29 20:38:35,937:::ERROR:::Exception: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06865.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\RawProcessing.py", line 59, in __init__
+    params_dict = np.load(directory, allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06865.npy'
+2025-01-29 20:41:28,580:::DEBUG:::matplotlib data path: c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-29 20:41:28,588:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-29 20:41:28,589:::DEBUG:::interactive is False
+2025-01-29 20:41:28,589:::DEBUG:::platform is win32
+2025-01-29 20:41:32,175:::ERROR:::Exception: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06864.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\RawProcessing.py", line 59, in __init__
+    params_dict = np.load(directory, allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06864.npy'
+2025-01-29 20:41:32,177:::ERROR:::Exception: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06865.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\RawProcessing.py", line 59, in __init__
+    params_dict = np.load(directory, allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06865.npy'
+2025-01-29 20:51:01,960:::DEBUG:::matplotlib data path: c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-29 20:51:01,968:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-29 20:51:01,969:::DEBUG:::interactive is False
+2025-01-29 20:51:01,969:::DEBUG:::platform is win32
+2025-01-29 20:51:22,134:::DEBUG:::matplotlib data path: c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-29 20:51:22,142:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-29 20:51:22,143:::DEBUG:::interactive is False
+2025-01-29 20:51:22,143:::DEBUG:::platform is win32
+2025-01-29 20:52:26,192:::ERROR:::Exception: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06864.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\RawProcessing.py", line 59, in __init__
+    params_dict = np.load(directory, allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06864.npy'
+2025-01-29 20:52:26,193:::ERROR:::Exception: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06865.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\RawProcessing.py", line 59, in __init__
+    params_dict = np.load(directory, allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06865.npy'
+2025-01-29 20:55:17,239:::DEBUG:::matplotlib data path: c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-29 20:55:17,247:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-29 20:55:17,248:::DEBUG:::interactive is False
+2025-01-29 20:55:17,248:::DEBUG:::platform is win32
+2025-01-29 21:13:33,817:::DEBUG:::matplotlib data path: c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-29 21:13:33,825:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-29 21:13:33,826:::DEBUG:::interactive is False
+2025-01-29 21:13:33,826:::DEBUG:::platform is win32
+2025-01-29 21:13:49,929:::DEBUG:::matplotlib data path: c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-29 21:13:49,937:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-29 21:13:49,938:::DEBUG:::interactive is False
+2025-01-29 21:13:49,938:::DEBUG:::platform is win32
+2025-01-29 21:14:05,525:::ERROR:::Exception: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06868.npy'
+Traceback (most recent call last):
+  File "d:\kai-m\Documents\Python Scripts\Film Scan Conversion\Film-Scan-Converter\source\RawProcessing.py", line 60, in __init__
+    params_dict = np.load(directory, allow_pickle=True).item()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\lib\_npyio_impl.py", line 459, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\kai-m\\.film_scan_converter\\DSC06868.npy'
+2025-01-29 21:28:17,834:::DEBUG:::matplotlib data path: c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-29 21:28:17,842:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-29 21:28:17,843:::DEBUG:::interactive is False
+2025-01-29 21:28:17,843:::DEBUG:::platform is win32
+2025-01-29 21:37:44,196:::DEBUG:::matplotlib data path: c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-29 21:37:44,204:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-29 21:37:44,205:::DEBUG:::interactive is False
+2025-01-29 21:37:44,205:::DEBUG:::platform is win32
+2025-01-29 21:39:36,370:::DEBUG:::matplotlib data path: c:\Users\kai-m\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+2025-01-29 21:39:36,377:::DEBUG:::CONFIGDIR=C:\Users\kai-m\.matplotlib
+2025-01-29 21:39:36,378:::DEBUG:::interactive is False
+2025-01-29 21:39:36,378:::DEBUG:::platform is win32

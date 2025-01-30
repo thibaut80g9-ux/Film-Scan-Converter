@@ -40,9 +40,11 @@ class GUI:
         self.base_picker = False
         self.unsaved = False # Indicates that settings have changed need to be saved
 
-        self.max_processors_override = 0 # 0 means disabled
-        self.preload = 4 # Buffer size to preload photos
-        self.advanced_attrs = ('max_processors_override','preload') # attributes that will be picked up for modification in advanced settings
+        self.default_advanced_settings = dict(
+            max_processors_override = 0, # 0 means disabled
+            preload = 4 # Buffer size to preload photos
+        )
+        self.advanced_settings = self.default_advanced_settings.copy()
 
         self.default_settings = dict(
             film_type = 0,
@@ -78,11 +80,14 @@ class GUI:
         menubar = tk.Menu(self.master, relief=tk.FLAT)
         self.filemenu = tk.Menu(menubar, tearoff=0)
         self.filemenu.add_command(label='Import...', command=self.import_photos)
-        self.filemenu.add_command(label='Save Settings', command=self.save_settings)
+        self.filemenu.add_command(label='Save Settings', command=self.save_settings, accelerator='Ctrl+S')
         self.filemenu.add_separator()
         self.filemenu.add_command(label='Exit', command=self.on_closing)
         menubar.add_cascade(label='File', menu=self.filemenu)
         self.editmenu = tk.Menu(menubar, tearoff=0)
+        self.editmenu.add_command(label='Copy Settings', command=self.copy_settings, accelerator='Ctrl+C')
+        self.editmenu.add_command(label='Paste Settings', command=self.paste_settings, state=tk.DISABLED, accelerator='Ctrl+V')
+        self.editmenu.add_separator()
         self.editmenu.add_command(label='Reset to Default Settings', command=self.reset_settings)
         self.editmenu.add_separator()
         self.editmenu.add_command(label='Advanced Settings...', command=self.advanced_dialog)
@@ -209,7 +214,7 @@ class GUI:
         export_frame.grid(row=9, column=0, sticky='EW')
         export_settings_frame = ttk.Frame(export_frame)
         export_settings_frame.pack(fill='x')
-        ComboLabel(export_settings_frame, 'Export File Type:', 0, self.filetypes, 'filetype', global_sync=False, output_list=self.filetypes, command=lambda widget:self.widget_changed(widget, 'skip', False), default_value=self.filetypes.index(RawProcessing.default_parameters['filetype']))
+        ComboLabel(export_settings_frame, 'Export File Type:', 0, self.filetypes, 'filetype', global_sync=False, output_list=self.filetypes, command=lambda widget:self.widget_changed(widget, 'skip', False), default_value=RawProcessing.default_parameters['filetype'])
         self.frame = ScaleEntry(export_settings_frame, 'White Frame (%):', 1, 0, 10, 'frame', global_sync=False, command=lambda widget:self.widget_changed(widget, 'update', False), default_value=RawProcessing.default_parameters['frame'])
         ttk.Label(export_frame, text='Output Destination Folder:', anchor='w').pack(fill = 'x')
         self.destination_folder_text = tk.StringVar()
@@ -264,12 +269,16 @@ class GUI:
         self.result_photo = ttk.Label(self.result_photo_frame)
         self.result_photo.pack()
 
+        # Bindings
         self.master.bind('<Configure>', self.resize_event)
         self.master.bind('<Key>', self.key_handler)
         self.master.bind('<Button>', self.click)
+        self.master.bind('<Control-c>', self.copy_settings)
+        self.master.bind('<Control-v>', self.paste_settings)
+        self.master.bind('<Control-s>', self.save_settings)
         self.master.protocol('WM_DELETE_WINDOW', self.on_closing)
-        dynamic_scroll_frame.update()
 
+        dynamic_scroll_frame.update()
         self.set_disable_buttons()
 
         # Loading advanced parameters from the config file
@@ -278,12 +287,12 @@ class GUI:
         except Exception as e:
             logger.exception(f"Exception: {e}")
         else:
-            for attr in self.advanced_attrs:
-                if attr in params_dict:
-                    setattr(self, attr, params_dict[attr]) # Initializes every parameter with imported parameters
-            for attr in RawProcessing.advanced_attrs:
-                if attr in params_dict:
-                    RawProcessing.class_parameters[attr] = params_dict[attr]
+            for settings in [self.advanced_settings, RawProcessing.class_parameters]:
+                for attr in settings:
+                    if attr in params_dict:
+                        settings[attr] = params_dict[attr] # Initializes every parameter with imported parameters
+                    else:
+                        Exception(f'Attribute {attr} not found in imported config.npy file.')
                     
         for widget in self.widgets.values():
             if widget.key in self.default_settings:
@@ -313,10 +322,12 @@ class GUI:
                 wb_mult.show()
 
         def apply_settings():
-            for widget in raw_processing_widgets.values():
-                RawProcessing.class_parameters[widget.key] = widget.get()
-            self.max_processors_override = max_processors.get()
-            self.preload = preload.get()
+            # applies the values stored in the widgets to the rest of the class
+            for widget in advanced_widgets.values():
+                if widget.key in RawProcessing.class_parameters:
+                    RawProcessing.class_parameters[widget.key] = widget.get()
+                else:
+                    self.advanced_settings[widget.key] = widget.get()
             
             quit()
             for photo in self.photos:
@@ -329,13 +340,25 @@ class GUI:
             params_dict = dict()
             for attr in RawProcessing.advanced_attrs:
                 params_dict[attr] = RawProcessing.class_parameters[attr]
-            for attr in self.advanced_attrs:
-                params_dict[attr] = getattr(self, attr)
+            for attr in self.advanced_settings:
+                params_dict[attr] = self.advanced_settings[attr]
             np.save(f'{os.path.join(self.config_path,"config.npy")}', params_dict)
         
         def quit():
             self.master.attributes('-topmost', 0)
             top.destroy()
+
+        def set_widgets(settings_dict):
+            # Applies the settings stored in the settings_dict to the advanced GUI
+            for widget in advanced_widgets.values():
+                if widget.key in settings_dict:
+                    widget.set(settings_dict[widget.key])
+        
+        def reset():
+            # Resets advanced settings to default values
+            set_widgets(RawProcessing.default_parameters)
+            set_widgets(self.default_advanced_settings)
+            set_wb()
 
         top = tk.Toplevel(self.master)
         top.transient(self.master)
@@ -344,9 +367,7 @@ class GUI:
         top.bind('<Button>', lambda event: event.widget.focus_set())
         top.resizable(False, False)
         top.focus_set()
-        top.transient(self.master)
         top.protocol('WM_DELETE_WINDOW', quit)
-        self.master.attributes('-topmost', 1)
 
         mainFrame = ttk.Frame(top, padding=10)
         mainFrame.pack(fill='x')
@@ -367,50 +388,53 @@ class GUI:
         dust_settings = ttk.LabelFrame(secondColumn, borderwidth=2, labelwidget=dust_lbl, padding=5)
         dust_settings.pack(fill='x', expand=True)
 
-        raw_processing_widgets = {}
-        initialized_values = {}
-        for key in RawProcessing.advanced_attrs:
-            initialized_values[key] = RawProcessing.class_parameters[key]
+        advanced_widgets = {}
 
         # Building pop-up GUI
         allowable_dm_algs = (0, 1, 2, 3, 4, 11, 12)
         dm_algs_list = ('LINEAR','VNG','PPG','AHD','DCB','DHT','AAHD')
-        ComboLabel(import_settings, 'Demosaicing Algorithm:', 0, dm_algs_list, 'dm_alg', raw_processing_widgets, False, default_value=initialized_values['dm_alg'], output_list=allowable_dm_algs, width=25)
+        ComboLabel(import_settings, 'Demosaicing Algorithm:', 0, dm_algs_list, 'dm_alg', advanced_widgets, output_list=allowable_dm_algs, width=25)
+        MultiEntryLabel(import_settings, 'Median Filter Passes:', 1, 0, 10, 1, key='median_filter_passes', widget_dictionary=advanced_widgets, width=25)
         cs_list = ('raw','sRGB','Adobe','Wide','ProPhoto','XYZ','ACES','P3D65','Rec2020')
-        ComboLabel(import_settings, 'RAW Output Colour Space:', 1, cs_list, 'colour_space', raw_processing_widgets, False, default_value=initialized_values['colour_space'], width=25)
-        MultiEntryLabel(import_settings, 'RAW Gamma (Power, Slope):', 3, 0, 8, initialized_values['raw_gamma'], 'raw_gamma', raw_processing_widgets, False, True, 0.1, width=25)
-        MultiEntryLabel(import_settings, 'RAW Exposure Shift:', 4, -2, 3, initialized_values['exp_shift'], 'exp_shift', raw_processing_widgets, False, True, 0.25, width=25)
+        ComboLabel(import_settings, 'RAW Output Colour Space:', 2, cs_list, 'colour_space', advanced_widgets, width=25)
+        MultiEntryLabel(import_settings, 'RAW Gamma (Power, Slope):', 3, 0, 8, 2, key='raw_gamma', widget_dictionary=advanced_widgets, is_float=True, increment=0.1, width=25)
+        MultiEntryLabel(import_settings, 'RAW Exposure Shift:', 4, -2, 3, 1, key='exp_shift', widget_dictionary=advanced_widgets, is_float=True, increment=0.25, width=25)
         fbdd_nr_list = ('Off','Light','Full')
-        ComboLabel(import_settings, 'FBDD Noise Reduction:', 5, fbdd_nr_list, 'fbdd_nr', raw_processing_widgets, False, default_value=initialized_values['fbdd_nr'], width=25)
-        use_camera_wb = CheckLabel(import_settings, 'Use Camera White Balance:', 6, 'use_camera_wb', raw_processing_widgets, False, initialized_values['use_camera_wb'], set_wb)
+        ComboLabel(import_settings, 'FBDD Noise Reduction:', 5, fbdd_nr_list, 'fbdd_nr', advanced_widgets, width=25)
+        MultiEntryLabel(import_settings, 'Noise Threshold', 6, 0, 1000, 1, key='noise_thr', widget_dictionary=advanced_widgets, increment=50, width=25)
+        use_camera_wb = CheckLabel(import_settings, 'Use Camera White Balance:', 8, 'use_camera_wb', advanced_widgets, command=set_wb)
         try:
             wb_lbl = f'White Balance Multipliers ({self.current_photo.colour_desc}):'
         except Exception as e:
             wb_lbl = 'White Balance Multipliers:'
-        wb_mult = MultiEntryLabel(import_settings, wb_lbl, 7, 0, 4, initialized_values['wb_mult'], 'wb_mult', raw_processing_widgets, False, True, 0.1, width=25)
-        set_wb()
+        wb_mult = MultiEntryLabel(import_settings, wb_lbl, 9, 0, 4, 4, key='wb_mult', widget_dictionary=advanced_widgets, is_float=True, increment=0.1, width=25)
 
-        MultiEntryLabel(process_settings, 'Max Proxy Size (W + H):', 0, 500, 20000, initialized_values['max_proxy_size'], 'max_proxy_size', raw_processing_widgets, False, increment=500)
-        preload = MultiEntryLabel(process_settings, 'Photo Preload Buffer Size:', 1, 0, 20, self.preload)
-        MultiEntryLabel(process_settings, 'EQ Ignore Borders % (W, H)', 2, 0, 40, initialized_values['ignore_border'], 'ignore_border', raw_processing_widgets, False)
-        MultiEntryLabel(process_settings, 'White Point Percentile:', 3, 70, 100, initialized_values['white_point_percentile'], 'white_point_percentile', raw_processing_widgets, False, True)
-        MultiEntryLabel(process_settings, 'Black Point Percentile:', 4, 0, 30, initialized_values['black_point_percentile'], 'black_point_percentile', raw_processing_widgets, False, True)
+        MultiEntryLabel(process_settings, 'Max Proxy Size (W + H):', 0, 500, 20000, 1, key='max_proxy_size', widget_dictionary=advanced_widgets, increment=500)
+        MultiEntryLabel(process_settings, 'Photo Preload Buffer Size:', 1, 0, 20, 1, key='preload', widget_dictionary=advanced_widgets)
+        MultiEntryLabel(process_settings, 'EQ Ignore Borders % (W, H)', 2, 0, 40, 2, key='ignore_border', widget_dictionary=advanced_widgets)
+        MultiEntryLabel(process_settings, 'White Point Percentile:', 3, 70, 100, 1, key='white_point_percentile', widget_dictionary=advanced_widgets, is_float=True)
+        MultiEntryLabel(process_settings, 'Black Point Percentile:', 4, 0, 30, 1, key='black_point_percentile', widget_dictionary=advanced_widgets, is_float=True)
+        MultiEntryLabel(process_settings, 'Colour Picker Radius (%)', 5, 0.5, 10, 1, key='picker_radius', widget_dictionary=advanced_widgets, is_float=True, increment=0.5)
 
-        MultiEntryLabel(dust_settings, 'Threshold:', 0, 0, 50, initialized_values['dust_threshold'], 'dust_threshold', raw_processing_widgets, False)
-        MultiEntryLabel(dust_settings, 'Noise Closing Iterations:', 1, 1, 10, initialized_values['dust_iter'], 'dust_iter', raw_processing_widgets, False)
-        MultiEntryLabel(dust_settings, 'Max Particle Area:', 2, 0, 100, initialized_values['max_dust_area'], 'max_dust_area', raw_processing_widgets, False)
+        MultiEntryLabel(dust_settings, 'Threshold:', 0, 0, 50, 1, key='dust_threshold', widget_dictionary=advanced_widgets)
+        MultiEntryLabel(dust_settings, 'Noise Closing Iterations:', 1, 1, 10, 1, key='dust_iter', widget_dictionary=advanced_widgets)
+        MultiEntryLabel(dust_settings, 'Max Particle Area:', 2, 0, 100, 1, key='max_dust_area', widget_dictionary=advanced_widgets)
 
-        MultiEntryLabel(export_settings, 'JPEG Quality:', 0, 0, 100, initialized_values['jpg_quality'], 'jpg_quality', raw_processing_widgets, False, increment=10)
+        MultiEntryLabel(export_settings, 'JPEG Quality:', 0, 0, 100, 1, key='jpg_quality', widget_dictionary=advanced_widgets, increment=10)
         tiff_comp_list = ['No Compression','Lempel-Ziv & Welch','Adobe Deflate (ZIP)','PackBits']
         tiff_comp_out = [1, 5, 8, 32773]
-        ComboLabel(export_settings, 'TIFF Compression:', 1, tiff_comp_list, 'tiff_compression', raw_processing_widgets, False, tiff_comp_out.index(initialized_values['tiff_compression']), output_list=tiff_comp_out, width=20)
+        ComboLabel(export_settings, 'TIFF Compression:', 1, tiff_comp_list, 'tiff_compression', advanced_widgets, False, output_list=tiff_comp_out, width=20)
+        MultiEntryLabel(export_settings, 'Max Processors Override:', 2, 0, multiprocessing.cpu_count(), 1, key='max_processors_override', widget_dictionary=advanced_widgets)
 
-        max_processors = MultiEntryLabel(export_settings, 'Max Processors Override:', 2, 0, multiprocessing.cpu_count(), self.max_processors_override)
+        set_widgets(RawProcessing.class_parameters)
+        set_widgets(self.advanced_settings)
+        set_wb()
 
         buttonFrame = ttk.Frame(mainFrame)
         buttonFrame.grid(row=1, column=0, columnspan=2, sticky='e')
         ttk.Button(buttonFrame, text='Cancel', command=quit).pack(side=tk.RIGHT, padx=2, pady=5, anchor='sw')
         ttk.Button(buttonFrame, text='Save', command=save_settings).pack(side=tk.RIGHT, padx=2, pady=5, anchor='sw')
+        ttk.Button(buttonFrame, text='Reset to Default', command=reset, width=17).pack(side=tk.RIGHT, padx=2, pady=5, anchor='sw')
 
         # Centres pop-up window over self.master window
         top.update_idletasks()
@@ -516,10 +540,10 @@ class GUI:
 
         # conservatively load extra images in background to speed up switching, while saving memory
         for i, photo in enumerate(self.photos):
-            if (abs(i - photo_index) <= self.preload) and not hasattr(photo, 'RAW_IMG') and i not in self.in_progress: # preload photos in buffer ahead or behind of the currently selected one
+            if (abs(i - photo_index) <= self.advanced_settings['preload']) and not hasattr(photo, 'RAW_IMG') and i not in self.in_progress: # preload photos in buffer ahead or behind of the currently selected one
                 threading.Thread(target=load_async, args=(photo, i), daemon=True).start()
                 self.in_progress.add(i) # keeps track of photos in progress
-            elif (abs(i - photo_index) > self.preload) and hasattr(photo, 'RAW_IMG'): # delete photos outside of buffer
+            elif (abs(i - photo_index) > self.advanced_settings['preload']) and hasattr(photo, 'RAW_IMG'): # delete photos outside of buffer
                 photo.clear_memory()
 
         self.set_disable_buttons()
@@ -645,7 +669,7 @@ class GUI:
             self.current_photo.process()
             self.update_IMG()
 
-    def change_settings(self, reset=False):
+    def change_settings(self):
         # Configures GUI to reflect current applied settings for the photo
         for widget in self.widgets.values():
             widget.set(getattr(self.current_photo, widget.key))
@@ -676,6 +700,9 @@ class GUI:
     def reset_settings(self):
         # Reset settings to default parameters
         if len(self.photos) == 0:
+            for widget in self.widgets.values():
+                if widget.key in self.default_settings:
+                    widget.set(self.default_settings[widget.key])
             return
         if self.glob_check.get():
             affected = sum([photo.use_global_settings for photo in self.photos]) # calculate the total number of photos using global settings
@@ -982,8 +1009,8 @@ class GUI:
                     allocated += photo.memory_alloc # tally of estimated memory requirements of each photo
                     has_alloc += 1
             
-            if self.max_processors_override != 0:
-                max_processors = self.max_processors_override
+            if self.advanced_settings['max_processors_override'] != 0:
+                max_processors = self.advanced_settings['max_processors_override']
             else:
                 # limting the maximum number of processes based on available system memory
                 available = psutil.virtual_memory()[1]
@@ -1077,13 +1104,33 @@ class GUI:
             self.save_settings()
         return result
     
-    def save_settings(self):
+    def save_settings(self, event=None):
         # loops through all the photos and applies global settings where needed, then saves the settings to disk
         for photo in self.photos:
             if photo.use_global_settings:
                 self.apply_settings(photo, self.global_settings) # apply most current settings before saving
             photo.save_settings()
         self.unsaved = False
+
+    def copy_settings(self, event=None):
+        # copies the current photo's settings
+        if len(self.photos) == 0:
+            return
+        self.copied_settings = {}
+        for key in self.default_settings:
+            self.copied_settings[key] = getattr(self.current_photo, key)
+        self.copied_settings['use_global_settings'] = self.glob_check.get()
+        self.editmenu.entryconfig('Paste Settings', state=tk.NORMAL)
+        
+    def paste_settings(self, event=None):
+        # pastes the copied settings if self.copy_settings() has been called
+        if hasattr(self, 'copied_settings') and hasattr(self, 'current_photo'):
+            self.apply_settings(self.current_photo, self.copied_settings)
+            self.change_settings()
+            self.glob_check.set(self.current_photo.use_global_settings)
+            self.current_photo.process()
+            self.update_IMG()
+            self.unsaved = True
     
     @staticmethod
     def _from_rgb(rgb):

@@ -16,27 +16,30 @@ class RawProcessing:
     default_parameters = dict(
         max_proxy_size = 2000, # Max dimension of height + width to increase processing speed (only for previews)
         histogram_plt_size = (1600, 2400, 3), # Dimensions of the histogram
-        hist_bg_colour = (25, 25, 25), # sets the backgroud colour of the histogram
+        hist_bg_colour = (25, 25, 25), # sets the background colour of the histogram
         frame = 0, # adds white frame to final photo
         jpg_quality = 90, # from 0-100
         tiff_compression = 8, # defines the tiff compression algorithm
         dm_alg = 2, # demosaicing algorithm
         colour_space = 7, # output colour space after demosaicing
-        exp_shift = 3, # number of stops to adjust the raw
+        exp_shift = 3.0, # number of stops to adjust the raw
         fbdd_nr = 0, # noise reduction on demosaic
         raw_gamma = (2.222, 4.5), # (power, slope) for RAW image
         use_camera_wb = True, # use built-in wb parameters from camera
-        wb_mult = [1, 1, 1, 1],
+        wb_mult = [1, 1, 1, 1], # multipliers for each 2x2 bayer pattern
+        noise_thr = 0, # for RAW denoising
+        median_filter_passes = 0, # can reduce colour artifacts during demosaicing
         black_point_percentile = 0.5, # sets the black point
-        white_point_percentile = 99, # sets the default white balance as a percentile of the brightest pixels
+        white_point_percentile = 99.0, # sets the default white balance as a percentile of the brightest pixels
         ignore_border = (1, 1), # ignores the border for calculation of histogram EQ
         dust_threshold = 10,
         max_dust_area = 15,
         dust_iter = 5,
+        picker_radius = 0.5,
         filetype = 'JPG'
     )
     class_parameters = default_parameters.copy()
-    advanced_attrs = ('max_proxy_size','jpg_quality','tiff_compression','dm_alg','colour_space','exp_shift','fbdd_nr','raw_gamma','use_camera_wb','wb_mult', 'black_point_percentile', 'white_point_percentile','ignore_border','dust_threshold','max_dust_area','dust_iter')
+    advanced_attrs = [key for key in default_parameters.keys() if key not in ('filetype', 'frame')] # list of keys for advanced settings, except for keys that should not be saved
     processing_parameters = ('dark_threshold','light_threshold','border_crop','flip','rotation','film_type','white_point','black_point','gamma','shadows','highlights','temp','tint','sat','reject','base_detect','base_rgb','remove_dust')
     
     def __init__(self, file_directory, default_settings, global_settings, config_path):
@@ -83,9 +86,12 @@ class RawProcessing:
                     use_camera_wb = self.class_parameters['use_camera_wb'], # Screws up the colours if not used
                     user_wb = self.class_parameters['wb_mult'], # wb multipliers
                     demosaic_algorithm = rawpy.DemosaicAlgorithm(self.class_parameters['dm_alg']),
+                    fbdd_noise_reduction = rawpy.FBDDNoiseReductionMode(self.class_parameters['fbdd_nr']),
                     output_color = rawpy.ColorSpace(self.class_parameters['colour_space']),
                     gamma = self.class_parameters['raw_gamma'],
                     auto_bright_thr = 0, # no clipping of highlights
+                    median_filter_passes = self.class_parameters['median_filter_passes'],
+                    noise_thr = self.class_parameters['noise_thr'],
                     exp_preserve_highlights = 1,
                     exp_shift = 2 ** self.class_parameters['exp_shift'],
                     half_size = not full_res # take the average of 4 pixels to reduce resolution and computational requirements
@@ -641,21 +647,21 @@ class RawProcessing:
                 total += getattr(self, attr).nbytes
         return total
     
-    def set_wb_from_picker(self, x, y, r=0.01):
+    def set_wb_from_picker(self, x, y):
         # x, y normalized between 0 and 1 as a proportion along the image height and width
         # r is the radius of a small circle to measure the wb as a proportion of the size of the image
-        self.wb_picker_params = (x, y, r)
+        self.wb_picker_params = (x, y, self.class_parameters['picker_radius'] / 100)
         self.pick_wb = True # sets flag to measure and set white balance on next processing
         self.process()
     
-    def get_base_colour(self, x, y, r=0.01):
+    def get_base_colour(self, x, y):
         # x, y normalized between 0 and 1 as a proportion along the image height and width
         # r is the radius of a small circle to measure the base colour as a proportion of the size of the image
         base_mask = self.rotate(np.zeros_like(self.RAW_IMG[:,:,0], dtype=np.uint8)) # generate blank mask, rotate to same orientation as preview image
         # applying scale factors based on image size
         x = int(x * base_mask.shape[1])
         y = int(y * base_mask.shape[0])
-        radius = int(min(base_mask.shape) * r)
+        radius = int(min(base_mask.shape) * self.class_parameters['picker_radius'] / 100)
 
         base_mask = cv2.circle(base_mask, (x, y), radius, 255, -1) # generate small circle to average pixels with
         base_mask = self.rotate(base_mask, True) # rotate image back to default orientation

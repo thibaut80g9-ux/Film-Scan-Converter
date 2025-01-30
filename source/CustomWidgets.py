@@ -76,7 +76,7 @@ class ScrollFrame:
                 self.canvas.yview_scroll(int(-1*(event.delta/delta_scale)), 'units')
     
 class ScaleEntry:
-    # Defines Label, Scale and Spinbox widgets, linked to a common integer variable
+    # Defines Label, Scale and Spinbox widgets, linked to a common integer or float variable
     # Has 4 methods that can be called: get(), set(), hide(), and show().
     # When the widget is interacted with, it will call the method passed into the command argument, and pass the widget itself as a parameter.
     def __init__(self, master, text: str, row: int, from_: int|float, to: int|float, key: str=None, widget_dictionary: dict=None, global_sync: bool=True, is_float=False, increment: int|float=1, default_value: int=0, command: Callable=lambda x:None):
@@ -232,9 +232,16 @@ class ComboLabel:
             # Returns the index of the combobox
             return self.combobox.current()
 
-    def set(self, value: int):
-        # Updates checkbutton to provided boolean variable
-        self.combobox.current(value)
+    def set(self, value):
+        # if a valid output list is provided, will set the combobox to the item corresponding to the provided value,
+        # otherwise, it will set the combobox using the provided value as an index
+        if len(self.output_list) == len(self.values):
+            if value in self.output_list:
+                self.combobox.current(self.output_list.index(value)) # Sets the combobox to the actual value provided
+            else:
+                Exception('Provided value does not exist in list of values')
+        else:
+            self.combobox.current(value) # Sets combobox to the entry corresponding to provided index
 
     def hide(self):
         # Hides the widget
@@ -247,7 +254,12 @@ class ComboLabel:
         self.combobox.grid(row=self.row, column=1, sticky=tk.W, padx=2, columnspan=2)
 
 class MultiEntryLabel:
-    def __init__(self, master, text: str, row: int, from_: int|float, to: int|float, default_values: Iterable, key: str=None, widget_dictionary: dict=None, global_sync: bool=True, is_float=False, increment: int|float=1, width=20, command: Callable=lambda x:None):
+    # defines label with a given number of numerical entries
+    # useful for when the modified parameter is an iterable
+    # Has 4 methods that can be called: get(), set(), hide().
+    # When the widget is interacted with, it will call the method passed into the command argument, and pass the widget itself as a parameter.
+    # Must be placed in grid
+    def __init__(self, master, text: str, row: int, from_: int|float, to: int|float, num_entries: int, default_values: Iterable=None, key: str=None, widget_dictionary: dict=None, global_sync: bool=True, is_float=False, increment: int|float=1, width=20, command: Callable=lambda x:None):
         self.global_sync = global_sync
         self.row = row
         self.key = key
@@ -297,17 +309,12 @@ class MultiEntryLabel:
         self.entry_frame = ttk.Frame(master)
         self.var_list = []
         column = 0
-        try:
-            iter(default_values)
-        except TypeError:
-            default_values = [default_values]
-        entry_width = max(int(width / len(default_values)) - 2, 4)
-        for value in default_values:
+        entry_width = max(int(width / num_entries) - 2, 4) # calculating the width of each entry
+        for _ in range(num_entries):
             if is_float:
                 variable = tk.DoubleVar()
             else:
                 variable = tk.IntVar()
-            variable.set(value)
             self.var_list.append(variable)
             spinbox = ttk.Spinbox(self.entry_frame, from_=from_, to=to, increment=increment, textvariable=variable, command=clamp, width=entry_width, validate='key', validatecommand=(validation, '%P', '%W'))
             spinbox.grid(row=self.row, column=column)
@@ -315,10 +322,12 @@ class MultiEntryLabel:
             spinbox.bind('<FocusOut>', clamp)
             column += 1
 
+        if default_values is not None:
+            self.set(default_values)
         self.show()
 
     def get(self):
-        # Returns the stored value
+        # Returns the stored value as either a tuple or a single value if there is only one entry
         output = tuple([var.get() for var in self.var_list])
         if len(output) == 1:
             return output[0]
@@ -327,9 +336,7 @@ class MultiEntryLabel:
 
     def set(self, values: int|float|Iterable):
         # Updates widgets to stored variable or value if given
-        # set to run every time self.variable is updated
-        # if triggered by an event (i.e. by changing the value manually through the GUI), executes self.command
-        # with run_command, will always trigger self.command
+        # length of input must match number of entries
         if type(values) is int or type(values) is float:
             values = [values]
         if len(values) != len(self.var_list):

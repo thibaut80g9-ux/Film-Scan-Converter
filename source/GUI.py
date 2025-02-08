@@ -74,7 +74,7 @@ class GUI:
         except Exception as e: # Exception for linux
             m = self.master.maxsize()
             self.master.geometry('{}x{}+0+0'.format(*m))
-            logger.exception(f"Exception: {e}")
+            logger.exception(f'Exception: {e}')
         self.master.geometry('800x500')
 
         menubar = tk.Menu(self.master, relief=tk.FLAT)
@@ -244,7 +244,7 @@ class GUI:
         self.outputFrame = ttk.Frame(mainFrame)
         self.outputFrame.grid_rowconfigure(3, weight=1)
         self.outputFrame.grid_columnconfigure(0, weight=1)
-        self.read_error_lbl = ttk.Label(mainFrame, text='Error: File could not be read', font=('Segoe UI', 20), justify="center", anchor='center')
+        self.read_error_lbl = ttk.Label(mainFrame, text='Error: File could not be read', font=('Segoe UI', 20), justify='center', anchor='center')
         self.read_error_lbl.bind('<Configure>', lambda e: self.read_error_lbl.config(wraplength=self.read_error_lbl.winfo_width()))
 
         # Process showing
@@ -568,7 +568,7 @@ class GUI:
             if self.current_photo.get_IMG() is None:
                 raise Exception
         except Exception as e:
-            logger.exception(f"Exception: {e}")
+            logger.exception(f'Exception: {e}')
             self.outputFrame.grid_forget()
             self.read_error_lbl.grid(row=0, column=1, sticky='EW') # displays error message when image cannot be loaded
             return
@@ -890,7 +890,7 @@ class GUI:
                 try:
                     colour = self.current_photo.base_rgb
                 except Exception as e: 
-                    logger.exception(f"Exception: {e}")
+                    logger.exception(f'Exception: {e}')
                     colour = None
                 rgb, _ = colorchooser.askcolor(colour, title='Enter Film Base RGB')
                 if rgb is None:
@@ -902,7 +902,7 @@ class GUI:
                 try:
                     filename = filename.name
                 except Exception as e: 
-                    logger.exception(f"Exception: {e}")
+                    logger.exception(f'Exception: {e}')
                     return
                 blank = RawProcessing(filename, self.default_settings, self.global_settings)
                 blank.load()
@@ -1031,7 +1031,7 @@ class GUI:
                         break
                     if result:
                         errors.append(result) # keeps track of any errors raised
-                        logger.exception(f"Exception: {result}") 
+                        logger.exception(f'Exception: {result}') 
                     update_message = f'Exported {i} of {str(len(inputs))} photos.'
                     self.update_progress(i / len(inputs) * 80 + 19.99, update_message) # update progress display
                     i += 1
@@ -1054,7 +1054,7 @@ class GUI:
         try:
             self.terminate.set()
         except Exception as e:
-            logger.exception(f"Exception: {e}") 
+            logger.exception(f'Exception: {e}') 
     
     # Defines how to show and hide the progress bar
     def show_progress(self, message=''):
@@ -1089,7 +1089,7 @@ class GUI:
                 try:
                     self.pool.terminate()
                 except Exception as e:
-                    logger.exception(f"Exception: {e}") 
+                    logger.exception(f'Exception: {e}') 
             else:
                 return
         self.master.destroy() # quit program
@@ -1123,6 +1123,7 @@ class GUI:
         
     def paste_settings(self, event=None):
         # pastes the copied settings if self.copy_settings() has been called
+        # if pasted into a photo with global settings applied, asks if the user wants to apply to all photos with global settings
         if hasattr(self, 'copied_settings') and hasattr(self, 'current_photo'):
             self.apply_settings(self.current_photo, self.copied_settings)
             if self.current_photo.use_global_settings:

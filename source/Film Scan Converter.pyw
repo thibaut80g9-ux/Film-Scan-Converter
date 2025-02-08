@@ -32,7 +32,7 @@ if __name__ == '__main__':
         else:
             datafile = os.path.join(sys.prefix, datafile)
     except Exception as e:
-        logger.exception(f"Exception: {e}")
+        logger.exception(f'Exception: {e}')
         root = tk.Tk()
     else:
         root = tk.Tk()

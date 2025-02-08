@@ -56,10 +56,10 @@ class RawProcessing:
         self.config_path = config_path
         # initializing raw processing parameters
         try: # to read in the parameters from a saved file
-            directory = os.path.join(self.config_path, f'{self.filename.split('.')[0]}.npy')
+            directory = os.path.join(self.config_path, f"{self.filename.split('.')[0]}.npy")
             params_dict = np.load(directory, allow_pickle=True).item()
         except Exception as e:# file does not exist
-            logger.exception(f"Exception: {e}")
+            logger.exception(f'Exception: {e}')
             for attr in self.processing_parameters:
                 if attr in global_settings:
                     setattr(self, attr, global_settings[attr]) # Initializes every instance parameter based on default value
@@ -103,7 +103,7 @@ class RawProcessing:
                 if type(self.RAW_IMG) is not np.ndarray:
                     raise Exception(f'{self.file_directory} failed to load!')
             except Exception as e:
-                logger.exception(f"Exception: {e}") # If fails again, set error attributes
+                logger.exception(f'Exception: {e}') # If fails again, set error attributes
                 self.reject = True
                 self.FileReadError = True
                 return

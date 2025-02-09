@@ -426,7 +426,13 @@ class RawProcessing:
     def hist_EQ(self, img):
         # Equalizes histogram for each color channel
         sensitivity = 0.2 # multiplier to adjust degree at which the sliders affect the output image
-        x, y = (np.array(self.class_parameters['ignore_border']) / 100 * img.shape[:2][::-1]).astype(np.int32) # calculates the width of the border to ignore in pixels
+
+        ignore_border = np.array(self.class_parameters['ignore_border'])
+        if self.border_crop < 0:
+            border_offset = np.array([abs(self.border_crop), abs(self.border_crop)])
+            ignore_border += border_offset # expands ignored border when border_crop is negative
+        x, y = (ignore_border / 100 * img.shape[:2][::-1]).astype(np.int32) # calculates the width of the border to ignore in pixels
+
         if x * y == 0:
             sample = np.s_[:]
         else:

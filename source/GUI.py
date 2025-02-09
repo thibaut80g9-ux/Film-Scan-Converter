@@ -167,9 +167,9 @@ class GUI:
 
         # Colour settings
         if getattr(sys, 'frozen', False):
-            picker = tk.PhotoImage(file=os.path.join(sys._MEIPASS, 'dropper.png')).subsample(15,15)
+            picker = tk.PhotoImage(file=os.path.join(sys._MEIPASS, 'assets', 'dropper.png')).subsample(15,15)
         else:
-            picker = tk.PhotoImage(file='dropper.png').subsample(15,15)
+            picker = tk.PhotoImage(file=os.path.join('assets', 'dropper.png')).subsample(15,15)
         colour_title = ttk.Label(text='Colour Adjustment', font=self.header_style, padding=2)
         self.colourFrame = ttk.LabelFrame(dynamic_scroll_frame.frame, borderwidth=2, labelwidget=colour_title, padding=5)
         colour_controls = ttk.Frame(self.colourFrame)

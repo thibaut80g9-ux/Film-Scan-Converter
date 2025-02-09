@@ -28,9 +28,9 @@ if __name__ == '__main__':
 
         datafile = 'camera-roll.ico'
         if not hasattr(sys, 'frozen'):
-            datafile = os.path.join(os.path.dirname(__file__), datafile)
+            datafile = os.path.join(os.path.dirname(__file__), 'assets', datafile)
         else:
-            datafile = os.path.join(sys.prefix, datafile)
+            datafile = os.path.join(sys.prefix, 'assets', datafile)
     except Exception as e:
         logger.exception(f'Exception: {e}')
         root = tk.Tk()

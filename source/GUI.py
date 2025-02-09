@@ -158,7 +158,7 @@ class GUI:
         crop_adjustments.grid_columnconfigure(3, weight=1)
         ScaleEntry(crop_adjustments, 'Dark Threshold:', 0, 0, 100, 'dark_threshold', self.widgets, command=self.widget_changed)
         ScaleEntry(crop_adjustments, 'Light Threshold:', 1, 0, 100, 'light_threshold', self.widgets, command=self.widget_changed)
-        ScaleEntry(crop_adjustments, 'Border Crop (%):', 2, 0, 20, 'border_crop', self.widgets, command=self.widget_changed)
+        ScaleEntry(crop_adjustments, 'Border Crop (%):', 2, -10, 20, 'border_crop', self.widgets, command=self.widget_changed)
         self.flip_check = CheckLabel(crop_adjustments, 'Flip Horizontally:', 3, 'flip', self.widgets, command=self.set_flip)
         rotButtons = ttk.Frame(self.cropFrame)
         rotButtons.pack(fill='x')

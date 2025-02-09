@@ -360,6 +360,8 @@ class RawProcessing:
         rect = cv2.minAreaRect(largest_contour) # bounding box of largest contour
         y, x = self.RAW_IMG.shape[0], self.RAW_IMG.shape[1]
         rect = ((rect[0][0]/y, rect[0][1]/x), (rect[1][0]/y, rect[1][1]/x), rect[2]) # normalizes crop for different sized images
+        if self.border_crop < 0:
+            rect = (rect[0], tuple(dim * (1 - self.border_crop / 100) for dim in rect[1]), rect[2])
         return thresh, rect, largest_contour
     
     def crop(self, img, rect):
@@ -379,7 +381,7 @@ class RawProcessing:
             img = cv2.warpPerspective(img, M, (width, height))
             if rect[2] > 45:
                 img = cv2.rotate(img, cv2.ROTATE_90_CLOCKWISE) # rotates image back if it has been rotated
-        if (self.border_crop != 0) & (np.min(img.shape[0:2]) > 100):
+        if (self.border_crop > 0) & (np.min(img.shape[0:2]) > 100):
             min_dim = np.min(img.shape[0:2])
             crop_px = int(self.border_crop / 100 * min_dim)
             if crop_px != 0:

@@ -940,15 +940,22 @@ class GUI:
     
     def select_folder(self):
         # Dialog to select output destination folder
-        self.destination_folder = filedialog.askdirectory() + '/' # opens dialog to choose folder
-        if len(self.destination_folder) <= 1:
+        destination_folder = filedialog.askdirectory() + '/' # opens dialog to choose folder
+        if len(destination_folder) <= 1:
             return
+        self.destination_folder = destination_folder
         self.destination_folder_text.set(self.destination_folder) # display destination folder in GUI
 
     def export(self, n_photos=1):
         # Start export in seperate thread to keep UI responsive
         if len([photo for photo in self.photos if not photo.reject]) == 0:
             return
+        if not self.destination_folder:
+            self.destination_folder = "export"  # sets default export folder
+        if not os.path.exists(self.destination_folder):
+            os.makedirs(self.destination_folder)
+            print(f'Creating {self.destination_folder}')
+        
         if n_photos == 1:
             export_fn = self.export_individual
         else:
@@ -973,7 +980,7 @@ class GUI:
         self.current_photo.load(True)
         self.current_photo.process(True)
         self.update_progress(99, 'Exporting photo...')
-        filename = self.destination_folder + str(self.current_photo).split('.')[0] # removes the file extension
+        filename = os.path.join(self.destination_folder, str(self.current_photo).split('.')[0]) # removes the file extension
         self.current_photo.export(filename) # saves the photo
         self.current_photo_button.configure(state=tk.NORMAL)
         self.all_photo_button.configure(state=tk.NORMAL)
@@ -1003,7 +1010,7 @@ class GUI:
                     continue
                 if photo.use_global_settings:
                     self.apply_settings(photo, self.global_settings) # Ensures the proper settings have been applied
-                filename = self.destination_folder + str(photo).split('.')[0] # removes the file extension
+                filename = os.path.join(self.destination_folder, str(self.current_photo).split('.')[0]) # removes the file extension
                 inputs.append((photo, filename, self.terminate, RawProcessing.class_parameters))
                 if hasattr(photo, 'memory_alloc'):
                     allocated += photo.memory_alloc # tally of estimated memory requirements of each photo

@@ -940,9 +940,10 @@ class GUI:
     
     def select_folder(self):
         # Dialog to select output destination folder
-        self.destination_folder = filedialog.askdirectory() + '/' # opens dialog to choose folder
-        if len(self.destination_folder) <= 1:
+        destination_folder = filedialog.askdirectory() + '/' # opens dialog to choose folder
+        if len(destination_folder) <= 1:
             return
+        self.destination_folder = destination_folder
         self.destination_folder_text.set(self.destination_folder) # display destination folder in GUI
 
     def export(self, n_photos=1):

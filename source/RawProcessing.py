@@ -171,7 +171,11 @@ class RawProcessing:
                     box = cv2.boxPoints(rect)
                     box = np.int64(box)
                     extra_crop_box = shrink_box(box, x_crop, y_crop)
-                    EQ_ignore_box = shrink_box(extra_crop_box, self.class_parameters['ignore_border'][0], self.class_parameters['ignore_border'][1])
+                    ignore_border = np.array(self.class_parameters['ignore_border'])
+                    if self.border_crop < 0:
+                        border_offset = np.array([abs(self.border_crop), abs(self.border_crop)])
+                        ignore_border += border_offset
+                    EQ_ignore_box = shrink_box(extra_crop_box, ignore_border[0], ignore_border[1])
                     EQ_ignore_poly = np.zeros_like(img)
                     cv2.fillPoly(EQ_ignore_poly, [extra_crop_box], (0,0,255))
                     cv2.fillPoly(EQ_ignore_poly, [EQ_ignore_box], (0,0,0))
@@ -427,7 +431,11 @@ class RawProcessing:
         # Equalizes histogram for each color channel
         sensitivity = 0.2 # multiplier to adjust degree at which the sliders affect the output image
 
-        x, y = (np.array(self.class_parameters['ignore_border']) / 100 * img.shape[:2][::-1]).astype(np.int32) # calculates the width of the border to ignore in pixels
+        ignore_border = np.array(self.class_parameters['ignore_border'])
+        if self.border_crop < 0:
+            border_offset = np.array([abs(self.border_crop), abs(self.border_crop)])
+            ignore_border += border_offset # expands ignored border when border_crop is negative
+        x, y = (ignore_border / 100 * img.shape[:2][::-1]).astype(np.int32) # calculates the width of the border to ignore in pixels
 
         if x * y == 0:
             sample = np.s_[:]

@@ -621,14 +621,11 @@ class RawProcessing:
         # adds decorative white border to the outside of picture
         if self.class_parameters['frame'] == 0:
             return img
-        scale_factor = self.class_parameters['frame'] / 50 + 1
-        new_shape = np.array(img.shape)
-        new_shape[0] *= scale_factor
-        new_shape[1] *= scale_factor
-        new_shape.astype(np.int_)
-        frame_img = np.ones(new_shape, np.uint16) * 65535
-        x_offset, y_offset = int(img.shape[1] * self.class_parameters['frame'] / 100), int(img.shape[0] * self.class_parameters['frame'] / 100)
-        frame_img[y_offset:y_offset+img.shape[0], x_offset:x_offset+img.shape[1]] = img
+        frame_size = min(int(img.shape[1] * self.class_parameters['frame'] / 100),
+                         int(img.shape[0] * self.class_parameters['frame'] / 100))
+        new_shape = (img.shape[0] + 2 * frame_size, img.shape[1] + 2 * frame_size, img.shape[2])
+        frame_img = np.ones(new_shape, dtype=img.dtype) * 65535
+        frame_img[frame_size:frame_size + img.shape[0], frame_size:frame_size + img.shape[1]] = img
         return frame_img
 
     def clear_memory(self):

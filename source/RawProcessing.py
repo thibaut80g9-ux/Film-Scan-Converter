@@ -36,7 +36,8 @@ class RawProcessing:
         max_dust_area = 15,
         dust_iter = 5,
         picker_radius = 0.5,
-        filetype = 'JPG'
+        filetype = 'JPG',
+        fit_aspect_ratio = 'Keep Original'
     )
     class_parameters = default_parameters.copy()
     advanced_attrs = [key for key in default_parameters.keys() if key not in ('filetype', 'frame')] # list of keys for advanced settings, except for keys that should not be saved
@@ -618,14 +619,29 @@ class RawProcessing:
         return hist_plot
     
     def add_frame(self, img):
-        # adds decorative white border to the outside of picture
         if self.class_parameters['frame'] == 0:
-            return img
-        frame_size = min(int(img.shape[1] * self.class_parameters['frame'] / 100),
-                         int(img.shape[0] * self.class_parameters['frame'] / 100))
-        new_shape = (img.shape[0] + 2 * frame_size, img.shape[1] + 2 * frame_size, img.shape[2])
+            if self.class_parameters['fit_aspect_ratio'] == 'Keep Original':
+                return img # skip if aspect ratio and frame have default values
+
+        frame_size = max(1, int(min(img.shape[:2]) * self.class_parameters['frame'] / 100)) # at least one pixel wide frame
+        new_shape = (img.shape[0] + 2 * frame_size, img.shape[1] + 2 * frame_size) + img.shape[2:]
         frame_img = np.ones(new_shape, dtype=img.dtype) * 65535
-        frame_img[frame_size:frame_size + img.shape[0], frame_size:frame_size + img.shape[1]] = img
+        frame_img[frame_size:-frame_size, frame_size:-frame_size] = img # center image inside frame
+
+        if self.class_parameters['fit_aspect_ratio'] != 'Keep Original': # fit image to aspect ratio
+            target_w, target_h = map(int, self.class_parameters['fit_aspect_ratio'].split(' ', 1)[0].split(':')) # parse 'W:H (text)' to W, H
+            target_ratio = target_w / target_h
+            current_ratio = frame_img.shape[1] / frame_img.shape[0]
+            if current_ratio > target_ratio: # image is wider than target aspect ratio
+                new_height = int(frame_img.shape[1] / target_ratio)
+                pad = (new_height - frame_img.shape[0]) // 2
+                padding = ((pad, pad + (new_height - frame_img.shape[0]) % 2), (0, 0)) + (() if img.ndim == 2 else ((0, 0),))
+            else:
+                new_width = int(frame_img.shape[0] * target_ratio)
+                pad = (new_width - frame_img.shape[1]) // 2
+                padding = ((0, 0), (pad, pad + (new_width - frame_img.shape[1]) % 2)) + (() if img.ndim == 2 else ((0, 0),))
+            frame_img = np.pad(frame_img, padding, mode='constant', constant_values=65535)
+
         return frame_img
 
     def clear_memory(self):

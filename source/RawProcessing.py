@@ -40,7 +40,7 @@ class RawProcessing:
         fit_aspect_ratio = 'Keep Original'
     )
     class_parameters = default_parameters.copy()
-    advanced_attrs = [key for key in default_parameters.keys() if key not in ('filetype', 'frame')] # list of keys for advanced settings, except for keys that should not be saved
+    advanced_attrs = [key for key in default_parameters.keys() if key not in ('filetype', 'frame', 'fit_aspect_ratio')] # list of keys for advanced settings, except for keys that should not be saved
     processing_parameters = ('dark_threshold','light_threshold','border_crop','flip','rotation','film_type','white_point','black_point','gamma','shadows','highlights','temp','tint','sat','reject','base_detect','base_rgb','remove_dust')
     
     def __init__(self, file_directory, default_settings, global_settings, config_path):

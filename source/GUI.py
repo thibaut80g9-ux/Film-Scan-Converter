@@ -217,7 +217,7 @@ class GUI:
         export_settings_frame.pack(fill='x')
         ComboLabel(export_settings_frame, 'Export File Type:', 0, self.filetypes, 'filetype', global_sync=False, output_list=self.filetypes, command=lambda widget:self.widget_changed(widget, 'skip', False), default_value=RawProcessing.default_parameters['filetype'])
         self.frame = ScaleEntry(export_settings_frame, 'White Frame (%):', 1, 0, 10, 'frame', global_sync=False, command=lambda widget:self.widget_changed(widget, 'update', False), default_value=RawProcessing.default_parameters['frame'])
-        ComboLabel(export_settings_frame, 'Fit Aspect Ratio:', 2, self.fit_aspect_ratios, 'fit_aspect_ratio', global_sync=False, output_list=self.fit_aspect_ratios, command=lambda widget:self.widget_changed(widget, 'update', False), default_value=RawProcessing.default_parameters['fit_aspect_ratio'])
+        ComboLabel(export_settings_frame, 'Fit Aspect Ratio:', 2, self.fit_aspect_ratios, 'fit_aspect_ratio', global_sync=False, output_list=self.fit_aspect_ratios, command=lambda widget:self.widget_changed(widget, 'update', False), default_value=RawProcessing.default_parameters['fit_aspect_ratio'], width=20)
         export_settings_frame.pack(fill='x', pady=(0, 15)) # adds some spacing
         
         ttk.Label(export_frame, text='Output Destination Folder:', anchor='w').pack(fill = 'x')

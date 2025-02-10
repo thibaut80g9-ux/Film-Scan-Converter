@@ -1078,6 +1078,10 @@ class GUI:
                 self.next()
             case 'Left':
                 self.previous()
+            case 'r':
+                self.rot_clockwise()
+            case 'R':
+                self.rot_counterclockwise()
     
     def on_closing(self):
         # Behaviour/cleanup at closing

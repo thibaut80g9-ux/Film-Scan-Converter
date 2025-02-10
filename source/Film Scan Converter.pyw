@@ -21,16 +21,16 @@ if __name__ == '__main__':
         def resource_path(relative_path):    
             try:       
                 base_path = sys._MEIPASS
+                return os.path.join(base_path, icon)
             except Exception:
                 base_path = os.path.abspath('.')
+                return os.path.join(base_path, relative_path)
 
-            return os.path.join(base_path, relative_path)
-
-        datafile = 'camera-roll.ico'
+        icon = 'camera-roll.ico'
         if not hasattr(sys, 'frozen'):
-            datafile = os.path.join(os.path.dirname(__file__), 'assets', datafile)
+            datafile = os.path.join(os.path.dirname(__file__), 'assets', icon)
         else:
-            datafile = os.path.join(sys.prefix, 'assets', datafile)
+            datafile = os.path.join(sys.prefix, 'assets', icon)
     except Exception as e:
         logger.exception(f'Exception: {e}')
         root = tk.Tk()

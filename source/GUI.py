@@ -1084,7 +1084,7 @@ class GUI:
                 self.previous()
 
     def set_tooltip(self, widget, text, delay=500):
-        tooltip = tk.Label(self.master, text='(' + text + ')', bg="white", relief="solid", borderwidth=1)
+        tooltip = tk.Label(self.master, text=f"({text})", bg="white", relief="solid", borderwidth=1)
         tooltip_timer = None
         def show_tooltip():
             tooltip.place(x=widget.winfo_rootx() - self.master.winfo_rootx() + 10, 

@@ -123,8 +123,10 @@ class GUI:
         importSubFrame2.pack(fill='x')
         self.prevButton = ttk.Button(importSubFrame2, text='< Previous Photo', width=20, command=self.previous)
         self.prevButton.pack(side=tk.LEFT, padx=2, pady=5)
+        self.set_tooltip(self.prevButton, "Left Arrow")
         self.nextButton = ttk.Button(importSubFrame2, text='Next Photo >', width=20, command=self.next)
         self.nextButton.pack(side=tk.LEFT, padx=2, pady=5)
+        self.set_tooltip(self.nextButton, "Right Arrow")
 
         # Processing Frame
         processing_title = ttk.Label(text='Processing Settings', font=self.header_style, padding=2)
@@ -163,7 +165,9 @@ class GUI:
         rotButtons = ttk.Frame(self.cropFrame)
         rotButtons.pack(fill='x')
         ttk.Button(rotButtons, text='Rotate Counterclockwise', width=22, command=self.rot_counterclockwise).pack(side=tk.LEFT, padx=2, pady=5)
+        self.set_tooltip(rotButtons.winfo_children()[-1], "Shift+R")
         ttk.Button(rotButtons, text='Rotate Clockwise', width=22, command=self.rot_clockwise).pack(side=tk.LEFT, padx=2, pady=5)
+        self.set_tooltip(rotButtons.winfo_children()[-1], "R")
 
         # Colour settings
         if getattr(sys, 'frozen', False):
@@ -1078,7 +1082,25 @@ class GUI:
                 self.next()
             case 'Left':
                 self.previous()
-    
+
+    def set_tooltip(self, widget, text, delay=500):
+        tooltip = tk.Label(self.master, text='(' + text + ')', bg="white", relief="solid", borderwidth=1)
+        tooltip_timer = None
+        def show_tooltip():
+            tooltip.place(x=widget.winfo_rootx() - self.master.winfo_rootx() + 10, 
+                        y=widget.winfo_rooty() - self.master.winfo_rooty() + 30)
+        def schedule_tooltip(event):
+            nonlocal tooltip_timer
+            tooltip_timer = self.master.after(delay, show_tooltip)
+        def cancel_tooltip(event):
+            nonlocal tooltip_timer
+            if tooltip_timer:
+                self.master.after_cancel(tooltip_timer)
+                tooltip_timer = None
+            tooltip.place_forget()
+        widget.bind("<Enter>", schedule_tooltip)
+        widget.bind("<Leave>", cancel_tooltip)
+
     def on_closing(self):
         # Behaviour/cleanup at closing
         if len(self.photos) > 0:

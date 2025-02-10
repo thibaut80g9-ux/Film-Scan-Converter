@@ -173,7 +173,7 @@ class GUI:
         if getattr(sys, 'frozen', False):
             picker = tk.PhotoImage(file=os.path.join(sys._MEIPASS, 'dropper.png')).subsample(15,15)
         else:
-            picker = tk.PhotoImage(file='dropper.png').subsample(15,15)
+            picker = tk.PhotoImage(file=os.path.join('assets', 'dropper.png')).subsample(15,15)
         colour_title = ttk.Label(text='Colour Adjustment', font=self.header_style, padding=2)
         self.colourFrame = ttk.LabelFrame(dynamic_scroll_frame.frame, borderwidth=2, labelwidget=colour_title, padding=5)
         colour_controls = ttk.Frame(self.colourFrame)
@@ -944,15 +944,22 @@ class GUI:
     
     def select_folder(self):
         # Dialog to select output destination folder
-        self.destination_folder = filedialog.askdirectory() + '/' # opens dialog to choose folder
-        if len(self.destination_folder) <= 1:
+        destination_folder = filedialog.askdirectory() + '/' # opens dialog to choose folder
+        if len(destination_folder) <= 1:
             return
+        self.destination_folder = destination_folder
         self.destination_folder_text.set(self.destination_folder) # display destination folder in GUI
 
     def export(self, n_photos=1):
         # Start export in seperate thread to keep UI responsive
         if len([photo for photo in self.photos if not photo.reject]) == 0:
             return
+        if not self.destination_folder:
+            self.destination_folder = "export"  # sets default export folder
+        if not os.path.exists(self.destination_folder):
+            os.makedirs(self.destination_folder)
+            print(f'Creating {self.destination_folder}')
+        
         if n_photos == 1:
             export_fn = self.export_individual
         else:
@@ -977,7 +984,7 @@ class GUI:
         self.current_photo.load(True)
         self.current_photo.process(True)
         self.update_progress(99, 'Exporting photo...')
-        filename = self.destination_folder + str(self.current_photo).split('.')[0] # removes the file extension
+        filename = os.path.join(self.destination_folder, str(self.current_photo).split('.')[0]) # removes the file extension
         self.current_photo.export(filename) # saves the photo
         self.current_photo_button.configure(state=tk.NORMAL)
         self.all_photo_button.configure(state=tk.NORMAL)
@@ -1007,7 +1014,7 @@ class GUI:
                     continue
                 if photo.use_global_settings:
                     self.apply_settings(photo, self.global_settings) # Ensures the proper settings have been applied
-                filename = self.destination_folder + str(photo).split('.')[0] # removes the file extension
+                filename = os.path.join(self.destination_folder, str(self.current_photo).split('.')[0]) # removes the file extension
                 inputs.append((photo, filename, self.terminate, RawProcessing.class_parameters))
                 if hasattr(photo, 'memory_alloc'):
                     allocated += photo.memory_alloc # tally of estimated memory requirements of each photo
@@ -1082,8 +1089,12 @@ class GUI:
                 self.next()
             case 'Left':
                 self.previous()
-
+            case 'r':
+                self.rot_clockwise()
+            case 'R':
+                self.rot_counterclockwise()
     def set_tooltip(self, widget, text, delay=500):
+        # Adds a tooltip to a provided widget showing the provided text when the mouse is hovering over the widget
         tooltip = tk.Label(self.master, text=f"({text})", bg="white", relief="solid", borderwidth=1)
         tooltip_timer = None
         def show_tooltip():
@@ -1100,7 +1111,6 @@ class GUI:
             tooltip.place_forget()
         widget.bind("<Enter>", schedule_tooltip)
         widget.bind("<Leave>", cancel_tooltip)
-
     def on_closing(self):
         # Behaviour/cleanup at closing
         if len(self.photos) > 0:

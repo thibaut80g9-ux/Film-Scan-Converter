@@ -360,12 +360,12 @@ class RawProcessing:
         rect = cv2.minAreaRect(largest_contour) # bounding box of largest contour
         y, x = self.RAW_IMG.shape[0], self.RAW_IMG.shape[1]
         rect = ((rect[0][0]/y, rect[0][1]/x), (rect[1][0]/y, rect[1][1]/x), rect[2]) # normalizes crop for different sized images
-        if self.border_crop < 0:
-            rect = (rect[0], tuple(dim * (1 - self.border_crop / 100) for dim in rect[1]), rect[2])
         return thresh, rect, largest_contour
     
     def crop(self, img, rect):
         if rect is not None:
+            if self.border_crop < 0:
+                rect = (rect[0], tuple(dim * (1 - self.border_crop / 100) for dim in rect[1]), rect[2])
             y, x = img.shape[0], img.shape[1]
             rect = ((rect[0][0]*y, rect[0][1]*x), (rect[1][0]*y, rect[1][1]*x), rect[2]) # convert normalized crop to corresponding pixel coordinates
             box = cv2.boxPoints(rect)
@@ -427,11 +427,7 @@ class RawProcessing:
         # Equalizes histogram for each color channel
         sensitivity = 0.2 # multiplier to adjust degree at which the sliders affect the output image
 
-        ignore_border = np.array(self.class_parameters['ignore_border'])
-        if self.border_crop < 0:
-            border_offset = np.array([abs(self.border_crop), abs(self.border_crop)])
-            ignore_border += border_offset # expands ignored border when border_crop is negative
-        x, y = (ignore_border / 100 * img.shape[:2][::-1]).astype(np.int32) # calculates the width of the border to ignore in pixels
+        x, y = (np.array(self.class_parameters['ignore_border']) / 100 * img.shape[:2][::-1]).astype(np.int32) # calculates the width of the border to ignore in pixels
 
         if x * y == 0:
             sample = np.s_[:]

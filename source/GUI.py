@@ -945,7 +945,7 @@ class GUI:
     def select_folder(self):
         # Dialog to select output destination folder
         destination_folder = filedialog.askdirectory() + '/' # opens dialog to choose folder
-        if len(destination_folder) <= 1:
+        if len(destination_folder) <= 1: # no input is given
             return
         self.destination_folder = destination_folder
         self.destination_folder_text.set(self.destination_folder) # display destination folder in GUI
@@ -958,7 +958,7 @@ class GUI:
             self.destination_folder = "export"  # sets default export folder
         if not os.path.exists(self.destination_folder):
             os.makedirs(self.destination_folder)
-            print(f'Creating {self.destination_folder}')
+            logger.info(f'Creating {self.destination_folder} folder')
         
         if n_photos == 1:
             export_fn = self.export_individual
@@ -1051,7 +1051,7 @@ class GUI:
             errors_display = 'Details:'
             for i, error in enumerate(errors, 1):
                 errors_display += f'\n {str(i)}. {str(error)}'
-            messagebox.showerror(f'Export Error {len(errors)}) export(s) failed.\n' + errors_display)
+            messagebox.showerror(f'Export Error: {len(errors)}) export(s) failed.\n' + errors_display)
 
         self.current_photo_button.configure(state=tk.NORMAL)
         self.abort_button.pack_forget()
@@ -1064,8 +1064,8 @@ class GUI:
         # Stop the export
         try:
             self.terminate.set()
-        except Exception as e:
-            logger.exception(f'Exception: {e}') 
+        except Exception:
+            pass
     
     # Defines how to show and hide the progress bar
     def show_progress(self, message=''):
@@ -1083,7 +1083,7 @@ class GUI:
         self.master.update()
 
     def key_handler(self, event):
-        # Maps left and right arrow keys to show previous or next photo respectively
+        # Maps various keybinds to different functions
         match event.keysym:
             case 'Right':
                 self.next()

@@ -17,6 +17,7 @@ class RawProcessing:
         max_proxy_size = 2000, # Max dimension of height + width to increase processing speed (only for previews)
         histogram_plt_size = (1600, 2400, 3), # Dimensions of the histogram
         hist_bg_colour = (25, 25, 25), # sets the background colour of the histogram
+        frame = 0, # adds white frame to final photo
         jpg_quality = 90, # from 0-100
         tiff_compression = 8, # defines the tiff compression algorithm
         dm_alg = 2, # demosaicing algorithm
@@ -35,11 +36,12 @@ class RawProcessing:
         max_dust_area = 15,
         dust_iter = 5,
         picker_radius = 0.5,
-        filetype = 'JPG'
+        filetype = 'JPG',
+        fit_aspect_ratio = 'Keep Original'
     )
     class_parameters = default_parameters.copy()
-    advanced_attrs = [key for key in default_parameters.keys() if key not in ('filetype')] # list of keys for advanced settings, except for keys that should not be saved
-    processing_parameters = ('dark_threshold','light_threshold','border_crop','flip','rotation','film_type','white_point','black_point','gamma','shadows','highlights','temp','tint','sat','reject','base_detect','base_rgb','remove_dust','frame','fit_aspect_ratio')
+    advanced_attrs = [key for key in default_parameters.keys() if key not in ('filetype', 'frame', 'fit_aspect_ratio')] # list of keys for advanced settings, except for keys that should not be saved
+    processing_parameters = ('dark_threshold','light_threshold','border_crop','flip','rotation','film_type','white_point','black_point','gamma','shadows','highlights','temp','tint','sat','reject','base_detect','base_rgb','remove_dust')
     
     def __init__(self, file_directory, default_settings, global_settings, config_path):
         # file_directory: the name of the RAW file to be processed
@@ -122,16 +124,15 @@ class RawProcessing:
         self.FileReadError = False
         self.memory_alloc = self.RAW_IMG.nbytes * 4 * 12 # estimation of memory requirements based on the size of the image
 
-    def get_IMG(self, output=None, as_array=False):
+    def get_IMG(self, output=None):
         # Returns the converted image at different stages of the process, based on desired output
         if self.FileReadError: # Return nothing when file could not be read
             return
         match output:
             case 'RAW': # return RAW image
-                img = self.rotate(self.RAW_IMG) # apply rotation to image
+                img = cv2.convertScaleAbs(self.RAW_IMG, alpha=(255.0/65535.0))
             case 'Threshold': # return threshold image
                 img = self.thresh
-                img = self.rotate(img) # apply rotation to image
             case 'Contours': # generate contour image, then return it
                 thresh_img = np.uint8(cv2.cvtColor(self.thresh, cv2.COLOR_GRAY2BGR) / 2)
                 thresh_img[:,:,2] = 0 # sets colour of threshold image
@@ -180,7 +181,6 @@ class RawProcessing:
                     cv2.drawContours(img,[box],0,(0,255,255), int(border_width * 0.75)) # original crop
                     cv2.drawContours(img, self.largest_contour, -1, (0,255,255), int(border_width * .75)) # largest contour
                     cv2.drawContours(img,[extra_crop_box],0,(0,255,0), int(border_width)) # extra border crop
-                img = self.rotate(img) # apply rotation to image
             case 'Histogram': # returns histogram of preview image
                 img = self.draw_histogram(self.IMG)
                 img = np.flip(img, 0)
@@ -190,15 +190,12 @@ class RawProcessing:
                 img = self.IMG
                 if self.remove_dust:
                     img = self.fill_dust(img, self.dust_mask)
-                img = self.rotate(img) # apply rotation to image
                 img = self.add_frame(img) # add decorative white frame
-        if as_array:
-            return img
-        else:
-            if img.dtype == 'uint16':
                 img = cv2.convertScaleAbs(img, alpha=(255.0/65535.0))
-            img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB) # Convert back to RGB
-            return Image.fromarray(img) # convert image to tkinter-friendly image
+        img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB) # Convert back to RGB
+        if output != 'Histogram':
+            img = self.rotate(img) # apply rotation to image
+        return Image.fromarray(img) # convert image to tkinter-friendly image
         
     def __str__(self):
         # returns file name when str() is called on photo
@@ -209,7 +206,10 @@ class RawProcessing:
         # filename is a string containing the directory and file name with the file extension
         if not hasattr(self, 'IMG'):
             return
-        img = self.get_IMG(as_array=True)
+        img = self.IMG
+        if self.remove_dust:
+            img = self.fill_dust(img, self.dust_mask)
+        img = self.add_frame(self.rotate(img)) # add decorative white frame
         filename = f"{filename}.{self.class_parameters['filetype']}"
         match self.class_parameters['filetype']:
             case 'JPG':
@@ -619,17 +619,17 @@ class RawProcessing:
         return hist_plot
     
     def add_frame(self, img):
-        # adds frame to image border
-        if self.frame == 0 and self.fit_aspect_ratio == 'Keep Original':
-            return img # skip if aspect ratio and frame have default values
+        if self.class_parameters['frame'] == 0:
+            if self.class_parameters['fit_aspect_ratio'] == 'Keep Original':
+                return img # skip if aspect ratio and frame have default values
 
-        frame_size = max(1, int(min(img.shape[:2]) * self.frame / 100)) # at least one pixel wide frame
+        frame_size = max(1, int(min(img.shape[:2]) * self.class_parameters['frame'] / 100)) # at least one pixel wide frame
         new_shape = (img.shape[0] + 2 * frame_size, img.shape[1] + 2 * frame_size) + img.shape[2:]
         frame_img = np.ones(new_shape, dtype=img.dtype) * 65535
         frame_img[frame_size:-frame_size, frame_size:-frame_size] = img # center image inside frame
 
-        if self.fit_aspect_ratio != 'Keep Original': # fit image to aspect ratio
-            target_w, target_h = map(int, self.fit_aspect_ratio.split(' ', 1)[0].split(':')) # parse 'W:H (text)' to W, H
+        if self.class_parameters['fit_aspect_ratio'] != 'Keep Original': # fit image to aspect ratio
+            target_w, target_h = map(int, self.class_parameters['fit_aspect_ratio'].split(' ', 1)[0].split(':')) # parse 'W:H (text)' to W, H
             target_ratio = target_w / target_h
             current_ratio = frame_img.shape[1] / frame_img.shape[0]
             if current_ratio > target_ratio: # image is wider than target aspect ratio

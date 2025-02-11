@@ -1084,6 +1084,9 @@ class GUI:
 
     def key_handler(self, event):
         # Maps various keybinds to different functions
+        if not hasattr(self, 'previous_view'):
+            self.previous_view = 0  # Default to RAW
+
         match event.keysym:
             case 'Right':
                 self.next()
@@ -1093,6 +1096,30 @@ class GUI:
                 self.rot_clockwise()
             case 'R':
                 self.rot_counterclockwise()
+            case 'q':
+                self.previous_view = 0
+                self.photo_process_Combo.current(0) # RAW
+                self.update_IMG()
+            case 'w':
+                self.previous_view = 1
+                self.photo_process_Combo.current(1) # Threshold
+                self.update_IMG()
+            case 'e':
+                self.previous_view = 2
+                self.photo_process_Combo.current(2) # Contours
+                self.update_IMG()
+            case 'h':
+                self.previous_view = 3
+                self.photo_process_Combo.current(3) # Histogram
+                self.update_IMG()
+            case 'f':
+                current_view = self.photo_process_Combo.current()
+                if current_view == 4:
+                    self.photo_process_Combo.current(self.previous_view) # Return to previous
+                else:
+                    self.photo_process_Combo.current(4) # Full Preview
+                self.update_IMG()
+
     def set_tooltip(self, widget, text, delay=500):
         # Adds a tooltip to a provided widget showing the provided text when the mouse is hovering over the widget
         tooltip = tk.Label(self.master, text=f"({text})", bg="white", relief="solid", borderwidth=1)

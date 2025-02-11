@@ -570,6 +570,7 @@ class GUI:
                 raise Exception
         except Exception as e:
             logger.exception(f'Exception: {e}')
+            print(e)
             self.outputFrame.grid_forget()
             self.read_error_lbl.grid(row=0, column=1, sticky='EW') # displays error message when image cannot be loaded
             return

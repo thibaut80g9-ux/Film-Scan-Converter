@@ -145,21 +145,6 @@ class RawProcessing:
 
                 # drawing crop boxes
                 if self.rect is not None:
-                    def shrink_box(box, x, y):
-                        # given box with 4 corner coordinates, returns new box coordinates shrunken by x and y percentages
-                        sorted = np.sort(box, 0)
-                        h = (sorted[2,1] + sorted[3,1] - sorted[0,1] - sorted[1,1]) / 2
-                        w = (sorted[2,0] + sorted[3,0] - sorted[0,0] - sorted[1,0]) / 2
-                        centre = np.mean(box, 0)
-                        y_offset = int(y / 100 * h)
-                        x_offset = int(x / 100 * w)
-                        offset = np.zeros_like(box)
-                        offset[box[:,1] < centre[1], 1] += y_offset
-                        offset[box[:,1] > centre[1], 1] -= y_offset
-                        offset[box[:,0] < centre[0], 0] += x_offset
-                        offset[box[:,0] > centre[0], 0] -= x_offset
-                        new_box = box + offset
-                        return new_box.astype(np.int32)
                     border_width = np.ceil((img.shape[0] + img.shape[1]) / 800) # border width proportional to image size
                     if img.shape[0] > img.shape[1]:
                         x_crop = self.border_crop
@@ -171,12 +156,13 @@ class RawProcessing:
                     rect = ((self.rect[0][0]*y, self.rect[0][1]*x), (self.rect[1][0]*y, self.rect[1][1]*x), self.rect[2])
                     box = cv2.boxPoints(rect)
                     box = np.int64(box)
-                    extra_crop_box = shrink_box(box, x_crop, y_crop)
+                    extra_crop_box = self.shrink_box(box, x_crop, y_crop)
+
+                    EQ_ignore_box = extra_crop_box.copy()
                     ignore_border = np.array(self.class_parameters['ignore_border'])
                     if self.border_crop < 0 and self.class_parameters['ignore_neg_border']:
-                        border_offset = np.array([abs(self.border_crop), abs(self.border_crop)])
-                        ignore_border += border_offset
-                    EQ_ignore_box = shrink_box(extra_crop_box, ignore_border[0], ignore_border[1])
+                        EQ_ignore_box = self.shrink_box(EQ_ignore_box, -x_crop, -y_crop)
+                    EQ_ignore_box = self.shrink_box(EQ_ignore_box, ignore_border[0], ignore_border[1])
                     EQ_ignore_poly = np.zeros_like(img)
                     cv2.fillPoly(EQ_ignore_poly, [extra_crop_box], (0,0,255))
                     cv2.fillPoly(EQ_ignore_poly, [EQ_ignore_box], (0,0,0))
@@ -262,9 +248,7 @@ class RawProcessing:
         else:
             img = self.RAW_IMG
 
-        img = self.crop(img, self.rect)
-
-        dust_mask = self.find_dust(img)
+        dust_mask = self.find_dust(self.crop(img, self.rect))
 
         # Additional processing specific to each film type
         match self.film_type:
@@ -276,6 +260,8 @@ class RawProcessing:
                 img = self.slide_processing(img)
             case 3:
                 img = self.crop_only(img)
+        
+        img = self.crop(img, self.rect)
 
         self.active_processes -= 1
         if recent_only and (self.active_processes > 0):
@@ -367,30 +353,34 @@ class RawProcessing:
         rect = ((rect[0][0]/y, rect[0][1]/x), (rect[1][0]/y, rect[1][1]/x), rect[2]) # normalizes crop for different sized images
         return thresh, rect, largest_contour
     
-    def crop(self, img, rect):
+    def crop(self, img, rect, include_EQ_ignore=False):
         if rect is not None:
-            if self.border_crop < 0:
-                rect = (rect[0], tuple(dim * (1 - self.border_crop / 100) for dim in rect[1]), rect[2])
+            if img.shape[0] > img.shape[1]:
+                x_crop = self.border_crop
+                y_crop = self.border_crop * img.shape[1] / img.shape[0]
+            else:
+                y_crop = self.border_crop
+                x_crop = self.border_crop * img.shape[0] / img.shape[1]
             y, x = img.shape[0], img.shape[1]
             rect = ((rect[0][0]*y, rect[0][1]*x), (rect[1][0]*y, rect[1][1]*x), rect[2]) # convert normalized crop to corresponding pixel coordinates
             box = cv2.boxPoints(rect)
             box = np.int64(box)
-            width = int(rect[1][0])
-            height = int(rect[1][1])
+            if not (include_EQ_ignore and self.class_parameters['ignore_neg_border']):
+                box = self.shrink_box(box, x_crop, y_crop)
+            if include_EQ_ignore:
+                ignore_border = np.array(self.class_parameters['ignore_border'])
+                box = self.shrink_box(box, ignore_border[0], ignore_border[1])
+            width = int(rect[1][1] * (1 - x_crop / 100))
+            height = int(rect[1][0] * (1 - y_crop / 100))
             src_pts = box.astype('float32')
-            dst_pts = np.array([[0, height-1],
+            dst_pts = np.array([[0, width-1],
                             [0, 0],
-                            [width-1, 0],
-                            [width-1, height-1]], dtype='float32')
+                            [height-1, 0],
+                            [height-1, width-1]], dtype='float32')
             M = cv2.getPerspectiveTransform(src_pts, dst_pts)
-            img = cv2.warpPerspective(img, M, (width, height))
+            img = cv2.warpPerspective(img, M, (height, width))
             if rect[2] > 45:
                 img = cv2.rotate(img, cv2.ROTATE_90_CLOCKWISE) # rotates image back if it has been rotated
-        if (self.border_crop > 0) & (np.min(img.shape[0:2]) > 100):
-            min_dim = np.min(img.shape[0:2])
-            crop_px = int(self.border_crop / 100 * min_dim)
-            if crop_px != 0:
-                img = img[crop_px:-crop_px,crop_px:-crop_px] # applying extra crop to remove borders
         return img
     
     def get_edges(self, img):
@@ -432,16 +422,7 @@ class RawProcessing:
         # Equalizes histogram for each color channel
         sensitivity = 0.2 # multiplier to adjust degree at which the sliders affect the output image
 
-        ignore_border = np.array(self.class_parameters['ignore_border'])
-        if self.border_crop < 0 and self.class_parameters['ignore_neg_border']:
-            border_offset = np.array([abs(self.border_crop), abs(self.border_crop)])
-            ignore_border += border_offset # expands ignored border when border_crop is negative
-        x, y = (ignore_border / 100 * img.shape[:2][::-1]).astype(np.int32) # calculates the width of the border to ignore in pixels
-
-        if x * y == 0:
-            sample = np.s_[:]
-        else:
-            sample = np.s_[y:-y, x:-x]
+        sample_img = self.crop(img, self.rect, include_EQ_ignore=True)
 
         if self.base_detect and (self.film_type == 1 or self.film_type == 2):
             if self.film_type == 1:
@@ -449,13 +430,16 @@ class RawProcessing:
             else:
                 black_point = np.array(self.base_rgb, np.uint16)[::-1] * 256
         else:
-            black_point = np.percentile(img[sample], self.class_parameters['black_point_percentile'], (0,1))
+            black_point = np.percentile(sample_img, self.class_parameters['black_point_percentile'], (0,1))
         black_offsets = self.black_point / 100 * sensitivity * 65535 - black_point
-        img = img.astype(np.float32, copy=False)
-        img[:,:] = img[:,:] + black_offsets # Sets the black point
+        img = img.astype(np.float64, copy=False)
+        sample_img = sample_img.astype(np.float32, copy=False)
+        
+        img[:,:] += black_offsets # Sets the black point
+        sample_img[:,:] += black_offsets
 
         max_array = np.ones_like(black_offsets)
-        white_point = np.percentile(img[sample], self.class_parameters['white_point_percentile'], (0,1))
+        white_point = np.percentile(sample_img, self.class_parameters['white_point_percentile'], (0,1))
         white_multipliers = np.divide(65535 + self.white_point / 100 * sensitivity * 65535, white_point, out=max_array, where=white_point>0) # division, but ignore divide by zero or negative
         img = np.multiply(img, white_multipliers) # Scales the white percentile to 65535
         return img
@@ -681,3 +665,34 @@ class RawProcessing:
         raw = cv2.convertScaleAbs(self.RAW_IMG, alpha=(255.0/65535.0))
         meanBGR = cv2.mean(raw, base_mask)[:-1] # returns BGR tuple containing average of unmasked pixels
         self.base_rgb = tuple([round(x) for x in reversed(meanBGR)])
+    
+    @staticmethod
+    def shrink_box(box, x, y):
+        # given box with 4 corner coordinates, returns new box coordinates shrunken by x and y percentages
+        sorted = np.sort(box, 0)
+        topleft = min(box, key=sum)
+        index = np.where(box==topleft)[0][0]
+        ordered = np.roll(box, -index, axis=0)
+        h = (sorted[2,1] + sorted[3,1] - sorted[0,1] - sorted[1,1]) / 2
+        w = (sorted[2,0] + sorted[3,0] - sorted[0,0] - sorted[1,0]) / 2
+        skew = (ordered[3,0] - ordered[0,0]) / w * 1.5 # change in y over x-axis
+        centre = np.mean(ordered, 0)
+        y_offset = y / 100 * h
+        x_offset = x / 100 * w
+        offset = np.zeros_like(ordered)
+        offset[ordered[:,1] < centre[1], 1] += int(y_offset)
+        offset[ordered[:,1] > centre[1], 1] -= int(y_offset)
+        offset[ordered[:,0] < centre[0], 0] += int(x_offset)
+        offset[ordered[:,0] > centre[0], 0] -= int(x_offset)
+        for point in offset:
+            if point[0] > 0:
+                point[1] -= int(x_offset * skew)
+            else:
+                point[1] += int(x_offset * skew)
+            if point[1] < 0:
+                point[0] -= int(y_offset * skew)
+            else:
+                point[0] += int(y_offset * skew)
+        new_box = ordered + offset
+        new_box = np.roll(new_box, index, axis=0)
+        return new_box.astype(np.int32)

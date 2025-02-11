@@ -160,7 +160,7 @@ class GUI:
         crop_adjustments.grid_columnconfigure(3, weight=1)
         ScaleEntry(crop_adjustments, 'Dark Threshold:', 0, 0, 100, 'dark_threshold', self.widgets, command=self.widget_changed)
         ScaleEntry(crop_adjustments, 'Light Threshold:', 1, 0, 100, 'light_threshold', self.widgets, command=self.widget_changed)
-        ScaleEntry(crop_adjustments, 'Border Crop (%):', 2, 0, 20, 'border_crop', self.widgets, command=self.widget_changed)
+        ScaleEntry(crop_adjustments, 'Border Crop (%):', 2, -5, 20, 'border_crop', self.widgets, command=self.widget_changed)
         self.flip_check = CheckLabel(crop_adjustments, 'Flip Horizontally:', 3, 'flip', self.widgets, command=self.set_flip)
         rotButtons = ttk.Frame(self.cropFrame)
         rotButtons.pack(fill='x')
@@ -416,9 +416,10 @@ class GUI:
         MultiEntryLabel(process_settings, 'Max Proxy Size (W + H):', 0, 500, 20000, 1, key='max_proxy_size', widget_dictionary=advanced_widgets, increment=500)
         MultiEntryLabel(process_settings, 'Photo Preload Buffer Size:', 1, 0, 20, 1, key='preload', widget_dictionary=advanced_widgets)
         MultiEntryLabel(process_settings, 'EQ Ignore Borders % (W, H)', 2, 0, 40, 2, key='ignore_border', widget_dictionary=advanced_widgets)
-        MultiEntryLabel(process_settings, 'White Point Percentile:', 3, 70, 100, 1, key='white_point_percentile', widget_dictionary=advanced_widgets, is_float=True)
-        MultiEntryLabel(process_settings, 'Black Point Percentile:', 4, 0, 30, 1, key='black_point_percentile', widget_dictionary=advanced_widgets, is_float=True)
-        MultiEntryLabel(process_settings, 'Colour Picker Radius (%)', 5, 0.5, 10, 1, key='picker_radius', widget_dictionary=advanced_widgets, is_float=True, increment=0.5)
+        CheckLabel(process_settings, 'EQ Ignore Negative Borders:', 3, 'ignore_neg_border', advanced_widgets, default_value=True)
+        MultiEntryLabel(process_settings, 'White Point Percentile:', 4, 70, 100, 1, key='white_point_percentile', widget_dictionary=advanced_widgets, is_float=True)
+        MultiEntryLabel(process_settings, 'Black Point Percentile:', 5, 0, 30, 1, key='black_point_percentile', widget_dictionary=advanced_widgets, is_float=True)
+        MultiEntryLabel(process_settings, 'Colour Picker Radius (%)', 6, 0.5, 10, 1, key='picker_radius', widget_dictionary=advanced_widgets, is_float=True, increment=0.5)
 
         MultiEntryLabel(dust_settings, 'Threshold:', 0, 0, 50, 1, key='dust_threshold', widget_dictionary=advanced_widgets)
         MultiEntryLabel(dust_settings, 'Noise Closing Iterations:', 1, 1, 10, 1, key='dust_iter', widget_dictionary=advanced_widgets)
@@ -573,6 +574,7 @@ class GUI:
                 raise Exception
         except Exception as e:
             logger.exception(f'Exception: {e}')
+            print(e)
             self.outputFrame.grid_forget()
             self.read_error_lbl.grid(row=0, column=1, sticky='EW') # displays error message when image cannot be loaded
             return

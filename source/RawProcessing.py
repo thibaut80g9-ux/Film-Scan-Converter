@@ -124,15 +124,16 @@ class RawProcessing:
         self.FileReadError = False
         self.memory_alloc = self.RAW_IMG.nbytes * 4 * 12 # estimation of memory requirements based on the size of the image
 
-    def get_IMG(self, output=None):
+    def get_IMG(self, output=None, as_array=False):
         # Returns the converted image at different stages of the process, based on desired output
         if self.FileReadError: # Return nothing when file could not be read
             return
         match output:
             case 'RAW': # return RAW image
-                img = cv2.convertScaleAbs(self.RAW_IMG, alpha=(255.0/65535.0))
+                img = self.rotate(self.RAW_IMG) # apply rotation to image
             case 'Threshold': # return threshold image
                 img = self.thresh
+                img = self.rotate(img) # apply rotation to image
             case 'Contours': # generate contour image, then return it
                 thresh_img = np.uint8(cv2.cvtColor(self.thresh, cv2.COLOR_GRAY2BGR) / 2)
                 thresh_img[:,:,2] = 0 # sets colour of threshold image
@@ -181,6 +182,7 @@ class RawProcessing:
                     cv2.drawContours(img,[box],0,(0,255,255), int(border_width * 0.75)) # original crop
                     cv2.drawContours(img, self.largest_contour, -1, (0,255,255), int(border_width * .75)) # largest contour
                     cv2.drawContours(img,[extra_crop_box],0,(0,255,0), int(border_width)) # extra border crop
+                img = self.rotate(img) # apply rotation to image
             case 'Histogram': # returns histogram of preview image
                 img = self.draw_histogram(self.IMG)
                 img = np.flip(img, 0)
@@ -191,11 +193,14 @@ class RawProcessing:
                 if self.remove_dust:
                     img = self.fill_dust(img, self.dust_mask)
                 img = self.add_frame(img) # add decorative white frame
+                img = self.rotate(img) # apply rotation to image
+        if as_array:
+            return img
+        else:
+            if img.dtype == 'uint16':
                 img = cv2.convertScaleAbs(img, alpha=(255.0/65535.0))
-        img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB) # Convert back to RGB
-        if output != 'Histogram':
-            img = self.rotate(img) # apply rotation to image
-        return Image.fromarray(img) # convert image to tkinter-friendly image
+            img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB) # Convert back to RGB
+            return Image.fromarray(img) # convert image to tkinter-friendly image
         
     def __str__(self):
         # returns file name when str() is called on photo
@@ -206,10 +211,7 @@ class RawProcessing:
         # filename is a string containing the directory and file name with the file extension
         if not hasattr(self, 'IMG'):
             return
-        img = self.IMG
-        if self.remove_dust:
-            img = self.fill_dust(img, self.dust_mask)
-        img = self.add_frame(self.rotate(img)) # add decorative white frame
+        img = self.get_IMG(as_array=True)
         filename = f"{filename}.{self.class_parameters['filetype']}"
         match self.class_parameters['filetype']:
             case 'JPG':

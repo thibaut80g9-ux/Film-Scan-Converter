@@ -30,6 +30,7 @@ class GUI:
         self.in_progress = set() # keeps track photos that are in processing when first loading
         self.photo_process_values = ['RAW', 'Threshold', 'Contours', 'Histogram', 'Full Preview']
         self.filetypes = ['TIFF', 'PNG', 'JPG'] # Export File Types
+        self.fit_aspect_ratios = ['Keep Original', '16:9 (Landscape)', '3:2 (Landscape)', '4:3 (Landscape)', '5:4 (Landscape)', '1:1 (Square)', '4:5 (Portrait)', '3:4 (Portrait)', '2:3 (Portrait)', '9:16 (Portrait)']
         self.destination_folder = ''
         self.allowable_image_filetypes = [
             ('RAW files', '*.DNG *.CR2 *.CR3 *.NEF *.ARW *.RAF *.ERF *.GPR *.RAW *.CRW *.dng *.cr2 *.cr3 *.nef *.arw *.raf *.erf *.grp *.raw *.crw'),
@@ -220,6 +221,9 @@ class GUI:
         export_settings_frame.pack(fill='x')
         ComboLabel(export_settings_frame, 'Export File Type:', 0, self.filetypes, 'filetype', global_sync=False, output_list=self.filetypes, command=lambda widget:self.widget_changed(widget, 'skip', False), default_value=RawProcessing.default_parameters['filetype'])
         self.frame = ScaleEntry(export_settings_frame, 'White Frame (%):', 1, 0, 10, 'frame', global_sync=False, command=lambda widget:self.widget_changed(widget, 'update', False), default_value=RawProcessing.default_parameters['frame'])
+        ComboLabel(export_settings_frame, 'Fit Aspect Ratio:', 2, self.fit_aspect_ratios, 'fit_aspect_ratio', global_sync=False, output_list=self.fit_aspect_ratios, command=lambda widget:self.widget_changed(widget, 'update', False), default_value=RawProcessing.default_parameters['fit_aspect_ratio'], width=20)
+        export_settings_frame.pack(fill='x', pady=(0, 15)) # adds some spacing
+        
         ttk.Label(export_frame, text='Output Destination Folder:', anchor='w').pack(fill = 'x')
         self.destination_folder_text = tk.StringVar()
         self.destination_folder_text.set('No Destination Folder Specified')

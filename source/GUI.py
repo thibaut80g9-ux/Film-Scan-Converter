@@ -63,7 +63,9 @@ class GUI:
             sat = 100,
             base_detect = 0,
             base_rgb = (255, 255, 255),
-            remove_dust = False
+            remove_dust = False,
+            frame = 0,
+            fit_aspect_ratio = 'Keep Original'
         )
 
         self.global_settings = self.default_settings.copy()
@@ -213,13 +215,13 @@ class GUI:
         export_title = ttk.Label(text='Export Settings', font=self.header_style, padding=2)
         export_frame = ttk.LabelFrame(dynamic_scroll_frame.frame, borderwidth=2, labelwidget=export_title, padding=5)
         export_frame.grid(row=9, column=0, sticky='EW')
-        export_settings_frame = ttk.Frame(export_frame)
-        export_settings_frame.pack(fill='x')
-        ComboLabel(export_settings_frame, 'Export File Type:', 0, self.filetypes, 'filetype', global_sync=False, output_list=self.filetypes, command=lambda widget:self.widget_changed(widget, 'skip', False), default_value=RawProcessing.default_parameters['filetype'])
-        self.frame = ScaleEntry(export_settings_frame, 'White Frame (%):', 1, 0, 10, 'frame', global_sync=False, command=lambda widget:self.widget_changed(widget, 'update', False), default_value=RawProcessing.default_parameters['frame'])
-        ComboLabel(export_settings_frame, 'Fit Aspect Ratio:', 2, self.fit_aspect_ratios, 'fit_aspect_ratio', global_sync=False, output_list=self.fit_aspect_ratios, command=lambda widget:self.widget_changed(widget, 'update', False), default_value=RawProcessing.default_parameters['fit_aspect_ratio'], width=20)
-        export_settings_frame.pack(fill='x', pady=(0, 15)) # adds some spacing
-        
+        border_frame = ttk.Frame(export_frame)
+        self.frame = ScaleEntry(border_frame, 'White Frame (%):', 0, 0, 10, 'frame', self.widgets, global_sync=True, command=lambda widget:self.widget_changed(widget, 'update'))
+        ComboLabel(border_frame, 'Fit Aspect Ratio:', 1, self.fit_aspect_ratios, 'fit_aspect_ratio', self.widgets, global_sync=True, output_list=self.fit_aspect_ratios, command=lambda widget:self.widget_changed(widget, 'update'), width=20)
+        border_frame.pack(fill='x', pady=(0, 15)) # adds some spacing
+        filetype_frame = ttk.Frame(export_frame)
+        filetype_frame.pack(fill='x')
+        ComboLabel(filetype_frame, 'Export File Type:', 0, self.filetypes, 'filetype', global_sync=False, output_list=self.filetypes, command=lambda widget:self.widget_changed(widget, 'skip', False), default_value=RawProcessing.default_parameters['filetype'])
         ttk.Label(export_frame, text='Output Destination Folder:', anchor='w').pack(fill = 'x')
         self.destination_folder_text = tk.StringVar()
         self.destination_folder_text.set('No Destination Folder Specified')

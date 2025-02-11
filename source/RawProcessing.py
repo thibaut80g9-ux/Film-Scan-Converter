@@ -32,6 +32,7 @@ class RawProcessing:
         black_point_percentile = 0.5, # sets the black point
         white_point_percentile = 99.0, # sets the default white balance as a percentile of the brightest pixels
         ignore_border = (1, 1), # ignores the border for calculation of histogram EQ
+        ignore_neg_border = True, # ignores negative border space for calculation of histogram EQ
         dust_threshold = 10,
         max_dust_area = 15,
         dust_iter = 5,
@@ -172,7 +173,7 @@ class RawProcessing:
                     box = np.int64(box)
                     extra_crop_box = shrink_box(box, x_crop, y_crop)
                     ignore_border = np.array(self.class_parameters['ignore_border'])
-                    if self.border_crop < 0:
+                    if self.border_crop < 0 and self.class_parameters['ignore_neg_border']:
                         border_offset = np.array([abs(self.border_crop), abs(self.border_crop)])
                         ignore_border += border_offset
                     EQ_ignore_box = shrink_box(extra_crop_box, ignore_border[0], ignore_border[1])
@@ -432,7 +433,7 @@ class RawProcessing:
         sensitivity = 0.2 # multiplier to adjust degree at which the sliders affect the output image
 
         ignore_border = np.array(self.class_parameters['ignore_border'])
-        if self.border_crop < 0:
+        if self.border_crop < 0 and self.class_parameters['ignore_neg_border']:
             border_offset = np.array([abs(self.border_crop), abs(self.border_crop)])
             ignore_border += border_offset # expands ignored border when border_crop is negative
         x, y = (ignore_border / 100 * img.shape[:2][::-1]).astype(np.int32) # calculates the width of the border to ignore in pixels

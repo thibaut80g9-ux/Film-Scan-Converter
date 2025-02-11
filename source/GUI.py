@@ -412,9 +412,10 @@ class GUI:
         MultiEntryLabel(process_settings, 'Max Proxy Size (W + H):', 0, 500, 20000, 1, key='max_proxy_size', widget_dictionary=advanced_widgets, increment=500)
         MultiEntryLabel(process_settings, 'Photo Preload Buffer Size:', 1, 0, 20, 1, key='preload', widget_dictionary=advanced_widgets)
         MultiEntryLabel(process_settings, 'EQ Ignore Borders % (W, H)', 2, 0, 40, 2, key='ignore_border', widget_dictionary=advanced_widgets)
-        MultiEntryLabel(process_settings, 'White Point Percentile:', 3, 70, 100, 1, key='white_point_percentile', widget_dictionary=advanced_widgets, is_float=True)
-        MultiEntryLabel(process_settings, 'Black Point Percentile:', 4, 0, 30, 1, key='black_point_percentile', widget_dictionary=advanced_widgets, is_float=True)
-        MultiEntryLabel(process_settings, 'Colour Picker Radius (%)', 5, 0.5, 10, 1, key='picker_radius', widget_dictionary=advanced_widgets, is_float=True, increment=0.5)
+        CheckLabel(process_settings, 'EQ Ignore Negative Borders:', 3, 'ignore_neg_border', advanced_widgets, default_value=True)
+        MultiEntryLabel(process_settings, 'White Point Percentile:', 4, 70, 100, 1, key='white_point_percentile', widget_dictionary=advanced_widgets, is_float=True)
+        MultiEntryLabel(process_settings, 'Black Point Percentile:', 5, 0, 30, 1, key='black_point_percentile', widget_dictionary=advanced_widgets, is_float=True)
+        MultiEntryLabel(process_settings, 'Colour Picker Radius (%)', 6, 0.5, 10, 1, key='picker_radius', widget_dictionary=advanced_widgets, is_float=True, increment=0.5)
 
         MultiEntryLabel(dust_settings, 'Threshold:', 0, 0, 50, 1, key='dust_threshold', widget_dictionary=advanced_widgets)
         MultiEntryLabel(dust_settings, 'Noise Closing Iterations:', 1, 1, 10, 1, key='dust_iter', widget_dictionary=advanced_widgets)

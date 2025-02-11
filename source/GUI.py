@@ -123,10 +123,10 @@ class GUI:
         importSubFrame2.pack(fill='x')
         self.prevButton = ttk.Button(importSubFrame2, text='< Previous Photo', width=20, command=self.previous)
         self.prevButton.pack(side=tk.LEFT, padx=2, pady=5)
-        self.set_tooltip(self.prevButton, "Left Arrow")
+        self.set_tooltip(self.prevButton, "(Left Arrow)")
         self.nextButton = ttk.Button(importSubFrame2, text='Next Photo >', width=20, command=self.next)
         self.nextButton.pack(side=tk.LEFT, padx=2, pady=5)
-        self.set_tooltip(self.nextButton, "Right Arrow")
+        self.set_tooltip(self.nextButton, "(Right Arrow)")
 
         # Processing Frame
         processing_title = ttk.Label(text='Processing Settings', font=self.header_style, padding=2)
@@ -165,9 +165,9 @@ class GUI:
         rotButtons = ttk.Frame(self.cropFrame)
         rotButtons.pack(fill='x')
         ttk.Button(rotButtons, text='Rotate Counterclockwise', width=22, command=self.rot_counterclockwise).pack(side=tk.LEFT, padx=2, pady=5)
-        self.set_tooltip(rotButtons.winfo_children()[-1], "Shift+R")
+        self.set_tooltip(rotButtons.winfo_children()[-1], "(Shift+R)")
         ttk.Button(rotButtons, text='Rotate Clockwise', width=22, command=self.rot_clockwise).pack(side=tk.LEFT, padx=2, pady=5)
-        self.set_tooltip(rotButtons.winfo_children()[-1], "R")
+        self.set_tooltip(rotButtons.winfo_children()[-1], "(R)")
 
         # Colour settings
         if getattr(sys, 'frozen', False):
@@ -261,6 +261,7 @@ class GUI:
         self.photo_process_Combo.current(0)
         self.photo_process_Combo.bind('<<ComboboxSelected>>', self.update_IMG)
         self.photo_process_Combo.grid(row=0, column=1, padx=2)
+        self.set_tooltip(self.photo_process_Combo, "(Q) RAW\n(W) Threshold\n(E) Contours\n(H) Histogram\n(F) Full Preview")
         self.process_photo_frame = tk.Frame(self.outputFrame, padx=3, pady=3)
         self.process_photo_frame.grid(row=1, column=0)
         self.process_photo = ttk.Label(self.process_photo_frame)
@@ -1122,7 +1123,7 @@ class GUI:
 
     def set_tooltip(self, widget, text, delay=500):
         # Adds a tooltip to a provided widget showing the provided text when the mouse is hovering over the widget
-        tooltip = tk.Label(self.master, text=f"({text})", bg="white", relief="solid", borderwidth=1)
+        tooltip = tk.Label(self.master, text=f"{text}", bg="white", relief="solid", borderwidth=1, anchor="w", justify="left", padx=3, pady=1)
         tooltip_timer = None
         def show_tooltip():
             tooltip.place(x=widget.winfo_rootx() - self.master.winfo_rootx() + 10, 
@@ -1138,6 +1139,7 @@ class GUI:
             tooltip.place_forget()
         widget.bind("<Enter>", schedule_tooltip)
         widget.bind("<Leave>", cancel_tooltip)
+        
     def on_closing(self):
         # Behaviour/cleanup at closing
         if len(self.photos) > 0:

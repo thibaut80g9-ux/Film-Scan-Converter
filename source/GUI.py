@@ -318,7 +318,7 @@ class GUI:
         folder_path = os.path.join(os.path.expanduser('~'), '.film_scan_converter')
         if not os.path.exists(folder_path):
             os.makedirs(folder_path)
-            print(f'Creating {folder_path}')
+            logger.info(f'Creating {folder_path} folder')
         return folder_path
 
     def advanced_dialog(self):

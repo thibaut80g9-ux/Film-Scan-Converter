@@ -195,8 +195,8 @@ class GUI:
         self.wb_picker_button = ttk.Button(colour_controls, image=picker, command=self.pick_wb)
         self.wb_picker_button.grid(row=3, column=1, sticky=tk.W)
         self.wb_picker_button.image = picker
-        self.temp = ScaleEntry(colour_controls, 'Temperature:', 4, -100, 100, 'temp', self.widgets, increment=5, command=lambda widget:self.widget_changed(widget, 'skip crop'))
-        self.tint = ScaleEntry(colour_controls, 'Tint:', 5, -100, 100, 'tint', self.widgets, increment=5, command=lambda widget:self.widget_changed(widget, 'skip crop'))
+        self.temp = ScaleEntry(colour_controls, 'Temperature:', 4, -100, 100, 'temp', self.widgets, increment=1, command=lambda widget:self.widget_changed(widget, 'skip crop'))
+        self.tint = ScaleEntry(colour_controls, 'Tint:', 5, -100, 100, 'tint', self.widgets, increment=1, command=lambda widget:self.widget_changed(widget, 'skip crop'))
         ScaleEntry(colour_controls, 'Saturation (%):', 6, 0, 200, 'sat', self.widgets, increment=10, command=lambda widget:self.widget_changed(widget, 'skip crop'))
         
         # Brightness Settings

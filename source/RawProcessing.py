@@ -455,7 +455,7 @@ class RawProcessing:
         if self.pick_wb: # logic to calculated temp and tint values from the wb picker
             self.pick_wb = False
             x, y, r = self.wb_picker_params # unpacks parameters passed in from white balance picker
-            wb_mask = self.rotate(np.zeros_like(img[:,:,0], dtype=np.uint8)) # generate blank mask, rotate to same orientation as preview image
+            wb_mask = self.rotate(np.zeros_like(self.crop(img, self.rect)[:,:,0], dtype=np.uint8)) # generate blank mask, rotate to same orientation as preview image
             # applying scale factors based on image size
             x = int(x * wb_mask.shape[1])
             y = int(y * wb_mask.shape[0])
@@ -463,7 +463,7 @@ class RawProcessing:
 
             wb_mask = cv2.circle(wb_mask, (x, y), radius, 255, -1) # generate small circle to average pixels with
             wb_mask = self.rotate(wb_mask, True) # rotate image back to default orientation
-            meanBGR = cv2.mean(img, wb_mask) # returns BGR tuple containing average of unmasked pixels
+            meanBGR = cv2.mean(self.crop(img, self.rect), wb_mask) # returns BGR tuple containing average of unmasked pixels
             # calculating temp and tint values required to balance average BGR to gray
             G_offset =  (meanBGR[0] + meanBGR[2]) / 2 - meanBGR[1]
             RB_offset = meanBGR[0] - (meanBGR[0] + meanBGR[2]) / 2
@@ -480,7 +480,7 @@ class RawProcessing:
         if self.pick_wb: # logic to calculated temp and tint values from the wb picker
             self.pick_wb = False
             x, y, r = self.wb_picker_params # unpacks parameters passed in from white balance picker
-            wb_mask = self.rotate(np.zeros_like(img[:,:,0], dtype=np.uint8)) # generate blank mask, rotate to same orientation as preview image
+            wb_mask = self.rotate(np.zeros_like(self.crop(img, self.rect)[:,:,0], dtype=np.uint8)) # generate blank mask, rotate to same orientation as preview image
             # applying scale factors based on image size
             x = int(x * wb_mask.shape[1])
             y = int(y * wb_mask.shape[0])
@@ -488,7 +488,7 @@ class RawProcessing:
 
             wb_mask = cv2.circle(wb_mask, (x, y), radius, 255, -1) # generate small circle to average pixels with
             wb_mask = self.rotate(wb_mask, True) # rotate image back to default orientation
-            B, G, R, _ = cv2.mean(img, wb_mask) # returns BGR tuple containing average of unmasked pixels
+            B, G, R, _ = cv2.mean(self.crop(img, self.rect), wb_mask) # returns BGR tuple containing average of unmasked pixels
             # calculating temp and tint values required to balance average BGR to gray
             self.tint = max(min((G/B+G/R-2)/((B*(G+R)+R*G)/(B*R)) * multiplier, 100), -100)
             self.temp = max(min(((2*G-(2*G+R)*self.tint/multiplier)/2/R-1) * multiplier, 100), -100)
@@ -503,7 +503,7 @@ class RawProcessing:
         if self.pick_wb: # logic to calculated temp and tint values from the wb picker
             self.pick_wb = False
             x, y, r = self.wb_picker_params # unpacks parameters passed in from white balance picker
-            wb_mask = self.rotate(np.zeros_like(img[:,:,0], dtype=np.uint8)) # generate blank mask, rotate to same orientation as preview image
+            wb_mask = self.rotate(np.zeros_like(self.crop(img, self.rect)[:,:,0], dtype=np.uint8)) # generate blank mask, rotate to same orientation as preview image
             # applying scale factors based on image size
             x = int(x * wb_mask.shape[1])
             y = int(y * wb_mask.shape[0])
@@ -511,7 +511,7 @@ class RawProcessing:
 
             wb_mask = cv2.circle(wb_mask, (x, y), radius, 255, -1) # generate small circle to average pixels with
             wb_mask = self.rotate(wb_mask, True) # rotate image back to default orientation
-            meanBGR = cv2.mean(img, wb_mask) # returns BGR tuple containing average of unmasked pixels
+            meanBGR = cv2.mean(self.crop(img, self.rect), wb_mask) # returns BGR tuple containing average of unmasked pixels
             # calculating temp and tint values required to balance average BGR to gray
             target = (meanBGR[0] + meanBGR[2]) / 2
             self.temp = 100 * np.log2(np.log(target) / np.log(meanBGR[0]))

@@ -878,7 +878,7 @@ class GUI:
             affected = sum([photo.use_global_settings for photo in self.photos])
             if affected > 1:
                 if messagebox.askyesno('Base Colour Changed', f'Do you want change the base colour globally to {str(affected)} photos?', default='no'):
-                    self.global_settings['base_detect'] = self.base.current()
+                    self.global_settings['base_detect'] = self.base_mode.get()
                     self.changed_global_settings()
                 else:
                     self.glob_check.set(False)

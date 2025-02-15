@@ -1021,7 +1021,7 @@ class GUI:
                     continue
                 if photo.use_global_settings:
                     self.apply_settings(photo, self.global_settings) # Ensures the proper settings have been applied
-                filename = os.path.join(self.destination_folder, str(self.current_photo).split('.')[0]) # removes the file extension
+                filename = os.path.join(self.destination_folder, str(photo).split('.')[0]) # removes the file extension
                 inputs.append((photo, filename, self.terminate, RawProcessing.class_parameters))
                 if hasattr(photo, 'memory_alloc'):
                     allocated += photo.memory_alloc # tally of estimated memory requirements of each photo

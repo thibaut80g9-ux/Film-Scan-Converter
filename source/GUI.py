@@ -463,12 +463,13 @@ class GUI:
             self.global_settings[key] = value
             self.changed_global_settings()
         self.update_UI()
-        if len(self.photos) == 0:
-            return
         if instance:
-            setattr(self.current_photo, key, value) # change instance
+            if hasattr(self, 'current_photo'):
+                setattr(self.current_photo, key, value) # change instance
         else:
             RawProcessing.class_parameters[key] = value
+        if len(self.photos) == 0:
+            return
         match mode:
             case 'normal':
                 self.current_photo.process()

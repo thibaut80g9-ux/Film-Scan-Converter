@@ -33,7 +33,7 @@ class GUI:
         self.fit_aspect_ratios = ['Keep Original', '16:9 (Landscape)', '3:2 (Landscape)', '4:3 (Landscape)', '5:4 (Landscape)', '1:1 (Square)', '4:5 (Portrait)', '3:4 (Portrait)', '2:3 (Portrait)', '9:16 (Portrait)']
         self.destination_folder = ''
         self.allowable_image_filetypes = [
-            ('RAW files', '*.DNG *.CR2 *.CR3 *.NEF *.ARW *.RAF *.ORF *.ORI *.ERF *.GPR *.RAW *.CRW *.dng *.cr2 *.cr3 *.nef *.arw *.raf *.orf *.ori *.erf *.grp *.raw *.crw'),
+            ('RAW files', '*.DNG *.CR2 *.CR3 *.NEF *.ARW *.RAF *.ORF *.ORI *.ERF *.GPR *.RAW *.CRW *.RW2 *.dng *.cr2 *.cr3 *.nef *.arw *.raf *.orf *.ori *.erf *.grp *.raw *.crw *.rw2'),
             ('Image files', '*.PNG *.JPG *.JPEG *.BMP *.TIFF *.TIF *.png *.jpg *.jpeg *.bmp *.tiff *.tif')
             ]
         self.header_style = ('Segoe UI', 10, 'normal') # Defines font for section headers

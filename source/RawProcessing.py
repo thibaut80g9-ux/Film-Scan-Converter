@@ -353,6 +353,8 @@ class RawProcessing:
         largest_contour = max(contours, key=cv2.contourArea)
         rect = cv2.minAreaRect(largest_contour) # bounding box of largest contour
         y, x = self.RAW_IMG.shape[0], self.RAW_IMG.shape[1]
+        if rect[2] <= 0:
+            rect = ((rect[0][0], rect[0][1]), (rect[1][1], rect[1][0]), rect[2] + 90) # correction for if the rectangle rotation is exactly zero
         rect = ((rect[0][0]/y, rect[0][1]/x), (rect[1][0]/y, rect[1][1]/x), rect[2]) # normalizes crop for different sized images
         return thresh, rect, largest_contour
     
